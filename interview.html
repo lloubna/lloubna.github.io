@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Préparation Entretien — Lola · Technical Lead</title>
+<style>
+:root{
+  --bg:#07090F;--bg2:#0D1018;--bg3:#131720;--border:rgba(255,255,255,0.07);
+  --text:rgba(255,255,255,0.88);--muted:rgba(255,255,255,0.45);--faint:rgba(255,255,255,0.1);
+  --gold:#C8A96E;--red:#E07B5A;--blue:#6B9FD4;--green:#7EC8A4;
+  --purple:#B07DC8;--orange:#E8A85A;--teal:#5AC8C8;--pink:#D47CA8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;line-height:1.6}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:3px}
+
+#sidebar{position:fixed;top:0;left:0;width:255px;height:100vh;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:100;overflow-y:auto}
+#sb-head{padding:22px 18px 14px;border-bottom:1px solid var(--border)}
+#sb-head .nm{font-size:13px;font-weight:700;color:var(--gold)}
+#sb-head .rl{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:.5px;font-family:monospace}
+#sb-prog{padding:12px 18px;border-bottom:1px solid var(--border)}
+#sb-prog .lbl{font-size:9px;color:var(--muted);margin-bottom:6px;letter-spacing:1px;text-transform:uppercase;font-family:monospace}
+.pbar{height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;margin-bottom:5px}
+.pfill{height:100%;border-radius:2px;transition:width .5s ease;background:linear-gradient(90deg,var(--gold),var(--orange))}
+.pcnt{font-size:10px;color:var(--gold);font-family:monospace}
+#nav-list{padding:10px 0;flex:1}
+.nbtn{display:flex;align-items:center;gap:9px;width:100%;padding:8px 18px;background:transparent;border:none;cursor:pointer;color:var(--muted);font-size:12px;text-align:left;transition:all .18s;font-family:inherit;border-left:2px solid transparent}
+.nbtn:hover{background:var(--bg3);color:var(--text)}
+.nbtn.on{color:var(--text);background:var(--bg3);border-left-color:var(--c, var(--gold))}
+.nbtn .ni{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.nbtn .nl{flex:1;font-weight:500}
+.nbtn .nc{font-size:9px;font-family:monospace;opacity:.6}
+
+#main{margin-left:255px;min-height:100vh}
+#topbar{position:sticky;top:0;z-index:50;background:rgba(7,9,15,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:12px 28px;display:flex;align-items:center;gap:14px}
+#topbar h2{font-size:16px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#searchbox{padding:7px 13px 7px 32px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:12px;width:260px;font-family:inherit;outline:none;transition:border .2s}
+#searchbox:focus{border-color:rgba(255,255,255,0.18)}
+#searchbox::placeholder{color:var(--muted)}
+.search-wrap{position:relative;flex-shrink:0}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;pointer-events:none}
+
+#content{padding:26px 28px 70px}
+
+/* HOME */
+#home{display:none}
+#home.vis{display:block}
+.hi h1{font-size:24px;font-weight:700;letter-spacing:-.4px;margin-bottom:8px}
+.hi p{font-size:13px;color:var(--muted);max-width:580px;line-height:1.7;margin-bottom:22px}
+.stats-row{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+.scard{padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;flex:1;min-width:110px}
+.scard .sv{font-size:22px;font-weight:700;margin-bottom:2px}
+.scard .sl{font-size:10px;color:var(--muted);font-family:monospace;letter-spacing:.5px;text-transform:uppercase}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:26px}
+.mcard{padding:20px;border-radius:13px;cursor:pointer;background:var(--bg2);border:1px solid var(--border);transition:all .22s;position:relative;overflow:hidden}
+.mcard:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.13)}
+.mcard .mi{font-size:24px;margin-bottom:9px}
+.mcard .mt{font-size:13.5px;font-weight:600;margin-bottom:2px}
+.mcard .mq{font-size:10px;color:var(--muted);font-family:monospace;margin-bottom:10px}
+.mcard .mg{position:absolute;top:0;right:0;width:70px;height:70px;border-radius:0 13px 0 0;opacity:.12}
+
+/* SEARCH */
+#search-view{display:none}
+#search-view.vis{display:block}
+.sr-hd{margin-bottom:16px;font-size:12px;color:var(--muted)}
+.sr-hd em{color:var(--text);font-style:normal;font-weight:600}
+
+/* MODULE VIEW */
+.mview{display:none}
+.mview.vis{display:block}
+.mv-hd{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.mv-hd .mhi{font-size:28px}
+.mv-hd .mht{font-size:20px;font-weight:700}
+.mv-hd .mhs{font-size:10px;color:var(--muted);margin-top:2px;font-family:monospace}
+.mv-hd .mvp{margin-left:auto;text-align:right}
+.mv-hd .mvpn{font-size:18px;font-weight:700}
+.mv-hd .mvpl{font-size:10px;color:var(--muted);font-family:monospace}
+
+/* Q CARDS */
+.qcard{background:var(--bg2);border:1px solid var(--border);border-radius:11px;margin-bottom:9px;overflow:hidden;transition:border-color .2s,opacity .2s}
+.qcard:hover{border-color:rgba(255,255,255,0.11)}
+.qcard.seen{opacity:.6}
+.qcard.seen:hover{opacity:.9}
+.qhead{padding:15px 18px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;user-select:none}
+.qn{font-family:monospace;font-size:10px;color:var(--muted);min-width:26px;margin-top:2px;flex-shrink:0}
+.qq{font-size:13px;flex:1;line-height:1.55;font-weight:500}
+.qmeta{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.sdot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.chv{font-size:10px;color:var(--muted);transition:transform .28s}
+.qcard.open .chv{transform:rotate(180deg)}
+.qtags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.tag{display:inline-block;padding:1px 7px;border-radius:20px;font-size:9.5px;font-family:monospace;border:1px solid currentColor;opacity:.65}
+.diff{padding:2px 7px;border-radius:20px;font-size:9px;font-family:monospace;letter-spacing:.3px;text-transform:uppercase}
+.de{background:rgba(126,200,164,.12);color:#7EC8A4;border:1px solid rgba(126,200,164,.25)}
+.dm{background:rgba(232,168,90,.12);color:#E8A85A;border:1px solid rgba(232,168,90,.25)}
+.dh{background:rgba(224,123,90,.12);color:#E07B5A;border:1px solid rgba(224,123,90,.25)}
+
+.qbody{display:none;padding:0 18px 18px}
+.qcard.open .qbody{display:block}
+.qdiv{height:1px;margin-bottom:14px;opacity:.4}
+
+.answer{font-size:12.5px;color:rgba(255,255,255,.76);line-height:1.78}
+.answer p{margin-bottom:7px}
+.answer strong{color:var(--text);font-weight:600}
+.answer h4{margin:12px 0 4px;font-size:12.5px;font-weight:700}
+.answer ul{padding-left:16px;margin-bottom:8px}
+.answer ul li{margin-bottom:3px}
+.answer ol{padding-left:16px;margin-bottom:8px}
+.answer ol li{margin-bottom:4px}
+.cb{background:rgba(0,0,0,.5);border-radius:7px;padding:10px 12px;margin:9px 0;font-family:monospace;font-size:11px;color:#A8D8EA;line-height:1.6;border-left:3px solid;white-space:pre;overflow-x:auto}
+.answer blockquote{border-left:3px solid rgba(200,169,110,.4);padding:8px 13px;margin:9px 0;background:rgba(255,255,255,.02);border-radius:0 7px 7px 0;font-style:italic;font-size:12px;color:rgba(255,255,255,.65)}
+.tipbox{margin-top:12px;padding:10px 13px;border-radius:7px;border:1px solid;font-size:12px;line-height:1.6;background:rgba(255,255,255,.02);display:none}
+.tipbtn{margin-top:11px;padding:5px 13px;background:transparent;border-radius:20px;font-size:11px;cursor:pointer;font-family:monospace;border:1px solid;transition:all .2s;color:inherit}
+.tipbtn:hover{background:rgba(255,255,255,.05)}
+.seenbtn{float:right;margin-top:13px;padding:5px 13px;background:transparent;border-radius:20px;font-size:11px;cursor:pointer;font-family:monospace;border:1px solid;transition:all .2s;color:inherit}
+.seenbtn:hover{background:rgba(255,255,255,.05)}
+.cf::after{content:"";display:table;clear:both}
+.noq{text-align:center;padding:50px 20px;color:var(--muted);font-size:13px}
+
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.mview.vis,.qcard{animation:fi .22s ease}
+@media(max-width:850px){#sidebar{width:210px}#main{margin-left:210px}.mgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){#sidebar{display:none}#main{margin-left:0}#content{padding:16px 14px 60px}.mgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div id="sb-head">
+    <div class="nm">Lola</div>
+    <div class="rl">Technical Lead · Architecte · Chef de Projet</div>
+  </div>
+  <div id="sb-prog">
+    <div class="lbl">Progression globale</div>
+    <div class="pbar"><div class="pfill" id="gfill" style="width:0%"></div></div>
+    <div class="pcnt"><span id="gseen">0</span>&thinsp;/&thinsp;<span id="gtotal">0</span> vues</div>
+  </div>
+  <div id="nav-list">
+    <button class="nbtn on" id="nav-home" onclick="showHome()" style="--c:var(--gold)">
+      <span class="ni">⊞</span><span class="nl">Accueil</span>
+    </button>
+  </div>
+</nav>
+
+<div id="main">
+  <div id="topbar">
+    <h2 id="tb-title">Préparation Entretien</h2>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="searchbox" placeholder="Rechercher une question..." oninput="doSearch(this.value)">
+    </div>
+  </div>
+
+  <div id="content">
+
+    <div id="home" class="vis">
+      <div class="hi">
+        <h1>Préparation Entretien 360°</h1>
+        <p>Questions &amp; réponses complètes pour vos entretiens <strong>Technical Lead · Architecte · Chef de Projet Technique</strong> sur le marché français (700–900€/j). Basé sur votre profil : Carrefour, Wafa Assurance, Attijariwafa Bank — 12 ans Java / Microservices / Cloud / Banking / Assurance.</p>
+      </div>
+      <div class="stats-row">
+        <div class="scard"><div class="sv" id="st-total" style="color:var(--gold)">0</div><div class="sl">Questions</div></div>
+        <div class="scard"><div class="sv" id="st-seen" style="color:var(--green)">0</div><div class="sl">Vues</div></div>
+        <div class="scard"><div class="sv" id="st-left" style="color:var(--orange)">0</div><div class="sl">Restantes</div></div>
+        <div class="scard"><div class="sv" id="st-pct" style="color:var(--teal)">0%</div><div class="sl">Progression</div></div>
+      </div>
+      <div class="mgrid" id="home-grid"></div>
+    </div>
+
+    <div id="search-view">
+      <div class="sr-hd">Résultats pour "<em id="sr-q"></em>" — <span id="sr-n"></span> trouvées</div>
+      <div id="sr-list"></div>
+    </div>
+
+    <div id="module-views"></div>
+
+  </div>
+</div>
+
+<script>
+const M = [
+{id:"gestion-projet", label:"Gestion de Projet", icon:"◈", color:"#C8A96E",
+ qs:[
+{q:"Comment organisez-vous le delivery d'une squad Agile sur un projet critique ?",d:"hard",tags:["Agile","Delivery","Leadership"],
+a:`<p>Ma méthode repose sur <strong>trois axes : cadrage, rythme, visibilité</strong>.</p>
+<h4>Cadrage</h4>
+<p>Je commence par aligner l'équipe sur la <strong>définition de "done"</strong> et les critères de qualité non-négociables (sécurité, performance, conformité réglementaire). Chez Carrefour sur le projet eInvoicing, cela signifiait zéro tolérance sur les erreurs de conformité fiscale européenne.</p>
+<h4>Rythme</h4>
+<p>Sprints de 2 semaines avec un backlog refinement hebdomadaire. Je pilote via <strong>3 indicateurs critiques</strong> : vélocité réelle vs prévue, taux de régression, et blocages non résolus depuis plus de 2 jours.</p>
+<h4>Visibilité</h4>
+<p>Board Kanban avec les dépendances inter-équipes explicites. Sur le programme Carrefour, nous avions 3 squads interconnectées — synchronisation via des "dependency standups" bihebdomadaires.</p>
+<p>Résultat : <strong>-30% de time-to-market</strong> chez Wafa Assurance grâce à l'élimination des bottlenecks inter-équipes.</p>`,
+tip:"Citez toujours un exemple chiffré issu de votre expérience réelle. Les recruteurs en ESN valorisent les impacts mesurables."},
+
+{q:"Comment gérez-vous les conflits techniques au sein d'une équipe ?",d:"med",tags:["Leadership","Communication","ADR"],
+a:`<p>Je distingue deux types : les désaccords sur les solutions techniques (sains et productifs) et les conflits interpersonnels (à désamorcer rapidement).</p>
+<h4>Désaccords techniques</h4>
+<p>J'instaure systématiquement les <strong>ADR (Architecture Decision Records)</strong> : contexte, options analysées, compromis, décision retenue. Cela dépersonnalise le débat — on discute de critères objectifs, pas d'ego.</p>
+<p>Exemple chez Wafa Assurance : désaccord Kafka vs RabbitMQ pour les notifications. J'ai organisé un "tech spike" de 3 jours avec les deux développeurs défendant chaque option. Résultat documenté, décision collective, engagement partagé.</p>
+<h4>Conflits interpersonnels</h4>
+<p>Entretien individuel en moins de 24h après détection, reformulation des positions de chacun, puis session commune centrée sur l'objectif projet plutôt que sur les personnes.</p>`,
+tip:"Les recruteurs évaluent votre capacité à maintenir la cohésion d'équipe sous pression. Insistez sur la blameless culture."},
+
+{q:"Comment gérez-vous les dépendances avec des équipes externes (Core Banking, Sécurité, DevOps) ?",d:"hard",tags:["Coordination","Risques","Stakeholders"],
+a:`<p>La gestion des dépendances externes est l'un des vrais défis du Technical Lead en contexte bancaire. Ma méthode en 4 points :</p>
+<ol>
+<li><strong>Cartographier en amont</strong> : matrice "impact × délai" dès le démarrage. Chez Attijariwafa Bank, j'avais cartographié 7 équipes clés (Core Banking Temenos, Sécurité, Payment, équipes régionales).</li>
+<li><strong>Contractualiser les interfaces</strong> : on ne "demande" pas une API, on convient d'un contrat (OpenAPI spec) avec SLA, environnement de test et date de livraison.</li>
+<li><strong>Anticiper les blocages</strong> : Plan B pour chaque dépendance critique. Si l'API Core Banking n'est pas prête → mock contractuel respectant le schéma.</li>
+<li><strong>Escalader vite et à bon niveau</strong> : dès 48h de blocage, j'escalade — pas pour blâmer, mais pour débloquer. La visibilité est une forme de respect envers les sponsors.</li>
+</ol>`,
+tip:"Montrez que vous pensez en termes de risques et de contingences. Mentionner les mocks contractuels est très apprécié."},
+
+{q:"Comment estimez-vous la complexité et les délais d'un projet technique ?",d:"med",tags:["Estimation","Planification","Risques"],
+a:`<p>L'estimation est un art, pas une science. Ma règle : ne jamais donner un chiffre seul — toujours une fourchette avec les hypothèses qui la conditionnent.</p>
+<h4>Ma démarche en 4 étapes</h4>
+<ul>
+<li><strong>Décomposition</strong> : tâches de 1-3 jours max. Tout ce qui dépasse 5 jours cache de la complexité.</li>
+<li><strong>Three-point estimation</strong> : optimiste / probable / pessimiste. Je présente toujours les trois aux sponsors — cela éduque sur l'incertitude.</li>
+<li><strong>Identification des inconnues</strong> : les "unknown unknowns" sont les vrais risques. Chez Carrefour, les spécifications PDP (plateformes gouvernementales) changeaient tous les mois — buffer de 20% dédié aux ajustements réglementaires.</li>
+<li><strong>Vélocité réelle</strong> : j'utilise la vélocité historique de l'équipe, pas la capacité théorique.</li>
+</ul>
+<p><strong>Formule pratique</strong> : Estimation = Σ tâches × 1,3 (intégration) × 1,2 (tests) × 1,1 (risques identifiés).</p>`,
+tip:"Les recruteurs cherchent quelqu'un qui ne sur-promet pas et gère les attentes avec honnêteté."},
+
+{q:"Comment priorisez-vous entre dette technique et nouvelles fonctionnalités ?",d:"med",tags:["Dette technique","Priorisation","Qualité"],
+a:`<p>C'est une tension permanente. Je ne peux pas l'effacer, je la gère de façon transparente.</p>
+<h4>Règle des 20%</h4>
+<p>J'alloue systématiquement 20% de la capacité sprint à la dette technique et à l'amélioration continue. Négocié une fois avec le Product Owner, acté dans la Definition of Done. Chez Wafa Assurance → ~1 jour/développeur/sprint.</p>
+<h4>Classification de la dette</h4>
+<ul>
+<li>🔴 <strong>Bloquante</strong> : risque sécurité ou performance critique → traitement immédiat</li>
+<li>🟡 <strong>Dégradante</strong> : ralentit les développements futurs → planifié sprint suivant</li>
+<li>🟢 <strong>Cosmétique</strong> : code non optimal mais fonctionnel → backlog basse priorité</li>
+</ul>
+<h4>Langage commun avec le métier</h4>
+<p>Je traduis la dette en impact business. "Ce module n'a pas de tests" devient "chaque modification prend 3× plus longtemps et coûte X€ en bugs de production".</p>
+<p>Résultat chez Wafa Assurance : <strong>-40% de taux de régression</strong> grâce à un investissement constant dans la qualité.</p>`,
+tip:"Montrez que vous parlez le langage du business, pas seulement le langage technique. Les sponsors adorent les impacts chiffrés."},
+
+{q:"Décrivez votre approche pour onboarder une nouvelle équipe sur un projet existant.",d:"med",tags:["Onboarding","Leadership","Documentation"],
+a:`<p>L'onboarding est un investissement critique. Un développeur mal onboardé coûte des mois de productivité perdue.</p>
+<h4>Semaine 1 — Comprendre avant de contribuer</h4>
+<p>Je prépare un "starter pack" : architecture diagram, glossaire métier (essentiel en banking/assurance), runbook de mise en place de l'environnement local (< 30 min), et liste des 5 composants clés à comprendre en priorité.</p>
+<h4>Semaine 2-3 — Pair programming structuré</h4>
+<p>Le nouvel arrivant travaille en binôme sur un ticket réel de complexité croissante. Pas de code review silencieux — explication vocale des décisions techniques.</p>
+<h4>Premier mois — Ownership progressif</h4>
+<p>Je confie un ownership partiel sur un bounded context. Responsabilité réelle = engagement réel. J'ai appliqué cette méthode chez Carrefour pour intégrer 3 développeurs en 6 semaines sur une architecture WebFlux/Kafka complexe.</p>`,
+tip:"Mentionnez les runbooks et l'architecture diagram — ça montre une culture documentation qui rassure les recruteurs."},
+
+{q:"Comment gérez-vous un projet en retard dont le scope ne peut pas être réduit ?",d:"hard",tags:["Scope","Délais","Négociation"],
+a:`<p>Quand scope et délai sont fixes, il ne reste qu'un levier : les ressources. Mais avant d'aller vers cette conclusion, je creuse.</p>
+<h4>Étape 1 — Diagnostiquer précisément le retard</h4>
+<p>Pas toutes les tâches du scope ont le même niveau de criticité. Je reprends le backlog et identifie le chemin critique réel. Souvent, 20% des tâches conditionnent 80% de la livraison.</p>
+<h4>Étape 2 — Options concrètes</h4>
+<ul>
+<li><strong>Renforcement ciblé</strong> : ajouter une ressource expérimentée sur le chemin critique (pas partout — la loi de Brooks s'applique)</li>
+<li><strong>Réduction de la qualité perçue</strong> (UI/UX, pas la sécurité ou la fiabilité) avec accord explicite du sponsor</li>
+<li><strong>Parallélisation</strong> : identifier les tâches qui peuvent se faire en parallèle plutôt que séquentiellement</li>
+<li><strong>Réduction du nombre d'environnements</strong> de test si possible</li>
+</ul>
+<h4>Ce que je ne fais pas</h4>
+<p>Je ne promets pas une date que je ne peux pas tenir. Une date fausse crée plus de dégâts qu'un retard annoncé tôt.</p>`,
+tip:"La loi de Brooks est un signal fort de maturité PM — mentionnez-la si vous rajoutez des ressources."},
+
+{q:"Comment organisez-vous la documentation technique d'un projet ?",d:"easy",tags:["Documentation","Architecture","ADR"],
+a:`<p>La documentation est la mémoire du projet. Mais trop de doc tue la doc. Je distingue trois niveaux.</p>
+<h4>Architecture Decision Records (ADR)</h4>
+<p>Un ADR par décision structurante : pourquoi ce choix, alternatives considérées, compromis acceptés. Format simple (markdown), versionné avec le code. Chez Carrefour, nous avions ~30 ADR couvrant tous les choix clés de l'architecture eInvoicing.</p>
+<h4>Documentation vivante (code)</h4>
+<p>API-first avec OpenAPI : les contrats d'interface sont la référence. Les tests BDD (Cucumber) documenteront le comportement métier. Ce qui est dans le code ne peut pas être désynchronisé.</p>
+<h4>Runbooks opérationnels</h4>
+<p>Pour chaque composant critique : comment déployer, comment rollback, comment diagnostiquer les 5 erreurs les plus fréquentes. Format wiki avec captures d'écran des dashboards Grafana.</p>
+<p>Règle d'or : si un nouveau venu ne peut pas mettre en place l'environnement de dev en moins de 30 minutes, la doc est insuffisante.</p>`,
+tip:"ADR + OpenAPI + Runbooks = le trio que tout architecte senior devrait citer."},
+
+{q:"Comment mesurez-vous la qualité du code au sein de votre équipe ?",d:"med",tags:["Qualité","CI/CD","Standards"],
+a:`<p>La qualité se mesure objectivement — pas à l'instinct. J'utilise un tableau de bord qualité en continu.</p>
+<h4>Métriques automatisées (SonarQube)</h4>
+<ul>
+<li>Couverture de tests : seuil minimum 80% sur le code nouveau</li>
+<li>Code smells : zero tolerance sur les blockers et criticals</li>
+<li>Duplication : < 3%</li>
+<li>Complexity cyclomatique : alertes sur les méthodes > 10</li>
+</ul>
+<h4>Code reviews structurées</h4>
+<p>Check-list de review obligatoire : sécurité (injection, auth), performance (N+1 queries, lock contentions), testabilité, lisibilité, et conformité aux ADR. Chez Wafa Assurance, j'ai formalisé cette check-list en 2 sprints — le taux de défauts en production a baissé de 35%.</p>
+<h4>Definition of Done</h4>
+<p>Aucun ticket "done" sans : tests unitaires écrits, code review approuvée, SonarQube green, documentation API à jour si interface modifiée.</p>`,
+tip:"Citer SonarQube avec des seuils précis (80% coverage, 3% duplication) montre une rigueur que les recruteurs apprécient."},
+
+{q:"Quelle est votre approche pour le knowledge transfer en fin de mission ?",d:"med",tags:["Consulting","Documentation","Transition"],
+a:`<p>Le knowledge transfer est la signature professionnelle d'un bon consultant. C'est ce qui distingue un prestataire qui laisse une équipe autonome de celui qui crée une dépendance.</p>
+<h4>6 semaines avant la fin de mission</h4>
+<p>J'identifie les "connaissances clés" que seul moi détiens. Pour chacune : session de transfert planifiée avec la personne qui reprend, document écrit, et validation que la personne peut reproduire de façon autonome.</p>
+<h4>Documentation de sortie</h4>
+<ul>
+<li>Architecture map à jour avec tous les ADR</li>
+<li>Cartographie des dépendances critiques et des points de fragilité connus</li>
+<li>Backlog technique avec priorisation recommandée</li>
+<li>Contacts clés (équipes externes, fournisseurs, experts techniques)</li>
+</ul>
+<h4>Shadow period</h4>
+<p>Les 2 dernières semaines, je travaille en tandem avec mon successeur ou le lead qui reprend. Il prend les décisions, je valide. Transition progressive, pas un handover brutal.</p>`,
+tip:"Ce type de réponse rassure énormément les clients sur votre fiabilité en tant que consultant."}
+]},
+
+{id:"gestion-crise", label:"Gestion de Crise & Incidents", icon:"⚡", color:"#E07B5A",
+ qs:[
+{q:"Décrivez votre processus complet de gestion d'un incident critique en production.",d:"hard",tags:["Incident","Production","Post-mortem"],
+a:`<p>J'applique un framework structuré affiné sur des environnements bancaires et d'assurance.</p>
+<h4>Phase 1 — Triage (0-10 min)</h4>
+<ul>
+<li>Évaluation de la criticité : périmètre impacté, utilisateurs, impact financier/réglementaire</li>
+<li>Ouverture immédiate d'un "war room" (canal Slack dédié #incident-YYYYMMDD)</li>
+<li>Attribution des rôles : Incident Commander, Communication Owner, Investigation Lead</li>
+</ul>
+<h4>Phase 2 — Stabilisation (10-60 min)</h4>
+<p>Priorité absolue : <strong>rétablir le service. Pas diagnostiquer</strong> — stabiliser d'abord. Rollback, basculement sur nœud sain, coupure composant défaillant. Communication status toutes les 15 min vers les stakeholders.</p>
+<h4>Phase 3 — Résolution</h4>
+<p>Analyse logs, traces distribuées, métriques (corrélation temporelle). Root cause. Fix et redéploiement contrôlé.</p>
+<h4>Phase 4 — Post-mortem (dans les 48h)</h4>
+<p><strong>Blameless post-mortem</strong> : "Qu'est-ce qui a failli dans notre système ?" pas "Qui a failli ?". 5 Whys ou Fishbone. Action items avec owner et date, suivi sprint suivant.</p>
+<p>Exemple : chez Carrefour, incident pipeline eInvoicing fin de mois. Rétablissement en <strong>23 min</strong> via rollback Kubernetes automatisé. Post-mortem → problème config Kafka consumer group → corrigé en 3h.</p>`,
+tip:"La distinction 'stabiliser d'abord, diagnostiquer ensuite' est le réflexe SRE attendu chez les recruteurs techniques."},
+
+{q:"Rollback ou fix-forward ? Comment décidez-vous ?",d:"hard",tags:["Rollback","Déploiement","Résilience"],
+a:`<p>C'est l'une des décisions les plus critiques à prendre en moins de 5 minutes sous pression.</p>
+<h4>Critères pour le Rollback</h4>
+<ul>
+<li>Fix non évident ou complexe à implémenter sous pression</li>
+<li>Impact sur des données critiques (financières, réglementaires)</li>
+<li>Plus de X% des utilisateurs impactés (seuil défini en amont, ex: 5%)</li>
+<li>Service lié à la conformité réglementaire (eInvoicing chez Carrefour : seuil 1%)</li>
+</ul>
+<h4>Critères pour le Fix-Forward</h4>
+<ul>
+<li>Régression mineure et isolée</li>
+<li>Fix simple, testé et prêt en < 30 min</li>
+<li>Rollback plus risqué que le fix (migrations de données, par exemple)</li>
+</ul>
+<h4>Communication pendant l'incident</h4>
+<p>Message sobre aux stakeholders : <em>"Incident détecté, [rollback/fix] en cours, prochaine communication dans 30 min"</em>. Ne pas sur-communiquer dans la phase de panique — cela génère du bruit et de l'anxiété.</p>
+<h4>Après résolution</h4>
+<p>Analyse de pourquoi les tests pré-prod n'ont pas détecté la régression. Renforcement : feature flags, blue/green deployment, smoke tests automatisés.</p>`,
+tip:"La règle 'rollback first pour tout ce qui est réglementaire' montre une maturité en contexte compliance."},
+
+{q:"Comment gérez-vous un incident causé par un changement de configuration tiers (API externe, Core Banking) ?",d:"hard",tags:["Incident","Dépendances","Core Banking"],
+a:`<p>C'est l'un des scénarios les plus délicats : vous subissez la panne mais ne contrôlez pas la cause.</p>
+<h4>Détection rapide</h4>
+<p>Circuit Breaker + alerting sur les métriques de taux d'erreur par endpoint externe. Chez Wafa Assurance, nos alertes se déclenchaient sur "taux d'erreur Core Banking > 5% sur 2 min". Détection en moins de 3 minutes.</p>
+<h4>Isolation immédiate</h4>
+<p>Le Circuit Breaker ouvre automatiquement et sert le fallback. Les utilisateurs voient une dégradation gracieuse plutôt qu'une erreur 500. On a ainsi évité 3 pannes perçues en 18 mois.</p>
+<h4>Coordination avec le tiers</h4>
+<ul>
+<li>Contact immédiat de l'équipe responsable avec : timestamp précis du début de l'anomalie, métriques (taux d'erreur, codes d'erreur HTTP, latence), trace distribuée exemple</li>
+<li>Bridge technique commun pour la résolution</li>
+</ul>
+<h4>Communication interne</h4>
+<p>Clarté sur la cause : "L'incident est causé par une anomalie sur [système externe], nous avons activé notre mode dégradé, les fonctionnalités [X, Y] sont temporairement limitées."</p>`,
+tip:"Mentionner le Circuit Breaker avec des seuils précis (5% sur 2 min) montre une expérience production réelle."},
+
+{q:"Comment préparez-vous une équipe pour les astreintes et la gestion d'incidents hors heures ?",d:"med",tags:["Astreinte","Runbook","Organisation"],
+a:`<p>Les astreintes non préparées sont une source de burnout et d'incidents mal gérés. Mon approche :</p>
+<h4>Runbooks opérationnels</h4>
+<p>Pour chaque scénario d'incident probable : symptômes, commandes de diagnostic, actions correctives, contact escalade. Le runbook doit permettre à un développeur de résoudre 80% des incidents sans appeler le senior.</p>
+<div class="cb" style="border-color:var(--red)">Runbook format :
+1. Symptômes observables (alertes, métriques)
+2. Diagnostic rapide (commandes kubectl, requêtes Grafana)
+3. Actions correctives (rollback, restart, scaling)
+4. Escalade si non résolu en 30 min</div>
+<h4>Rotation équitable</h4>
+<p>Rotation hebdomadaire avec un binôme (senior + junior). Le junior apprend, le senior n'est pas seul. Compensation claire (récup ou prime selon politique entreprise).</p>
+<h4>Post-astreinte systématique</h4>
+<p>Chaque incident d'astreinte → 30 min de debrief le lendemain. Si le même incident se reproduit plus d'une fois → ticket d'amélioration obligatoire.</p>
+<p>Règle que j'applique : <strong>si l'équipe est réveillée la nuit pour le même problème deux fois, c'est un échec d'architecture, pas un problème d'astreinte.</strong></p>`,
+tip:"La phrase finale sur l'échec d'architecture est très mémorable et montre une vraie culture d'amélioration continue."},
+
+{q:"Décrivez une situation de crise technique que vous avez gérée et ce que vous avez appris.",d:"hard",tags:["Expérience","Leadership","Post-mortem"],
+a:`<p>Chez Carrefour, en novembre 2023, en pleine période de pic fiscal de fin de mois.</p>
+<h4>La situation</h4>
+<p>À 22h un lundi, alertes critiques : le microservice de soumission de factures affiche un taux d'erreur à 85%. Le pipeline eInvoicing vers la PDP (plateforme gouvernementale) est bloqué. Impact : ~2000 factures en attente, risque de non-conformité réglementaire pour Carrefour.</p>
+<h4>Mes actions (23 min pour résolution)</h4>
+<ol>
+<li>Ouverture du war room Slack, rôles attribués en 2 min</li>
+<li>Décision immédiate de rollback Kubernetes sur la dernière version stable</li>
+<li>Communication aux stakeholders business : "Mode dégradé activé, traitement des factures repris manuellement, retour à la normale estimé dans 45 min"</li>
+<li>Rollback exécuté → service rétabli en 23 min</li>
+</ol>
+<h4>Root cause (post-mortem J+2)</h4>
+<p>Un changement de configuration Kafka (augmentation du nombre de partitions) avait cassé la logique de rebalancing des consumer groups. Les messages s'accumulaient sans être consommés.</p>
+<h4>Actions correctives</h4>
+<ul>
+<li>Ajout d'une alerte spécifique sur le consumer lag Kafka (seuil: 5000 messages)</li>
+<li>Procédure de test de rebalancing dans le pipeline CI/CD</li>
+<li>Documentation ADR sur la gestion des changements de topologie Kafka</li>
+</ul>
+<h4>Ce que j'ai appris</h4>
+<p>Les changements de configuration Kafka en production sont aussi risqués que les changements de code. Tout changement de topologie Kafka doit passer par le même pipeline de validation que le code.</p>`,
+tip:"Ce type de réponse détaillée (avec timeline, root cause et actions) impressionne systématiquement les recruteurs techniques."},
+
+{q:"Comment gérez-vous la communication de crise vers les directions et clients ?",d:"hard",tags:["Communication","Stakeholders","Crise"],
+a:`<p>La communication de crise est un art distinct de la résolution technique. Mal gérée, elle aggrave la situation même quand l'incident est résolu.</p>
+<h4>Principes clés</h4>
+<ul>
+<li><strong>Communiquer tôt, même sans solution</strong> : "Nous avons détecté un problème, nous enquêtons, prochaine communication dans 30 min" vaut mieux que le silence</li>
+<li><strong>Séparer les audiences</strong> : les équipes techniques ont besoin de détails techniques. Les directions et clients ont besoin d'impact business et d'ETA.</li>
+<li><strong>Ne pas sur-promettre</strong> : "Le service sera rétabli dans 30 min" vous engage. "Nous visons un retour à la normale dans les 30 prochaines minutes" nuance.</li>
+</ul>
+<h4>Template de communication externe</h4>
+<div class="cb" style="border-color:var(--red)">Sujet : [INCIDENT] Dégradation de service - Mise à jour [HH:MM]
+Statut : En cours de résolution
+Impact : [périmètre précis]
+Actions en cours : [résumé non-technique]
+Prochaine communication : dans [X] minutes</div>
+<h4>Après résolution</h4>
+<p>Rapport post-incident dans les 24h : résumé de l'impact, timeline, cause racine (en langage accessible), et mesures préventives prises. Ce rapport est aussi une opportunité de montrer la maturité de votre organisation.</p>`,
+tip:"Montrez que vous différenciez le discours technique du discours business — c'est une compétence rare et très valorisée."}
+]},
+
+{id:"design-patterns", label:"Design Patterns GoF", icon:"⬡", color:"#6B9FD4",
+ qs:[
+{q:"Expliquez les 23 patterns GoF et leurs familles. Lesquels utilisez-vous vraiment en production ?",d:"hard",tags:["GoF","Architecture","Java"],
+a:`<p>Les 23 patterns GoF se répartissent en 3 familles :</p>
+<h4>Créationnels (5) — Comment créer des objets</h4>
+<ul>
+<li><strong>Singleton</strong> : instance unique (Spring @Bean par défaut). Attention : anti-pattern si sur-utilisé.</li>
+<li><strong>Factory Method</strong> : délègue l'instanciation aux sous-classes. Ex : NotificationFactory.</li>
+<li><strong>Abstract Factory</strong> : familles d'objets cohérentes. Ex : UIFactory Windows vs Mac.</li>
+<li><strong>Builder</strong> : construction d'objets complexes (Lombok @Builder, StringBuilder).</li>
+<li><strong>Prototype</strong> : copie d'objets coûteux (Object.clone()).</li>
+</ul>
+<h4>Structuraux (7) — Comment assembler les objets</h4>
+<ul>
+<li><strong>Adapter</strong> : interfaces incompatibles (InputStreamReader, intégration SDK tiers).</li>
+<li><strong>Decorator</strong> : ajout dynamique de comportements (java.io streams, Spring interceptors).</li>
+<li><strong>Proxy</strong> : contrôle d'accès (Spring AOP, Hibernate lazy loading).</li>
+<li><strong>Facade</strong> : interface simplifiée (JdbcTemplate, API Gateway).</li>
+<li><strong>Composite</strong> : hiérarchies tout/partie (arbre de composants UI).</li>
+<li><strong>Bridge</strong> : abstraction/implémentation séparées (SLF4J, JDBC).</li>
+<li><strong>Flyweight</strong> : partage d'objets légers (Integer.valueOf() cache, String pool).</li>
+</ul>
+<h4>Comportementaux (11) — Comment les objets communiquent</h4>
+<ul>
+<li><strong>Observer</strong> : notification de changements (Kafka Consumer, Spring Events).</li>
+<li><strong>Strategy</strong> : algorithmes interchangeables (Comparator, Spring Security).</li>
+<li><strong>Command</strong> : encapsulation de requêtes (Runnable, Saga Pattern).</li>
+<li><strong>Chain of Responsibility</strong> : pipeline de traitement (Servlet Filters, Spring Security).</li>
+<li><strong>State</strong> : machine à états (Order lifecycle, Session management).</li>
+<li><strong>Template Method</strong> : squelette d'algorithme (JdbcTemplate).</li>
+<li><strong>Iterator</strong> : parcours de collections (java.util.Iterator).</li>
+<li><strong>Mediator</strong> : découplage inter-composants (Event Bus, Saga Orchestration).</li>
+<li><strong>Memento</strong> : capture d'état (Undo/Redo, Event Sourcing).</li>
+<li><strong>Visitor</strong> : opérations sur structure stable (AST visitors, Jackson).</li>
+<li><strong>Interpreter</strong> : évaluation de DSL (SpEL, regex).</li>
+</ul>
+<h4>Les plus utilisés en production</h4>
+<p>Observer (Kafka), Strategy (tarification, validation), Builder (objets complexes), Proxy (Spring AOP), Facade (API Gateway), Circuit Breaker (Proxy + State), Saga (Command + Mediator).</p>`,
+tip:"Connaître les 23 en détail est attendu pour un poste Architecte. Mais surtout : savoir QUAND les utiliser vs quand ne pas les utiliser."},
+
+{q:"Quelle est la différence entre Decorator, Proxy et Adapter ? Donnez des exemples Java.",d:"hard",tags:["GoF","Structural","Java"],
+a:`<p>Ces trois patterns partagent la même structure (wrapping d'objet) mais diffèrent par leur <strong>intention</strong>.</p>
+<h4>Adapter — "Je traduis"</h4>
+<p>Résout une incompatibilité d'interface. Les deux interfaces existaient avant.</p>
+<div class="cb" style="border-color:var(--blue)">// Adapte PayPalSDK vers PaiementService (interfaces incompatibles)
+public class PayPalAdapter implements PaiementService {
+    private PayPalSDK sdk;
+    public void payer(double montant, String devise) {
+        sdk.executePayment(devise, montant); // inversion des paramètres
+    }
+}
+// Usage : InputStreamReader, intégration SDK tiers, migration SOAP→REST</div>
+
+<h4>Decorator — "J'enrichis"</h4>
+<p>Ajoute dynamiquement des comportements sans modifier la classe.</p>
+<div class="cb" style="border-color:var(--blue)">TextProcessor proc = new LoggingDecorator(
+                        new CachingDecorator(
+                            new ServiceReel()));
+// Usage : Spring AOP, @Transactional, @Cacheable, java.io streams
+// BufferedReader(InputStreamReader(...)) = stack de Decorators</div>
+
+<h4>Proxy — "Je contrôle"</h4>
+<p>Contrôle l'accès à un objet (lazy loading, sécurité, cache, remote).</p>
+<div class="cb" style="border-color:var(--blue)">public class ServiceProxy implements Service {
+    private Service real;
+    public String operation() {
+        checkPermissions();  // contrôle d'accès
+        audit();             // traçabilité
+        return real.operation();
+    }
+}
+// Usage : Spring @Transactional, Hibernate lazy loading, Spring Security</div>
+
+<p><strong>Résumé mnémotechnique</strong> : Adapter = "je traduis" | Decorator = "j'enrichis" | Proxy = "je contrôle"</p>`,
+tip:"Cette distinction est testée dans presque tous les entretiens architecte. Les mots clés 'intention' et les exemples JDK réels font la différence."},
+
+{q:"Expliquez le Builder Pattern et son utilisation en Java moderne (Lombok, immutabilité).",d:"med",tags:["Builder","Java","Lombok"],
+a:`<p>Le Builder Pattern sépare la construction d'un objet complexe de sa représentation. Essentiel pour éviter le "telescoping constructor anti-pattern".</p>
+<h4>Implémentation classique GoF</h4>
+<div class="cb" style="border-color:var(--blue)">public class Commande {
+    private final String produit;
+    private final int quantite;
+    private final String adresse;
+    private final boolean express;
+    
+    private Commande(Builder b) {
+        this.produit = b.produit;
+        this.quantite = b.quantite;
+        this.adresse = b.adresse;
+        this.express = b.express;
+    }
+    
+    public static class Builder {
+        private String produit;
+        private int quantite = 1;  // valeur par défaut
+        private String adresse;
+        private boolean express = false;
+        
+        public Builder produit(String p) { this.produit = p; return this; }
+        public Builder quantite(int q)   { this.quantite = q; return this; }
+        public Builder adresse(String a) { this.adresse = a; return this; }
+        public Builder express()         { this.express = true; return this; }
+        public Commande build()          { return new Commande(this); }
+    }
+}
+// Utilisation fluide
+Commande cmd = new Commande.Builder()
+    .produit("Laptop").quantite(2).adresse("Paris").express().build();</div>
+
+<h4>En Java moderne avec Lombok</h4>
+<div class="cb" style="border-color:var(--blue)">@Builder
+@Value  // immutable (tous les champs final)
+public class Commande {
+    String produit;
+    @Builder.Default int quantite = 1;
+    String adresse;
+    @Builder.Default boolean express = false;
+}
+// Lombok génère tout automatiquement</div>
+
+<h4>En production</h4>
+<p>J'utilise Lombok @Builder systématiquement pour les DTOs et Value Objects. Pour les objets de domaine riches, j'implémente manuellement pour garder le contrôle des invariants métier (validation dans build()).</p>`,
+tip:"Montrez que vous utilisez Lombok en production mais que vous savez aussi l'implémenter à la main — ça prouve la compréhension."},
+
+{q:"Comment le Strategy Pattern élimine-t-il les if/else massifs ? Exemple concret.",d:"med",tags:["Strategy","Java","Refactoring"],
+a:`<p>Le Strategy Pattern remplace les gros blocs conditionnels par une famille d'algorithmes interchangeables.</p>
+<h4>Avant Strategy (anti-pattern)</h4>
+<div class="cb" style="border-color:var(--blue)">public double calculerPrix(String typeClient, double prix, int qte) {
+    if ("VIP".equals(typeClient)) {
+        return prix * qte * 0.80;
+    } else if ("PROMO".equals(typeClient)) {
+        return qte > 10 ? prix * qte * 0.70 : prix * qte;
+    } else if ("EMPLOYE".equals(typeClient)) {
+        return prix * qte * 0.50;
+    } else {
+        return prix * qte;
+    }
+    // Problème : chaque nouveau type = modification de cette classe (violation OCP)
+}</div>
+
+<h4>Avec Strategy</h4>
+<div class="cb" style="border-color:var(--blue)">public interface StratégiePrix {
+    double calculer(double prix, int quantite);
+}
+
+public class PrixVIP implements StratégiePrix {
+    public double calculer(double p, int q) { return p * q * 0.80; }
+}
+public class PrixPromo implements StratégiePrix {
+    public double calculer(double p, int q) {
+        return q > 10 ? p * q * 0.70 : p * q;
+    }
+}
+
+// En production : Spring + Map<String, StratégiePrix>
+@Service
+public class TarificationService {
+    private final Map<String, StratégiePrix> strategies;
+    
+    public double calculer(String type, double prix, int qte) {
+        return strategies.getOrDefault(type, new PrixNormal())
+                         .calculer(prix, qte);
+    }
+}
+// Nouveau type de client = nouvelle classe, aucune modification existante (OCP ✓)</div>
+
+<h4>Usage en production</h4>
+<p>J'ai utilisé Strategy chez Wafa Assurance pour les règles de validation de contrats d'assurance (différentes selon le produit), et chez Carrefour pour les règles de formatage selon les différentes PDPs gouvernementales.</p>`,
+tip:"L'exemple avec Spring Bean Map<String, StratégiePrix> est très professionnel — c'est le pattern exact utilisé en production Spring."},
+
+{q:"Expliquez le Chain of Responsibility Pattern. Comment l'utilisez-vous pour les pipelines de validation ?",d:"med",tags:["Chain of Responsibility","Java","Validation"],
+a:`<p>Le Chain of Responsibility définit une chaîne d'objets traitants, chacun ayant la possibilité de traiter la requête ou de la passer au suivant.</p>
+<h4>En Java</h4>
+<div class="cb" style="border-color:var(--blue)">public abstract class ValidateurFacture {
+    private ValidateurFacture suivant;
+    
+    public ValidateurFacture setSuivant(ValidateurFacture s) {
+        this.suivant = s; return s;
+    }
+    
+    public final ValidationResult valider(Facture f) {
+        ValidationResult result = doValider(f);
+        if (!result.isValid()) return result;
+        return suivant != null ? suivant.valider(f) : ValidationResult.ok();
+    }
+    
+    protected abstract ValidationResult doValider(Facture f);
+}
+
+// Validateurs concrets
+public class ValidateurMontant extends ValidateurFacture {
+    protected ValidationResult doValider(Facture f) {
+        return f.getMontant() > 0 ? ValidationResult.ok() 
+               : ValidationResult.error("Montant invalide");
+    }
+}
+
+// Construction et utilisation
+ValidateurFacture chain = new ValidateurMontant();
+chain.setSuivant(new ValidateurSiret())
+     .setSuivant(new ValidateurTVA())
+     .setSuivant(new ValidateurConformitePDP());
+
+ValidationResult result = chain.valider(maFacture);</div>
+
+<h4>Avantages en production</h4>
+<ul>
+<li>Ajout d'un nouveau validateur sans modifier les existants (OCP)</li>
+<li>Chaque validateur est testable indépendamment</li>
+<li>Ordre configurable (priorité des validations)</li>
+</ul>
+<p>Chez Carrefour, ce pattern gérait la validation des factures avant soumission aux PDPs : 8 validateurs chaînés, chacun testé unitairement, configurables selon le type de PDP destinataire.</p>`,
+tip:"Montrer une implémentation avec ValidationResult (pas d'exception) est plus mature que de lancer des exceptions."},
+
+{q:"Expliquez le State Pattern avec un exemple de workflow de commande/facture.",d:"med",tags:["State","Java","Workflow"],
+a:`<p>Le State Pattern permet à un objet de modifier son comportement quand son état interne change. Idéal pour les machines à états complexes.</p>
+<div class="cb" style="border-color:var(--blue)">public interface EtatFacture {
+    void soumettre(ContexteFacture ctx);
+    void valider(ContexteFacture ctx);
+    void rejeter(ContexteFacture ctx);
+    void annuler(ContexteFacture ctx);
+    String getLibelle();
+}
+
+public class EtatBrouillon implements EtatFacture {
+    public void soumettre(ContexteFacture ctx) {
+        ctx.setEtat(new EtatSoumise());
+        ctx.publierEvenement(new FactureSoumiseEvent(ctx.getId()));
+    }
+    public void valider(ContexteFacture ctx) {
+        throw new IllegalStateException("Impossible de valider un brouillon");
+    }
+    public String getLibelle() { return "BROUILLON"; }
+    // ...
+}
+
+public class ContexteFacture {
+    private EtatFacture etat = new EtatBrouillon();
+    
+    public void setEtat(EtatFacture e) { this.etat = e; }
+    public void soumettre() { etat.soumettre(this); }
+    public void valider()   { etat.valider(this); }
+    public String getStatut() { return etat.getLibelle(); }
+}
+
+// Workflow complet :
+// BROUILLON → SOUMISE → VALIDEE → TRANSMISE_PDP → ACCEPTEE/REJETEE</div>
+
+<h4>Avantages vs switch/if</h4>
+<ul>
+<li>Les transitions invalides lèvent des exceptions explicites</li>
+<li>Chaque état est testable indépendamment</li>
+<li>Ajout d'un nouvel état = nouvelle classe, pas de modification des existants</li>
+</ul>
+<p>Ce pattern était au cœur du workflow de facturation chez Carrefour : 7 états, 12 transitions, intégration avec Kafka pour publier les événements à chaque transition.</p>`,
+tip:"Montrer l'intégration avec les événements Kafka à chaque transition d'état montre une architecture event-driven mature."},
+
+{q:"Quand utilisez-vous le Visitor Pattern et le Template Method ?",d:"hard",tags:["Visitor","Template Method","Java"],
+a:`<p>Ces deux patterns partagent une caractéristique : ils permettent de définir des opérations variables sur une structure stable.</p>
+<h4>Template Method — "Squelette d'algorithme"</h4>
+<p>Définit la structure d'un algorithme dans une classe abstraite, délègue certaines étapes aux sous-classes.</p>
+<div class="cb" style="border-color:var(--blue)">public abstract class GenerateurRapportFacture {
+    // Template Method — structure fixe, non overridable
+    public final RapportFacture generer(List<Facture> factures) {
+        List<Facture> filtrees = filtrer(factures);      // étape variable
+        List<LigneRapport> lignes = transformer(filtrees); // étape variable
+        return formater(lignes);                          // étape variable
+    }
+    
+    protected abstract List<Facture> filtrer(List<Facture> f);
+    protected abstract List<LigneRapport> transformer(List<Facture> f);
+    protected abstract RapportFacture formater(List<LigneRapport> l);
+}
+
+public class RapportPDFMensuel extends GenerateurRapportFacture {
+    protected List<Facture> filtrer(List<Facture> f) {
+        return f.stream().filter(Facture::isValide).collect(toList());
+    }
+    // ... autres étapes
+}</div>
+
+<h4>Visitor — "Opération sur structure stable"</h4>
+<p>Permet d'ajouter des opérations sur une hiérarchie de classes sans les modifier.</p>
+<div class="cb" style="border-color:var(--blue)">public interface Visiteur {
+    void visiter(FactureSimple f);
+    void visiter(FactureAvecAvoir f);
+    void visiter(NoteDeCredit n);
+}
+// Nouveau comportement = nouvelle implémentation de Visiteur
+// Structure des documents = inchangée
+public class ExportateurXML implements Visiteur { ... }
+public class CalculateurTVA implements Visiteur { ... }</div>
+
+<h4>Quand choisir quoi</h4>
+<ul>
+<li><strong>Template Method</strong> : la structure de l'algorithme est fixe, certaines étapes varient. Ex : JdbcTemplate, tous les AbstractXxx de Spring.</li>
+<li><strong>Visitor</strong> : la hiérarchie d'objets est stable, les opérations dessus varient souvent. Ex : compilateurs (AST), export multi-format.</li>
+</ul>`,
+tip:"Citer JdbcTemplate comme exemple concret de Template Method est parfait — c'est ce que tout développeur Spring connaît."}
+]},
+
+{id:"microservices", label:"Architecture Microservices", icon:"◎", color:"#7EC8A4",
+ qs:[
+{q:"Quelle est la différence entre un monolithe modulaire et des microservices ? Quand choisir quoi ?",d:"med",tags:["Microservices","Architecture","Décision"],
+a:`<p>C'est la question fondamentale d'architecture. Beaucoup confondent microservices = moderne et monolithe = dépassé. C'est faux.</p>
+<h4>Monolithe modulaire</h4>
+<p>Application unique avec séparation logique interne forte (modules, bounded contexts). Déploiement unique. Base de données partagée (mais accès cloisonné par module).</p>
+<p><strong>Avantages</strong> : simplicité opérationnelle, cohérence transactionnelle native, debugging facile, refactoring intra-module aisé.</p>
+<h4>Microservices</h4>
+<p>Services déployables indépendamment, chacun avec ses propres données et responsabilités métier.</p>
+<p><strong>Avantages</strong> : déploiement indépendant, scalabilité ciblée, isolation des pannes, autonomie des équipes.</p>
+<p><strong>Coûts réels</strong> : réseau, cohérence distribuée, observabilité complexe, overhead opérationnel (CI/CD × N services).</p>
+<h4>Règles de décision</h4>
+<ul>
+<li><strong>Microservices si</strong> : équipes > 15 personnes, domaines métier clairement distincts, besoin de scalabilité asymétrique, déploiements fréquents par domaine</li>
+<li><strong>Monolithe modulaire si</strong> : petite équipe (< 8 dev), domaine instable ou en exploration, startup early-stage</li>
+<li><strong>Distributed Monolith (à éviter)</strong> : services techniquement séparés mais fortement couplés via DB partagée → pire des deux mondes</li>
+</ul>
+<p>Chez Carrefour, les microservices étaient justifiés : équipes autonomes par domaine (Invoicing, Reporting, Communication), scalabilité asymétrique (le reporting est 10× moins sollicité que l'invoicing), contraintes réglementaires différentes par domaine.</p>`,
+tip:"La mention du 'Distributed Monolith' comme anti-pattern à éviter distingue immédiatement un Architecte d'un développeur."},
+
+{q:"Comment définissez-vous les frontières d'un microservice ? Expliquez le Bounded Context DDD.",d:"hard",tags:["DDD","Bounded Context","Découpe"],
+a:`<p>La découpe des microservices est l'une des décisions les plus critiques. Une mauvaise découpe crée un distributed monolith plus problématique que le monolithe original.</p>
+<h4>Bounded Context (DDD)</h4>
+<p>Un bounded context est une frontière dans laquelle un modèle métier garde un sens cohérent. Chaque terme métier a un sens précis et unique à l'intérieur du contexte.</p>
+<p>Exemple : "Client" dans le contexte Facturation ≠ "Client" dans le contexte CRM. Ce sont deux modèles différents pour le même concept.</p>
+<h4>Critères de découpe</h4>
+<ul>
+<li><strong>Autonomie des données</strong> : le service possède ses données, personne d'autre ne lit directement sa base</li>
+<li><strong>Cohérence fonctionnelle</strong> : ce qui change ensemble reste ensemble</li>
+<li><strong>Taille d'équipe</strong> : règle des "2 pizzas" (Amazon) — une équipe peut maintenir le service</li>
+<li><strong>Fréquence de déploiement</strong> : si deux fonctions changent toujours ensemble → même service</li>
+</ul>
+<h4>Red flags à éviter</h4>
+<ul>
+<li>Service qui appelle 5+ autres services pour répondre → trop fin (chatty)</li>
+<li>Service avec 15+ responsabilités → trop large</li>
+<li>Deux services qui partagent une base de données → distributed monolith</li>
+</ul>
+<h4>Exemple chez Attijariwafa Bank</h4>
+<p>Au départ : un "UserService" monolithique. Après analyse DDD : AuthenticationService (OAuth2/DSP2), CustomerProfileService (données CRM), AccountService (Core Banking). Trois bounded contexts, trois équipes distinctes, trois cycles de déploiement indépendants.</p>`,
+tip:"Nommer et expliquer le Bounded Context DDD est indispensable pour un poste Architecte. C'est le vocabulaire attendu."},
+
+{q:"Expliquez le Circuit Breaker Pattern. Implémentation avec Resilience4j.",d:"hard",tags:["Circuit Breaker","Resilience4j","Résilience"],
+a:`<p>Le Circuit Breaker évite les cascades de pannes lors d'appels distants. Il s'inspire des disjoncteurs électriques.</p>
+<h4>Les 3 états</h4>
+<ul>
+<li><strong>CLOSED</strong> (normal) : les appels passent, les erreurs sont comptées</li>
+<li><strong>OPEN</strong> (déclenché) : les appels sont immédiatement rejetés, le fallback est appelé</li>
+<li><strong>HALF_OPEN</strong> (test) : quelques appels tests passent pour vérifier si le service est rétabli</li>
+</ul>
+<h4>Configuration Resilience4j (production)</h4>
+<div class="cb" style="border-color:var(--green)">resilience4j:
+  circuitbreaker:
+    instances:
+      coreBanking:
+        slidingWindowSize: 10
+        failureRateThreshold: 50      # ouvre si 50% d'erreurs
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 2
+        slowCallDurationThreshold: 3s
+        slowCallRateThreshold: 80</div>
+<h4>Code Java</h4>
+<div class="cb" style="border-color:var(--green)">@Service
+public class CoreBankingService {
+    
+    @CircuitBreaker(name = "coreBanking", fallbackMethod = "fallback")
+    @TimeLimiter(name = "coreBanking")
+    public CompletableFuture&lt;AccountInfo&gt; getAccount(String id) {
+        return CompletableFuture.supplyAsync(() -> 
+            coreBankingClient.fetchAccount(id));
+    }
+    
+    public CompletableFuture&lt;AccountInfo&gt; fallback(String id, Exception e) {
+        log.warn("CB ouvert coreBanking, fallback id={}", id);
+        return CompletableFuture.completedFuture(AccountInfo.cached(id));
+    }
+}
+
+// Monitoring des transitions d'état
+registry.circuitBreaker("coreBanking")
+    .getEventPublisher()
+    .onStateTransition(e -> metrics.recordCBTransition(e));</div>
+<p>Chez Wafa Assurance, cette configuration a évité <strong>3 incidents majeurs</strong> en 18 mois.</p>`,
+tip:"Le monitoring des transitions d'état du CB montre un niveau Senior/Lead. C'est souvent oublié."},
+
+{q:"Expliquez le Saga Pattern — Orchestration vs Chorégraphie. Implémentation Kafka.",d:"hard",tags:["Saga","Kafka","Transactions distribuées"],
+a:`<p>Le Saga Pattern résout les transactions distribuées dans une architecture microservices où ACID multi-services est impossible.</p>
+<h4>Orchestration (Saga Orchestrator centralisé)</h4>
+<div class="cb" style="border-color:var(--green)">@SagaOrchestrator
+public class OrderSaga {
+    
+    @StartSaga
+    @SagaEventHandler
+    public void on(OrderCreatedEvent event) {
+        commandGateway.send(new ReserveInventoryCommand(event.getItems()));
+    }
+    
+    @SagaEventHandler
+    public void on(InventoryReservedEvent event) {
+        commandGateway.send(new ProcessPaymentCommand(event.getOrderId()));
+    }
+    
+    @SagaEventHandler  // Compensation si paiement échoue
+    public void on(PaymentFailedEvent event) {
+        commandGateway.send(new ReleaseInventoryCommand(event.getOrderId()));
+    }
+    
+    @EndSaga
+    @SagaEventHandler
+    public void on(OrderCompletedEvent event) {
+        // Saga terminée
+    }
+}</div>
+
+<h4>Chorégraphie (chez Carrefour)</h4>
+<div class="cb" style="border-color:var(--green)">// Chaque service réagit aux événements Kafka et publie les suivants
+// InvoicingService → [invoice.submitted] → ValidationService
+// ValidationService → [invoice.validated] → ReportingService
+// ReportingService → [report.sent] → NotificationService
+// En cas d'erreur : chaque service publie un événement de compensation
+
+@KafkaListener(topics = "invoice.submitted")
+public void handleInvoiceSubmitted(InvoiceSubmittedEvent event) {
+    try {
+        ValidationResult result = validate(event.getInvoice());
+        if (result.isValid()) {
+            kafkaTemplate.send("invoice.validated", new InvoiceValidatedEvent(...));
+        } else {
+            kafkaTemplate.send("invoice.rejected", new InvoiceRejectedEvent(...));
+        }
+    } catch (Exception e) {
+        kafkaTemplate.send("invoice.validation.failed", ...);
+    }
+}</div>
+<h4>Idempotence — indispensable</h4>
+<p>Kafka garantit at-least-once delivery. Chaque handler doit vérifier si l'opération a déjà été exécutée via une clé d'idempotence en base.</p>`,
+tip:"L'idempotence est souvent oubliée dans les réponses — la mentionner spontanément fait immédiatement la différence."},
+
+{q:"Expliquez l'Outbox Pattern. Pourquoi est-il critique en contexte financier ?",d:"hard",tags:["Outbox","Kafka","Cohérence"],
+a:`<p>L'Outbox Pattern résout un problème fondamental : garantir qu'une écriture en base et une publication Kafka sont <strong>atomiquement cohérentes</strong>.</p>
+<h4>Le problème sans Outbox</h4>
+<div class="cb" style="border-color:var(--green)">// DANGEREUX — deux opérations indépendantes
+@Transactional
+public void processInvoice(Invoice invoice) {
+    invoiceRepo.save(invoice);             // commit DB ✓
+    kafkaTemplate.send("invoices", invoice); // si crash ici → incohérence silencieuse !
+    // Donnée en base sans événement publié = non-conformité réglementaire
+}</div>
+
+<h4>La solution Outbox</h4>
+<div class="cb" style="border-color:var(--green)">@Transactional
+public void processInvoice(Invoice invoice) {
+    invoiceRepo.save(invoice);
+    // Même transaction DB : atomicité garantie
+    outboxRepo.save(OutboxEvent.builder()
+        .aggregateId(invoice.getId())
+        .eventType("InvoiceCreated")
+        .payload(serialize(invoice))
+        .status(PENDING)
+        .build());
+    // Kafka n'est PAS appelé ici
+}
+
+// Processus séparé (ou Debezium CDC)
+@Scheduled(fixedDelay = 100)
+public void publishPendingEvents() {
+    outboxRepo.findPending(100).forEach(event -> {
+        kafkaTemplate.send(event.getTopic(), event.getPayload());
+        outboxRepo.markPublished(event.getId());
+    });
+}</div>
+
+<h4>Avec Debezium (chez Carrefour)</h4>
+<p>Debezium capture les changements sur la table outbox via CDC (Change Data Capture) et publie directement sur Kafka. Plus performant que le polling, délai de propagation < 100ms.</p>
+<h4>Pourquoi critique en e-Invoicing</h4>
+<p>Une facture "créée" en base mais non publiée vers la PDP (plateforme gouvernementale) = non-conformité fiscale avec risque d'amende. L'Outbox garantit at-least-once delivery avec idempotence côté consommateur.</p>`,
+tip:"Mentionner Debezium + CDC distingue un Architecte d'un développeur Senior. C'est une technologie avancée très appréciée."},
+
+{q:"Expliquez CQRS et Event Sourcing. Quand les utiliser (et ne pas les utiliser) ?",d:"hard",tags:["CQRS","Event Sourcing","Architecture"],
+a:`<p>CQRS et Event Sourcing sont souvent présentés ensemble mais sont des patterns indépendants.</p>
+<h4>CQRS — Séparation lecture/écriture</h4>
+<div class="cb" style="border-color:var(--green)">// Write side : modèle de domaine strict avec invariants métier
+@Service
+public class InvoiceCommandService {
+    public void createInvoice(CreateInvoiceCommand cmd) {
+        Invoice invoice = Invoice.create(cmd);  // validation domaine
+        invoiceRepo.save(invoice);
+        eventBus.publish(new InvoiceCreatedEvent(invoice));
+    }
+}
+
+// Read side : modèle dénormalisé optimisé pour la consultation
+@Service
+public class InvoiceQueryService {
+    public InvoiceSummaryDto getSummary(String id) {
+        return invoiceReadRepo.findSummary(id); // vue pré-calculée
+    }
+    public Page&lt;InvoiceListDto&gt; search(InvoiceSearchCriteria c) {
+        return invoiceReadRepo.search(c); // index optimisé
+    }
+}</div>
+<h4>Event Sourcing — Persister les événements, pas l'état</h4>
+<div class="cb" style="border-color:var(--green)">// L'état d'une facture = replay de tous ses événements
+List&lt;InvoiceEvent&gt; events = eventStore.load(invoiceId);
+Invoice invoice = events.stream()
+    .reduce(Invoice.empty(), Invoice::apply, (a,b) -> b);
+// On peut reconstruire n'importe quel état passé</div>
+<h4>Quand utiliser</h4>
+<ul>
+<li><strong>CQRS seul</strong> : forte disproportion lectures/écritures, besoins de lecture complexes, scalabilité asymétrique. Chez Carrefour → dashboards de consultation très différents de la soumission.</li>
+<li><strong>CQRS + Event Sourcing</strong> : audit trail complet requis (finance, santé, légal), replay nécessaire, débogage temporel important.</li>
+</ul>
+<h4>Quand NE PAS utiliser</h4>
+<ul>
+<li>CRUD simple et équipe réduite</li>
+<li>Besoin de cohérence forte immédiate</li>
+<li>Équipe pas encore mûre sur l'eventual consistency</li>
+</ul>
+<p>Règle : CQRS ≈ 30% des microservices. Event Sourcing ≈ 10% (contextes très spéciaux).</p>`,
+tip:"Parler des trade-offs et des cas où on NE les utilise PAS montre une vraie maturité architecturale."},
+
+{q:"Qu'est-ce que le Strangler Fig Pattern ? Comment l'avez-vous utilisé ?",d:"hard",tags:["Strangler Fig","Migration","Architecture"],
+a:`<p>Le Strangler Fig Pattern est une stratégie de migration progressive d'un monolithe vers des microservices, inspirée du figuier étrangleur qui remplace progressivement son arbre hôte.</p>
+<h4>Principe</h4>
+<ol>
+<li>Un proxy/API Gateway intercepte toutes les requêtes</li>
+<li>On extrait progressivement des fonctionnalités du monolithe vers de nouveaux microservices</li>
+<li>Le proxy route vers le monolithe OU le nouveau service selon la fonctionnalité</li>
+<li>Quand tout est migré, le monolithe est retiré</li>
+</ol>
+<h4>Chez Attijariwafa Bank</h4>
+<p>Migration du module d'authentification DSP2 depuis le Core Banking vers un service OAuth2/Keycloak dédié :</p>
+<ul>
+<li><strong>Phase 1 (2 sem.)</strong> : proxy transparent, tout vers le Core Banking</li>
+<li><strong>Phase 2 (6 sem.)</strong> : nouveau service Keycloak en parallèle, trafic dupliqué pour validation (shadow mode)</li>
+<li><strong>Phase 3</strong> : bascule progressive 10% → 50% → 100%, rollback possible à chaque étape</li>
+</ul>
+<h4>Quand l'utiliser</h4>
+<ul>
+<li>Migration d'un monolithe sans pouvoir tout réécrire d'un coup</li>
+<li>Contraintes de continuité de service (zéro downtime)</li>
+<li>Équipes multiples travaillant en parallèle sur différents bounded contexts</li>
+</ul>
+<h4>Alternative : Big Bang Rewrite</h4>
+<p>Uniquement si le domaine est petit et clairement délimité. Sinon → Strangler Fig systématiquement. Un Big Bang sur un système bancaire est un suicide projet.</p>`,
+tip:"Ce pattern montre une vraie maturité architecturale pour les postes Architecte. Mentionnez le 'shadow mode' pour les plus détaillés."},
+
+{q:"Comment assurez-vous la résilience d'une architecture microservices en production ?",d:"hard",tags:["Résilience","Kubernetes","Production"],
+a:`<p>La résilience est une propriété systémique — elle se construit à plusieurs niveaux simultanément.</p>
+<h4>Niveau Infrastructure</h4>
+<ul>
+<li>Kubernetes : restart automatique, health checks (readiness + liveness probes)</li>
+<li>HPA (Horizontal Pod Autoscaler) : scale-out automatique sous charge</li>
+<li>Multi-zone : services critiques Carrefour sur 3 zones GCP</li>
+<li>Pod Disruption Budget : garantit la disponibilité minimale lors des mises à jour</li>
+</ul>
+<h4>Niveau Service (Java/Spring)</h4>
+<ul>
+<li>Circuit Breaker Resilience4j avec fallback explicite</li>
+<li>Timeouts explicites sur chaque appel externe (pas de valeur par défaut)</li>
+<li>Retry avec backoff exponentiel + jitter (évite le thundering herd)</li>
+<li>Bulkhead : thread pools séparés par type d'appel</li>
+</ul>
+<h4>Niveau Architecture</h4>
+<ul>
+<li>Idempotence : chaque opération rejouable sans effet de bord</li>
+<li>Graceful degradation : réponse dégradée (cache, données par défaut) plutôt qu'erreur 500</li>
+<li>Event-driven : découplage temporel, absorption des pics</li>
+</ul>
+<h4>Niveau Observabilité</h4>
+<p>SLO définis et monitorés (disponibilité > 99.5%, p99 < 2s). Alerting sur taux d'erreur et saturation. Distributed tracing pour les analyses post-incident.</p>
+<p>Résultat chez Carrefour : ~2 factures/sec/microservice en charge soutenue, <strong>zéro perte de données</strong> sur 18 mois de production.</p>`,
+tip:"Structurer en 4 niveaux (infra, service, architecture, observabilité) montre une vision systémique complète."},
+
+{q:"Comment gérez-vous la communication inter-services : synchrone vs asynchrone ?",d:"hard",tags:["Kafka","REST","Communication"],
+a:`<p>Le choix sync vs async est structurant et impacte directement la résilience et la scalabilité.</p>
+<h4>Règle générale</h4>
+<ul>
+<li><strong>Synchrone (REST/gRPC)</strong> : quand le client a besoin de la réponse immédiatement. Ex : GET /invoice/{id}</li>
+<li><strong>Asynchrone (Kafka)</strong> : quand la cohérence finale suffit. Ex : soumission → validation → notification</li>
+</ul>
+<h4>Architecture chez Carrefour</h4>
+<div class="cb" style="border-color:var(--green)">Flux sync (lecture) :
+UI → API Gateway → InvoicingService (GET, affichage immédiat)
+
+Flux async (traitement) :
+InvoicingService → [invoice.submitted] → ValidationService
+ValidationService → [invoice.validated] → ReportingService
+ReportingService → [report.sent] → NotificationService
+(→ dead letter topic si erreur non récupérable)</div>
+<h4>Problèmes du tout-synchrone</h4>
+<ul>
+<li>Couplage temporel : si un service est down, tout s'arrête</li>
+<li>Latence cumulée : A→B→C = latence(A)+latence(B)+latence(C)</li>
+<li>Cascade de pannes (Circuit Breaker indispensable)</li>
+</ul>
+<h4>Problèmes du tout-asynchrone</h4>
+<ul>
+<li>Débogage plus complexe (correlation IDs obligatoires)</li>
+<li>Cohérence éventuelle difficile à expliquer au métier</li>
+<li>Duplication et idempotence à gérer systématiquement</li>
+</ul>
+<p><strong>Règle d'or</strong> : async by default pour les mutations métier, sync pour les queries.</p>`,
+tip:"La règle 'async by default pour les mutations' est simple et mémorable. Les recruteurs l'adorent."}
+]},
+
+{id:"kafka-event", label:"Kafka & Event-Driven", icon:"◫", color:"#E8A85A",
+ qs:[
+{q:"Expliquez l'architecture de Kafka : topics, partitions, consumer groups, offsets.",d:"hard",tags:["Kafka","Architecture","Fondamentaux"],
+a:`<p>Kafka est un log distribué immuable, pas une file de messages traditionnelle. Cette différence est fondamentale.</p>
+<h4>Concepts clés</h4>
+<ul>
+<li><strong>Topic</strong> : canal de messages nommé (ex: "invoice.submitted")</li>
+<li><strong>Partition</strong> : subdivision d'un topic pour le parallélisme. L'ordre est garanti UNIQUEMENT par partition.</li>
+<li><strong>Offset</strong> : position d'un message dans une partition. Immuable, croissant.</li>
+<li><strong>Consumer Group</strong> : groupe de consumers partageant la consommation. Chaque partition assignée à un seul consumer du groupe.</li>
+</ul>
+<h4>Règle de scalabilité</h4>
+<div class="cb" style="border-color:var(--orange)">// Scalabilité optimale : nb partitions >= nb consumers dans le groupe
+// 6 partitions + 6 consumers = 1 partition/consumer (optimal)
+// 6 partitions + 3 consumers = 2 partitions/consumer
+// 6 partitions + 9 consumers = 3 consumers inactifs (gaspillage)
+// → Toujours dimensionner les partitions en prévision de la scalabilité future</div>
+<h4>Garanties de livraison</h4>
+<ul>
+<li><strong>at-most-once</strong> : commit avant traitement → perte possible</li>
+<li><strong>at-least-once</strong> : commit après traitement → duplication possible (le plus courant)</li>
+<li><strong>exactly-once</strong> : transactions Kafka (coût performance, rare en pratique)</li>
+</ul>
+<h4>Idempotence obligatoire avec at-least-once</h4>
+<p>Chaque consumer doit implémenter l'idempotence : si le même message est traité deux fois, le résultat est identique. Généralement via une clé d'idempotence en base ou Redis.</p>`,
+tip:"La règle 'nb partitions >= nb consumers' et les 3 modes de livraison sont des questions fréquentes en entretien."},
+
+{q:"Comment gérez-vous la cohérence des schémas Kafka en production (Schema Registry) ?",d:"hard",tags:["Kafka","Schema Registry","Avro"],
+a:`<p>En production, sans Schema Registry, un changement de format d'événement peut casser silencieusement tous les consumers. C'est un risque majeur en microservices.</p>
+<h4>Schema Registry (Confluent)</h4>
+<ul>
+<li>Registre central des schémas Avro/Protobuf/JSON Schema</li>
+<li>Versionning avec compatibilité : BACKWARD, FORWARD, FULL</li>
+<li>Chaque message contient l'ID du schéma → auto-désérialisation</li>
+</ul>
+<h4>Règles de compatibilité</h4>
+<div class="cb" style="border-color:var(--orange)">// BACKWARD (défaut recommandé) :
+// Les nouveaux consumers peuvent lire les anciens messages
+// → Ajouter des champs OPTIONNELS avec valeur par défaut = compatible
+// → Supprimer des champs obligatoires = INCOMPATIBLE → refusé par Registry
+
+// FORWARD :
+// Les anciens consumers peuvent lire les nouveaux messages
+
+// FULL = BACKWARD + FORWARD (le plus strict)</div>
+<h4>Stratégie de migration de schéma</h4>
+<ol>
+<li>Déployer les consumers capables de lire le nouveau schéma</li>
+<li>Déployer les producers avec le nouveau schéma</li>
+<li>Nettoyer l'ancien code consumers après validation</li>
+</ol>
+<p>Chez Carrefour, tous nos topics utilisaient Avro + Schema Registry. Un ADR dédié documentait la politique de compatibilité : BACKWARD obligatoire, revue d'impact avant tout changement de schéma.</p>`,
+tip:"Mentionner la stratégie de migration (consumers d'abord, producers ensuite) montre une expérience réelle de migration zero-downtime."},
+
+{q:"Comment gérez-vous les erreurs Kafka : Dead Letter Topics, retry strategies ?",d:"hard",tags:["Kafka","DLT","Résilience"],
+a:`<p>La gestion des erreurs Kafka est critique. Un consumer qui plante en boucle bloque toute la partition.</p>
+<h4>Dead Letter Topic (DLT)</h4>
+<div class="cb" style="border-color:var(--orange)">@Bean
+public DefaultErrorHandler errorHandler(KafkaOperations&lt;Object, Object&gt; template) {
+    // Retry 3 fois avec backoff exponentiel
+    ExponentialBackOffWithMaxRetries backoff = 
+        new ExponentialBackOffWithMaxRetries(3);
+    backoff.setInitialInterval(1000L);
+    backoff.setMultiplier(2.0);
+    backoff.setMaxInterval(10_000L);
+    
+    DefaultErrorHandler handler = new DefaultErrorHandler(
+        new DeadLetterPublishingRecoverer(template), backoff);
+    
+    // Exceptions non-retriables (erreurs logiques)
+    handler.addNotRetryableExceptions(
+        IllegalArgumentException.class,
+        ValidationException.class
+    );
+    
+    return handler;
+}</div>
+<h4>Monitoring du DLT</h4>
+<p>Alerting dès qu'un message atterrit dans le DLT : soit c'est un bug (à corriger), soit c'est un message malformé (à analyser). Un DLT qui grossit en silence = problème non détecté.</p>
+<h4>Reprocessing du DLT</h4>
+<p>Interface d'administration pour rejouer les messages du DLT après correction du bug. Chaque message doit avoir les métadonnées de l'erreur (exception, timestamp, topic source).</p>
+<h4>Stratégie globale</h4>
+<ul>
+<li>Exceptions transientes (réseau, DB temporairement down) → retry avec backoff</li>
+<li>Exceptions logiques (validation, format) → DLT directement, sans retry</li>
+<li>DLT monitoré et alerté → correction → replay</li>
+</ul>`,
+tip:"La distinction 'retriable vs non-retriable exceptions' dans la configuration du handler montre une vraie expérience production."},
+
+{q:"Qu'est-ce que le Consumer Lag et comment le monitorez-vous ?",d:"med",tags:["Kafka","Monitoring","Performance"],
+a:`<p>Le consumer lag est la différence entre l'offset du dernier message produit et l'offset du dernier message consommé. C'est l'indicateur de santé le plus important d'un pipeline Kafka.</p>
+<h4>Signification du lag</h4>
+<ul>
+<li>Lag stable proche de 0 → consumer suit le producteur, tout va bien</li>
+<li>Lag croissant → le consumer ne suit pas la cadence de production</li>
+<li>Lag constant non-zéro → backlog accumulé mais traité à la même vitesse</li>
+</ul>
+<h4>Monitoring avec Prometheus/Grafana</h4>
+<div class="cb" style="border-color:var(--orange)"># Métriques Kafka Exporter à surveiller
+kafka_consumer_group_lag         # lag par partition
+kafka_consumer_group_lag_sum     # lag total du consumer group
+kafka_topic_partition_offset     # offset producteur
+
+# Alerte critique chez Carrefour :
+# lag > 10000 messages sur topic invoice.submitted → PagerDuty P1
+# lag croissant depuis > 5 min → alerte P2</div>
+<h4>Causes fréquentes du lag</h4>
+<ul>
+<li>Traitement trop lent (appel externe lent, requête DB non optimisée)</li>
+<li>Pic de production soudain → scale-out des consumers (HPA sur lag metric)</li>
+<li>Consumer bloqué (exception non gérée, deadlock)</li>
+<li>Trop peu de partitions pour la charge</li>
+</ul>
+<h4>HPA sur consumer lag (chez Carrefour)</h4>
+<p>L'HPA Kubernetes était configuré pour scaler les consumer pods basé sur le consumer lag (via KEDA - Kubernetes Event-Driven Autoscaling), pas sur le CPU. Bien plus pertinent pour les workloads Kafka.</p>`,
+tip:"Mentionner KEDA pour le scaling basé sur le lag Kafka est un détail très avancé qui impressionne les architectes."}
+]},
+
+{id:"kubernetes-cloud", label:"Kubernetes & Cloud", icon:"☁", color:"#B07DC8",
+ qs:[
+{q:"Expliquez votre stratégie de déploiement Kubernetes : Blue/Green, Canary, Rolling.",d:"hard",tags:["Kubernetes","CI/CD","Déploiement"],
+a:`<p>Le choix de la stratégie de déploiement dépend du risque acceptable, de la criticité du service et de la capacité de rollback.</p>
+<h4>Rolling Update (défaut Kubernetes)</h4>
+<div class="cb" style="border-color:var(--purple)">strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 0    # aucun pod indisponible pendant la MAJ
+    maxSurge: 1          # 1 pod supplémentaire pendant la transition
+# Avantage : simple, sans infrastructure supplémentaire
+# Inconvénient : rollback lent, deux versions en prod simultanément</div>
+
+<h4>Blue/Green Deployment</h4>
+<div class="cb" style="border-color:var(--purple)">apiVersion: v1
+kind: Service
+spec:
+  selector:
+    version: blue   # → changer en "green" pour basculer
+    app: invoice-service
+# Deux deployments maintenu en parallèle (blue stable, green nouveau)
+# Bascule instantanée, rollback immédiat
+# Coût : double la capacité infrastructure pendant la transition</div>
+
+<h4>Canary Release (chez Carrefour)</h4>
+<div class="cb" style="border-color:var(--purple)"># Via Istio VirtualService
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+spec:
+  http:
+  - route:
+    - destination: {host: invoice-service, subset: stable}
+      weight: 95   # 95% du trafic → version stable
+    - destination: {host: invoice-service, subset: canary}
+      weight: 5    # 5% → nouvelle version
+# Progression automatique si métriques OK : 5% → 25% → 50% → 100%</div>
+
+<h4>Notre choix chez Carrefour</h4>
+<p>Services eInvoicing critiques → Canary avec validation automatique des métriques (erreur rate, latence p99) à chaque étape. Rollback automatique si seuil dépassé.</p>`,
+tip:"Montrer la config Istio VirtualService pour le Canary est très technique et impressionnant pour un poste Architecte Cloud."},
+
+{q:"Expliquez Readiness vs Liveness vs Startup Probes. Erreurs courantes.",d:"med",tags:["Kubernetes","Health Checks","Production"],
+a:`<p>Ces trois probes sont distinctes et servent des objectifs différents. Les confondre crée des incidents de production sérieux.</p>
+<h4>Liveness Probe</h4>
+<p>"Le pod est-il vivant ?" Si elle échoue → Kubernetes redémarre le pod (kill + recreate).</p>
+<div class="cb" style="border-color:var(--purple)">livenessProbe:
+  httpGet:
+    path: /actuator/health/liveness
+    port: 8080
+  initialDelaySeconds: 60  # important : laisser le temps à Spring de démarrer
+  periodSeconds: 10
+  failureThreshold: 3</div>
+
+<h4>Readiness Probe</h4>
+<p>"Le pod est-il prêt à recevoir du trafic ?" Si elle échoue → retrait du pod du Service Kubernetes (plus de trafic), mais pas de redémarrage.</p>
+<div class="cb" style="border-color:var(--purple)">readinessProbe:
+  httpGet:
+    path: /actuator/health/readiness
+    port: 8080
+  periodSeconds: 5
+  failureThreshold: 3
+# Spring Boot : /readiness vérifie les connexions DB, Kafka, Redis...</div>
+
+<h4>Startup Probe</h4>
+<p>"Le pod a-t-il fini de démarrer ?" Désactive la liveness probe pendant le démarrage. Essentiel pour les apps à démarrage lent (JVM warm-up).</p>
+<div class="cb" style="border-color:var(--purple)">startupProbe:
+  httpGet:
+    path: /actuator/health/liveness
+    port: 8080
+  failureThreshold: 30   # 30 × 10s = 5 min max pour démarrer
+  periodSeconds: 10</div>
+
+<h4>Erreurs courantes</h4>
+<ul>
+<li>Liveness probe trop agressive → pod redémarré sous charge alors qu'il travaille</li>
+<li>Readiness = Liveness (même endpoint) → on coupe le trafic ET on redémarre au lieu de juste couper</li>
+<li>Pas de Startup Probe → la JVM est tuée pendant son warm-up</li>
+</ul>`,
+tip:"Les erreurs courantes (surtout la liveness probe trop agressive) montrent une vraie expérience de production K8s."},
+
+{q:"Comment gérez-vous les secrets et la configuration en production Kubernetes ?",d:"hard",tags:["Kubernetes","Sécurité","Secrets"],
+a:`<p>Les secrets ne doivent jamais être dans le code, ni dans les images Docker. C'est la règle n°1 de sécurité cloud.</p>
+<h4>Anti-patterns à éviter</h4>
+<ul>
+<li>Secrets en dur dans le code → git leak possible</li>
+<li>Secrets dans les images Docker → docker history révèle tout</li>
+<li>Kubernetes Secrets en base64 simple → pas chiffré par défaut</li>
+</ul>
+<h4>Architecture de secrets en production</h4>
+<div class="cb" style="border-color:var(--purple)"># Stack chez Carrefour :
+# 1. HashiCorp Vault : stockage chiffré des secrets
+# 2. Vault Agent Sidecar : injection automatique dans les pods
+# 3. Kubernetes Secrets chiffrés at rest (encryption config)
+
+# Annotation pour le Vault Agent
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: "invoice-service"
+    vault.hashicorp.com/agent-inject-secret-db: "secret/invoice/db"
+    vault.hashicorp.com/agent-inject-template-db: |
+      {{- with secret "secret/invoice/db" -}}
+      DB_PASSWORD={{ .Data.data.password }}
+      {{- end -}}</div>
+<h4>Configuration (non-sensible)</h4>
+<p>ConfigMaps pour la configuration non-sensible (URLs, timeouts, feature flags). Variables d'environnement pour Spring profiles. External Config Server (Spring Cloud Config) pour la configuration centralisée multi-environnements.</p>
+<h4>Rotation des secrets</h4>
+<p>Vault gère la rotation automatique. Les pods sont notifiés via le Vault Agent qui recharge les secrets sans redémarrage. Politique de rotation : 90 jours pour les credentials DB, 30 jours pour les API keys.</p>`,
+tip:"Mentionner HashiCorp Vault + Vault Agent Sidecar est la référence pour la gestion des secrets en production enterprise."},
+
+{q:"Comment configurez-vous l'autoscaling Kubernetes (HPA, VPA, KEDA) ?",d:"hard",tags:["Kubernetes","Autoscaling","Performance"],
+a:`<p>L'autoscaling en production microservices nécessite des métriques pertinentes — le CPU seul est souvent insuffisant.</p>
+<h4>HPA (Horizontal Pod Autoscaler) sur CPU</h4>
+<div class="cb" style="border-color:var(--purple)">apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: invoice-service-hpa
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: invoice-service
+  minReplicas: 3
+  maxReplicas: 50
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70</div>
+
+<h4>KEDA — Scaling sur métriques custom (Kafka lag)</h4>
+<div class="cb" style="border-color:var(--purple)"># Bien plus pertinent pour les consumers Kafka
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+spec:
+  scaleTargetRef:
+    name: invoice-processor
+  minReplicaCount: 2
+  maxReplicaCount: 30
+  triggers:
+  - type: kafka
+    metadata:
+      bootstrapServers: kafka:9092
+      consumerGroup: invoice-processors
+      topic: invoice.submitted
+      lagThreshold: "1000"  # scale si lag > 1000 messages/pod
+      activationLagThreshold: "100"</div>
+
+<h4>Notre configuration chez Carrefour</h4>
+<p>Services REST → HPA sur CPU + latence p95 (custom metric Prometheus). Services Kafka consumers → KEDA sur consumer lag. Scaling de 3 → 30 pods lors des pics de fin de mois, retour à 3 pods en 15 min après.</p>`,
+tip:"KEDA + scaling sur consumer lag Kafka est un pattern avancé qui montre une vraie expertise cloud-native."}
+]},
+
+{id:"securite", label:"Sécurité & OAuth2", icon:"⬛", color:"#5AC8C8",
+ qs:[
+{q:"Expliquez OAuth2 / OIDC / JWT. Comment les implémentez-vous avec Keycloak ?",d:"hard",tags:["OAuth2","Keycloak","Sécurité"],
+a:`<p>OAuth2, OIDC et JWT sont trois standards complémentaires souvent confondus.</p>
+<h4>Les distinctions clés</h4>
+<ul>
+<li><strong>OAuth2</strong> : framework d'autorisation (délégation de droits). "Alice autorise l'app X à accéder à ses données chez Y"</li>
+<li><strong>OIDC (OpenID Connect)</strong> : couche d'authentification sur OAuth2. Ajoute l'identité de l'utilisateur (id_token)</li>
+<li><strong>JWT</strong> : format de token (JSON Web Token). Signé (JWS) ou chiffré (JWE). Peut contenir n'importe quelle claim.</li>
+</ul>
+<h4>Flow recommandé (Authorization Code + PKCE)</h4>
+<div class="cb" style="border-color:var(--teal)">1. UI → Keycloak : GET /auth?response_type=code&code_challenge=...
+2. Utilisateur s'authentifie sur Keycloak
+3. Keycloak → UI : redirect avec authorization_code
+4. UI → Keycloak : POST /token avec code + code_verifier
+5. Keycloak → UI : access_token (15min) + refresh_token (8h) + id_token
+6. UI → API : Authorization: Bearer &lt;access_token&gt;
+7. API Gateway valide JWT signature avec la public key Keycloak</div>
+<h4>Configuration Spring Boot</h4>
+<div class="cb" style="border-color:var(--teal)">spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://keycloak/realms/invoice-realm
+          
+# Spring Security valide automatiquement :
+# - signature JWT (avec public key Keycloak)
+# - expiration
+# - issuer
+# → Aucun appel Keycloak pour chaque requête (stateless)</div>
+<h4>Chez Wafa Assurance</h4>
+<p>Keycloak centralisé pour tous les services de la plateforme. Scopes OAuth2 fins par fonctionnalité. Tokens courts (15 min access, 8h refresh). mTLS entre services internes via Istio.</p>`,
+tip:"La distinction OAuth2 (autorisation) vs OIDC (authentification) est testée dans presque tous les entretiens techniques bancaires/assurance."},
+
+{q:"Comment sécurisez-vous une API REST en production ? OWASP Top 10.",d:"hard",tags:["OWASP","API Security","Sécurité"],
+a:`<p>La sécurité des API est une responsabilité du Technical Lead, pas uniquement de l'équipe sécurité.</p>
+<h4>OWASP API Security Top 10 (les plus critiques)</h4>
+<ul>
+<li><strong>A01 - Broken Object Level Authorization</strong> : valider que l'utilisateur a accès à l'objet demandé. Ex: GET /invoices/{id} → vérifier que la facture appartient au client authentifié</li>
+<li><strong>A03 - Broken Object Property Level Auth</strong> : ne pas exposer des champs sensibles. Utiliser des DTOs, pas des entités directement.</li>
+<li><strong>A04 - Unrestricted Resource Consumption</strong> : rate limiting, pagination obligatoire, limite de taille des requêtes</li>
+<li><strong>A06 - Unrestricted Access to Sensitive Business Flows</strong> : limiter les tentatives de login, de paiement</li>
+</ul>
+<h4>Mesures concrètes en production</h4>
+<div class="cb" style="border-color:var(--teal)">// Spring Security : vérification ownership
+@PreAuthorize("@invoiceSecurityService.canAccess(authentication, #invoiceId)")
+public InvoiceDto getInvoice(@PathVariable String invoiceId) { ... }
+
+// API Gateway : rate limiting + size limit
+filters:
+  - RateLimiter=100,1              # 100 req/s par client
+  - RequestSize=10MB               # limite payload
+  - StripPrefix=1
+
+// Dependency scan dans CI/CD
+mvn org.owasp:dependency-check-maven:check
+docker run aquasec/trivy image invoice-service:latest</div>
+<h4>Checklist sécurité dans le DoD</h4>
+<ul>
+<li>Pas de secrets dans le code (git-secrets pre-commit hook)</li>
+<li>Scan OWASP dependency-check dans le pipeline</li>
+<li>Scan image Docker Trivy</li>
+<li>Audit log sur toutes les opérations sensibles</li>
+<li>TLS 1.3 obligatoire, pas de HTTP interne</li>
+</ul>`,
+tip:"Intégrer les outils de sécurité dans le CI/CD (Trivy, dependency-check) est ce qui distingue un Tech Lead mature."},
+
+{q:"Qu'est-ce que mTLS ? Quand et comment l'utilisez-vous ?",d:"hard",tags:["mTLS","Sécurité","Kubernetes"],
+a:`<p>mTLS (mutual TLS) = authentification bidirectionnelle : le client ET le serveur s'authentifient mutuellement via des certificats.</p>
+<h4>TLS classique vs mTLS</h4>
+<ul>
+<li><strong>TLS classique</strong> : le client vérifie l'identité du serveur. Ex: votre navigateur vérifie le certificat de gmail.com</li>
+<li><strong>mTLS</strong> : le serveur vérifie AUSSI l'identité du client. Les deux échangent leurs certificats.</li>
+</ul>
+<h4>Quand utiliser mTLS</h4>
+<ul>
+<li>Communications service-à-service en contexte sensible (banking, santé)</li>
+<li>APIs exposées à des partenaires externes (Open Banking DSP2)</li>
+<li>Zero-trust network architecture</li>
+</ul>
+<h4>Avec Istio (chez Carrefour)</h4>
+<div class="cb" style="border-color:var(--teal)">apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: invoice-prod
+spec:
+  mtls:
+    mode: STRICT  # mTLS obligatoire pour tous les services du namespace
+# Istio injecte automatiquement les certificats via le sidecar Envoy
+# Rotation automatique des certificats (24h par défaut)
+# Zero-trust : même entre services du même namespace</div>
+<h4>Avantage de Istio pour mTLS</h4>
+<p>Sans Istio, implémenter mTLS nécessite des changements dans chaque service. Avec Istio, c'est transparent pour le code applicatif — le sidecar Envoy gère tout. C'est l'une des principales raisons d'utiliser un service mesh.</p>`,
+tip:"Montrer que vous utilisez Istio pour mTLS de façon transparente (sans changer le code) montre une vraie maturité cloud-native."}
+]},
+
+{id:"observabilite", label:"Observabilité & Production", icon:"◉", color:"#D47CA8",
+ qs:[
+{q:"Expliquez les 3 piliers de l'observabilité. Comment les implémentez-vous ?",d:"hard",tags:["Observabilité","OpenTelemetry","SRE"],
+a:`<p>L'observabilité est "la capacité à comprendre l'état interne d'un système à partir de ses outputs". En microservices, c'est une nécessité opérationnelle critique.</p>
+<h4>1. Logs (structured logging)</h4>
+<div class="cb" style="border-color:var(--pink)">// Logback avec JSON structuré
+log.info("Invoice processed",
+    kv("invoiceId", invoice.getId()),
+    kv("correlationId", MDC.get("correlationId")),
+    kv("duration_ms", duration),
+    kv("status", invoice.getStatus()),
+    kv("customerId", invoice.getCustomerId()));
+// → Elasticsearch / Kibana pour indexation et recherche
+// Correlation ID propagé depuis l'API Gateway via MDC</div>
+
+<h4>2. Métriques (Prometheus + Grafana)</h4>
+<div class="cb" style="border-color:var(--pink)">// Micrometer (Spring Boot) - métriques custom
+@EventListener
+public void onInvoiceCreated(InvoiceCreatedEvent e) {
+    meterRegistry.counter("invoice.created",
+        "status", e.getStatus(),
+        "customerId", e.getCustomerId())
+        .increment();
+}
+// Dashboard Grafana : 4 Golden Signals
+// Latency (p50, p95, p99) | Traffic (req/s) | Errors (rate) | Saturation (CPU, mémoire)</div>
+
+<h4>3. Traces distribuées (OpenTelemetry + Jaeger/Tempo)</h4>
+<div class="cb" style="border-color:var(--pink)">// OpenTelemetry auto-instrumentation Spring Boot
+// application.properties
+otel.exporter.otlp.endpoint=http://tempo:4317
+otel.service.name=invoice-service
+otel.resource.attributes=env=prod,team=invoicing
+
+// Chaque requête → trace complète à travers tous les services
+// Corrélation via traceId propagé dans les headers HTTP et Kafka</div>
+<h4>Stack chez Carrefour</h4>
+<p>OpenTelemetry → Jaeger (traces) + Prometheus → Grafana (métriques) + Fluentd → Elasticsearch → Kibana (logs). Corrélation via traceId possible en < 2 min pour tout incident.</p>`,
+tip:"Mentionner les 4 Golden Signals (Latency, Traffic, Errors, Saturation) de Google SRE est très apprécié."},
+
+{q:"Qu'est-ce qu'un SLO / SLA / SLI ? Comment les définissez-vous en production ?",d:"hard",tags:["SRE","SLO","SLA"],
+a:`<p>Ces trois concepts forment la base de la fiabilité des systèmes. Les confondre est une erreur fréquente.</p>
+<h4>Définitions</h4>
+<ul>
+<li><strong>SLI (Service Level Indicator)</strong> : mesure objective d'une caractéristique du service. Ex: latence p99, taux de disponibilité, taux d'erreur.</li>
+<li><strong>SLO (Service Level Objective)</strong> : objectif cible sur un SLI. Ex: "disponibilité > 99.5% sur 30 jours"</li>
+<li><strong>SLA (Service Level Agreement)</strong> : engagement contractuel avec pénalités. Toujours moins ambitieux que le SLO (marge de sécurité)</li>
+</ul>
+<h4>Notre SLO chez Carrefour (eInvoicing critique)</h4>
+<div class="cb" style="border-color:var(--pink)">SLI / SLO cibles (30 jours glissants) :
+• Disponibilité : mesure = % requêtes réussies → SLO > 99.5%
+• Latence : mesure = p99 des requêtes → SLO < 2s
+• Fraîcheur : mesure = délai soumission→transmission PDP → SLO < 30min
+• Correctness : mesure = % factures sans erreur → SLO > 99.9%
+
+Error Budget mensuel (disponibilité 99.5%) :
+= (1 - 0.995) × 30j × 24h × 60min = 216 minutes d'indisponibilité autorisées</div>
+<h4>Error Budget Policy</h4>
+<p>Quand l'error budget est consommé à 50% → gel des déploiements non-critiques. À 100% → seuls les correctifs de sécurité peuvent être déployés. Cela crée une pression naturelle vers la fiabilité.</p>
+<h4>Alerting basé sur le burn rate</h4>
+<p>Plutôt qu'alerter sur un seuil fixe, j'alerte sur le <strong>burn rate</strong> de l'error budget : "nous consommons notre budget d'erreurs 14× plus vite que la normale" → alerte P1 immédiate.</p>`,
+tip:"L'Error Budget Policy est un concept SRE Google très avancé. Le mentionner montre une culture SRE mature très appréciée des ESN."},
+
+{q:"Comment organisez-vous un post-mortem blameless ? Que produisez-vous comme livrables ?",d:"med",tags:["Post-mortem","SRE","Amélioration continue"],
+a:`<p>Un bon post-mortem transforme une panne en apprentissage collectif. Un mauvais post-mortem crée de la peur et masque les prochains problèmes.</p>
+<h4>Principes du blameless post-mortem</h4>
+<ul>
+<li><strong>Pas de blâme individuel</strong> : les personnes qui commettent des erreurs sont dans des systèmes qui permettent ces erreurs. On améliore le système, pas on punit les individus.</li>
+<li><strong>Supposer la bonne foi</strong> : chacun a fait le meilleur choix possible avec les informations disponibles à ce moment.</li>
+<li><strong>Focaliser sur les causes systémiques</strong>, pas les erreurs humaines.</li>
+</ul>
+<h4>Format du post-mortem (document partagé)</h4>
+<div class="cb" style="border-color:var(--pink)">POST-MORTEM : Incident #2024-11-15 — Invoice Service
+────────────────────────────────
+Impact : 23 min d'indisponibilité, ~2000 factures retardées
+Sévérité : P1
+
+Timeline :
+22:03 - Premières alertes (taux d'erreur 85%)
+22:05 - War room ouvert, rôles assignés
+22:08 - Rollback décidé et lancé
+22:26 - Service rétabli
+
+Root Cause : 
+Configuration Kafka (nb partitions augmenté) → rebalancing consumer groups → 
+consommation stoppée. Pas détecté en staging (volume insuffisant).
+
+5 Whys :
+1. Pourquoi les factures n'étaient pas traitées ? → Consumer lag extrême
+2. Pourquoi consumer lag ? → Consumer group bloqué en rebalancing
+3. Pourquoi rebalancing infini ? → Nb partitions > session.timeout
+4. Pourquoi non détecté en staging ? → Staging avait 2 partitions, prod 12
+5. Pourquoi incohérence staging/prod ? → Pas de procédure de sync config Kafka
+
+Action items (avec owner + date) :
+- [Alice, J+5] Alerte sur consumer lag > 5000
+- [Bob, J+10] Procédure de changement topologie Kafka avec checklist
+- [Alice, J+15] Synchronisation config Kafka staging/prod via IaC (Terraform)</div>`,
+tip:"Le format de post-mortem avec les 5 Whys et les action items datés et assignés est exactement ce que les équipes matures utilisent."}
+]},
+
+{id:"java-spring", label:"Java & Spring Boot", icon:"☕", color:"#C8A96E",
+ qs:[
+{q:"Quelles sont les nouveautés Java 17-21 que vous utilisez en production ?",d:"med",tags:["Java","Spring Boot","Modern Java"],
+a:`<p>Java a connu une accélération remarquable depuis Java 9. En production chez Carrefour, nous utilisions Java 21 avec Spring Boot 3.2.</p>
+<h4>Records (Java 16+) — pour les Value Objects et DTOs</h4>
+<div class="cb" style="border-color:var(--gold)">// Avant (verbeux)
+public class InvoiceDto { 
+    private final String id; private final BigDecimal amount;
+    // constructeur, getters, equals, hashCode, toString...
+}
+
+// Avec Record (immutable, tout généré)
+public record InvoiceDto(String id, BigDecimal amount, String status) {}
+
+// Parfait pour : DTOs, Value Objects, Command/Query objects
+public record CreateInvoiceCommand(String customerId, List&lt;LineItem&gt; items) {}</div>
+
+<h4>Pattern Matching + Sealed Classes (Java 17+)</h4>
+<div class="cb" style="border-color:var(--gold)">// Sealed classes pour les états de facture
+public sealed interface InvoiceEvent
+    permits InvoiceCreated, InvoiceValidated, InvoiceRejected {}
+
+// Pattern matching switch (Java 21)
+String message = switch (event) {
+    case InvoiceCreated c   -> "Facture créée: " + c.invoiceId();
+    case InvoiceValidated v -> "Facture validée: " + v.invoiceId();
+    case InvoiceRejected r  -> "Facture rejetée: " + r.reason();
+    // Le compilateur force l'exhaustivité → plus de cas oubliés !
+};</div>
+
+<h4>Virtual Threads (Java 21 — Project Loom)</h4>
+<div class="cb" style="border-color:var(--gold)">// Spring Boot 3.2+ : activer les virtual threads
+spring.threads.virtual.enabled=true
+# → Chaque requête HTTP = un virtual thread (léger, millions possibles)
+# → Remplace WebFlux pour les workloads I/O-bound
+# → Code synchrone avec performance asynchrone</div>
+
+<h4>Text Blocks (Java 15+)</h4>
+<p>JSON, SQL, HTML dans le code sans concatenation illisible. Très utile pour les scripts de migration, les requêtes JPQL complexes, les templates.</p>`,
+tip:"Mentionner Virtual Threads Java 21 et l'impact sur WebFlux est un sujet brûlant — tous les architectes en parlent en 2024-2025."},
+
+{q:"Expliquez Spring WebFlux et la programmation réactive. Quand l'utiliser ?",d:"hard",tags:["WebFlux","Reactive","Spring"],
+a:`<p>Spring WebFlux est le framework réactif de Spring, basé sur Project Reactor. Il diffère fondamentalement de Spring MVC.</p>
+<h4>Spring MVC (thread-per-request)</h4>
+<div class="cb" style="border-color:var(--gold)">// 1 requête = 1 thread bloqué pendant toute la durée
+@GetMapping("/invoice/{id}")
+public InvoiceDto getInvoice(@PathVariable String id) {
+    Thread bloqué ici pendant la requête DB (ex: 50ms)
+    → avec 200 requêtes concurrentes = 200 threads bloqués
+    → problème de scalabilité si les requêtes sont longues</div>
+
+<h4>Spring WebFlux (event-loop, non-bloquant)</h4>
+<div class="cb" style="border-color:var(--gold)">// Peu de threads gèrent des milliers de requêtes
+@GetMapping("/invoice/{id}")
+public Mono&lt;InvoiceDto&gt; getInvoice(@PathVariable String id) {
+    return invoiceR2dbcRepo.findById(id)  // R2DBC non-bloquant
+        .map(InvoiceMapper::toDto)
+        .switchIfEmpty(Mono.error(new NotFoundException(id)));
+}
+
+// Mono&lt;T&gt; = 0 ou 1 résultat asynchrone
+// Flux&lt;T&gt;  = 0 à N résultats asynchrones (stream)</div>
+
+<h4>Backpressure</h4>
+<p>Le consommateur peut signaler au producteur qu'il n'est pas prêt. Essentiel pour éviter les out-of-memory lors du traitement de gros volumes. Chez Carrefour, le traitement des factures en batch utilisait la backpressure pour réguler le flux vers la base de données.</p>
+<h4>Quand utiliser WebFlux</h4>
+<ul>
+<li>Services à très haute concurrence (> 1000 req/s) avec I/O lente</li>
+<li>Streaming de données (Server-Sent Events, WebSocket)</li>
+<li>Agrégation de multiples appels services en parallèle</li>
+</ul>
+<h4>Quand NE PAS utiliser WebFlux</h4>
+<ul>
+<li>Équipe non familière avec la programmation réactive → complexité accidentelle</li>
+<li>Java 21 disponible → Virtual Threads offrent la même perf avec du code synchrone simple</li>
+</ul>`,
+tip:"Mentionner Virtual Threads comme alternative plus simple à WebFlux est un signe de maturité technique très apprécié."},
+
+{q:"Comment écrivez-vous des tests robustes en Java ? TDD, BDD, tests d'intégration.",d:"hard",tags:["Tests","TDD","BDD","Java"],
+a:`<p>La stratégie de tests est ce qui différencie une équipe senior d'une équipe qui découverte les bugs en production.</p>
+<h4>Pyramide de tests</h4>
+<ul>
+<li>🔺 Tests unitaires (70%) : JUnit 5 + Mockito. Rapides (< 1ms), pas d'infra, testent la logique métier.</li>
+<li>🔷 Tests d'intégration (20%) : @SpringBootTest, Testcontainers. Testent les interactions (DB, Kafka, Redis).</li>
+<li>🔶 Tests E2E / contrats (10%) : Pact (Consumer-Driven Contract Testing), tests de smoke en production.</li>
+</ul>
+<h4>TDD — Test-Driven Development</h4>
+<div class="cb" style="border-color:var(--gold)">// Red → Green → Refactor
+@Test
+void shouldRejectInvoiceWithNegativeAmount() {
+    // Red : test écrit avant le code
+    Invoice invoice = Invoice.builder()
+        .amount(BigDecimal.valueOf(-100)).build();
+    
+    assertThatThrownBy(() -> invoiceService.validate(invoice))
+        .isInstanceOf(InvalidInvoiceException.class)
+        .hasMessageContaining("montant négatif");
+}
+// Green : code minimum pour passer le test
+// Refactor : améliorer sans casser les tests</div>
+
+<h4>BDD avec Cucumber (chez Wafa Assurance)</h4>
+<div class="cb" style="border-color:var(--gold)">Feature: Validation d'une demande de retraite
+  Scenario: Adhérent éligible
+    Given un adhérent avec 25 ans de cotisations
+    And un âge de 62 ans
+    When il soumet une demande de retraite
+    Then la demande est acceptée
+    And un courrier de confirmation est envoyé</div>
+
+<h4>Testcontainers — intégration réaliste</h4>
+<div class="cb" style="border-color:var(--gold)">@SpringBootTest
+@Testcontainers
+class InvoiceRepositoryTest {
+    @Container
+    static PostgreSQLContainer&lt;?&gt; postgres = 
+        new PostgreSQLContainer&lt;&gt;("postgres:15");
+    
+    // Teste avec une vraie base PostgreSQL en Docker
+    // Plus fiable qu'H2 in-memory (comportements différents)
+}</div>`,
+tip:"Testcontainers est devenu le standard — mentionner que c'est plus fiable qu'H2 montre une expérience réelle de tests d'intégration."},
+
+{q:"Comment optimisez-vous les performances d'une application Spring Boot / JPA ?",d:"hard",tags:["Performance","JPA","Spring"],
+a:`<p>Les problèmes de performance en Java enterprise viennent presque toujours de la même source : les interactions avec la base de données.</p>
+<h4>Le problème N+1 (le plus fréquent)</h4>
+<div class="cb" style="border-color:var(--gold)">// PROBLÈME : 1 requête pour les factures + N requêtes pour les lignes
+List&lt;Invoice&gt; invoices = invoiceRepo.findAll();
+invoices.forEach(i -> i.getLines().size()); // N requêtes supplémentaires !
+
+// SOLUTION : fetch join
+@Query("SELECT i FROM Invoice i LEFT JOIN FETCH i.lines WHERE i.customerId = :cId")
+List&lt;Invoice&gt; findWithLines(@Param("cId") String customerId);
+
+// Ou avec @BatchSize
+@BatchSize(size = 100)  // charge 100 collections en une requête
+@OneToMany
+private List&lt;InvoiceLine&gt; lines;</div>
+
+<h4>Index et requêtes</h4>
+<div class="cb" style="border-color:var(--gold)">// Toujours analyser avec EXPLAIN ANALYZE
+EXPLAIN ANALYZE SELECT * FROM invoice WHERE customer_id = 'X' AND status = 'VALIDATED';
+-- Index manquant → Seq Scan (lent) vs Index Scan (rapide)
+
+@Table(indexes = {
+    @Index(name = "idx_invoice_customer_status", 
+           columnList = "customer_id, status")
+})
+public class Invoice { ... }</div>
+
+<h4>Connection pooling (HikariCP)</h4>
+<div class="cb" style="border-color:var(--gold)">spring.datasource.hikari.maximum-pool-size=20
+# Formule : (Core_count × 2) + effective_spindle_count
+# Sur 4 cores, DB SSD : (4×2)+1 = 9. NE PAS mettre 100 !
+spring.datasource.hikari.connection-timeout=3000  # 3s max d'attente
+spring.datasource.hikari.leak-detection-threshold=60000</div>
+
+<h4>Cache (Redis + Caffeine)</h4>
+<p>Cache à deux niveaux : Caffeine (L1 in-process, microsecondes) + Redis (L2 distributed, millisecondes). Stratégie cache-aside avec TTL adapté au domaine. Chez Carrefour : données de référence (PDPs, taux TVA) cachées 1h, réduisant les appels DB de 80%.</p>`,
+tip:"La formule HikariCP (Core × 2 + spindle) est un détail expert très peu connu qui distingue immédiatement les profils seniors."}
+]},
+
+{id:"ddd-clean", label:"DDD & Clean Architecture", icon:"◬", color:"#7EC8A4",
+ qs:[
+{q:"Expliquez les principes SOLID avec des exemples Java concrets.",d:"med",tags:["SOLID","Java","Architecture"],
+a:`<p>Les principes SOLID sont la fondation de la conception orientée objet. Les connaître par cœur est attendu pour tout poste senior.</p>
+<h4>S — Single Responsibility Principle</h4>
+<div class="cb" style="border-color:var(--green)">// VIOLATION : une classe fait trop
+public class InvoiceService {
+    public void createInvoice(Invoice i) { ... }
+    public void sendEmailNotification(Invoice i) { ... }  // devrait être dans NotificationService
+    public void generatePDF(Invoice i) { ... }             // devrait être dans PDFService
+    public void saveToDatabase(Invoice i) { ... }         // devrait être dans Repository
+}
+
+// CORRECT : une seule responsabilité
+public class InvoiceService { void createInvoice(Invoice i) { ... } }
+public class NotificationService { void notify(Invoice i) { ... } }
+public class InvoicePDFGenerator { PDF generate(Invoice i) { ... } }</div>
+
+<h4>O — Open/Closed Principle</h4>
+<div class="cb" style="border-color:var(--green)">// Strategy Pattern applique OCP
+public interface ExportStrategy { void export(Invoice i); }
+public class PDFExport implements ExportStrategy { ... }
+public class XMLExport implements ExportStrategy { ... }  // nouveau format = nouvelle classe
+// Aucune modification du code existant → fermé à la modification, ouvert à l'extension</div>
+
+<h4>L — Liskov Substitution Principle</h4>
+<p>Tout sous-type doit être substituable à son type de base sans altérer le comportement attendu. Violation classique : Square étend Rectangle mais viole le comportement setWidth/setHeight.</p>
+
+<h4>I — Interface Segregation Principle</h4>
+<div class="cb" style="border-color:var(--green)">// VIOLATION : interface trop large
+interface InvoiceRepository { 
+    Invoice findById(String id); 
+    void save(Invoice i);
+    List&lt;Invoice&gt; findForReporting(); // pas tous les clients ont besoin de ça
+    void archiveOldInvoices();         // idem
+}
+// CORRECT : interfaces spécifiques par client
+interface InvoiceReader { Invoice findById(String id); }
+interface InvoiceWriter { void save(Invoice i); }
+interface InvoiceReporter { List&lt;Invoice&gt; findForReporting(); }</div>
+
+<h4>D — Dependency Inversion Principle</h4>
+<div class="cb" style="border-color:var(--green)">// VIOLATION : dépendance vers le concret
+public class InvoiceService {
+    private MySQLInvoiceRepository repo = new MySQLInvoiceRepository(); // couplage fort
+}
+// CORRECT : dépendance vers l'abstraction
+public class InvoiceService {
+    private final InvoiceRepository repo; // interface
+    public InvoiceService(InvoiceRepository repo) { this.repo = repo; } // injection
+}</div>`,
+tip:"Donner des exemples de VIOLATION suivis de la solution est beaucoup plus efficace que de simplement décrire le principe."},
+
+{q:"Expliquez la Clean Architecture (Hexagonale / Ports & Adapters). Comment l'implémentez-vous ?",d:"hard",tags:["Clean Architecture","Hexagonale","DDD"],
+a:`<p>La Clean Architecture (Robert Martin) et l'Architecture Hexagonale (Alistair Cockburn) partagent le même principe : <strong>isoler le domaine métier de l'infrastructure</strong>.</p>
+<h4>Structure des couches</h4>
+<div class="cb" style="border-color:var(--green)">invoice-service/
+├── domain/              # Cœur métier — aucune dépendance externe
+│   ├── model/           # Invoice, InvoiceLine, InvoiceStatus
+│   ├── port/            # Interfaces (ports)
+│   │   ├── input/       # InvoiceUseCase (ce que le domaine expose)
+│   │   └── output/      # InvoiceRepository, EventPublisher (ce qu'il consomme)
+│   └── service/         # InvoiceService (logique métier)
+├── application/         # Use cases (orchestration)
+│   └── InvoiceApplicationService.java
+└── infrastructure/      # Adapters (détails techniques)
+    ├── persistence/     # InvoiceJpaRepository (implements InvoiceRepository)
+    ├── kafka/           # KafkaEventPublisher (implements EventPublisher)
+    ├── rest/            # InvoiceController (implements InvoiceUseCase)
+    └── config/          # Spring Configuration</div>
+
+<h4>La règle de dépendance</h4>
+<p>Les dépendances ne vont que vers l'intérieur. Le domaine ne connaît PAS JPA, Spring, Kafka. L'infrastructure connaît le domaine.</p>
+<div class="cb" style="border-color:var(--green)">// Dans le domaine — aucun import infrastructure
+public interface InvoiceRepository {
+    void save(Invoice invoice);
+    Optional&lt;Invoice&gt; findById(InvoiceId id);
+}
+
+// Dans l'infrastructure — implémentation Spring Data
+@Repository
+public class InvoiceJpaAdapter implements InvoiceRepository {
+    private final InvoiceJpaRepository jpa;
+    public void save(Invoice invoice) {
+        jpa.save(InvoiceJpaMapper.toEntity(invoice));
+    }
+}</div>
+<h4>Avantages concrets</h4>
+<ul>
+<li>Tests du domaine sans Spring (ultra rapides, aucune infra)</li>
+<li>Remplacement de la DB (JPA → R2DBC) sans toucher le domaine</li>
+<li>Remplacement de Kafka par RabbitMQ sans toucher le domaine</li>
+</ul>`,
+tip:"La structure de package avec domain/application/infrastructure et les règles de dépendance sont exactement ce qu'un Architecte doit savoir décrire précisément."},
+
+{q:"Qu'est-ce que l'Aggregate Root en DDD ? Avec un exemple de facturation.",d:"hard",tags:["DDD","Aggregate","Java"],
+a:`<p>L'Aggregate Root est le concept le plus important et le plus mal compris de DDD.</p>
+<h4>Définitions</h4>
+<ul>
+<li><strong>Aggregate</strong> : grappe d'objets métier traités comme une unité de cohérence</li>
+<li><strong>Aggregate Root</strong> : l'objet racine qui garantit les invariants de l'aggregate. Le seul point d'entrée pour modifier l'aggregate.</li>
+<li>Règle : on n'accède JAMAIS directement aux sous-objets d'un aggregate — toujours via la root.</li>
+</ul>
+<h4>Exemple : Facture comme Aggregate Root</h4>
+<div class="cb" style="border-color:var(--green)">public class Invoice {  // Aggregate Root
+    private final InvoiceId id;
+    private final CustomerId customerId;
+    private InvoiceStatus status;
+    private final List&lt;InvoiceLine&gt; lines;  // Value Objects — jamais accédés directement
+    
+    // Règle métier encapsulée dans le domaine
+    public void addLine(String description, BigDecimal unitPrice, int quantity) {
+        if (status != InvoiceStatus.DRAFT) {
+            throw new DomainException("On ne peut modifier qu'un brouillon");
+        }
+        if (lines.size() >= 100) {
+            throw new DomainException("Maximum 100 lignes par facture");
+        }
+        lines.add(new InvoiceLine(description, unitPrice, quantity));
+    }
+    
+    public void submit() {
+        if (lines.isEmpty()) throw new DomainException("Facture vide");
+        if (calculateTotal().compareTo(BigDecimal.ZERO) <= 0) 
+            throw new DomainException("Montant nul");
+        this.status = InvoiceStatus.SUBMITTED;
+        registerEvent(new InvoiceSubmittedEvent(this.id));
+    }
+    
+    // Calcul dans le domaine, pas dans un service externe
+    public BigDecimal calculateTotal() {
+        return lines.stream()
+            .map(InvoiceLine::calculateAmount)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+    
+    // Domain Events enregistrés pour être publiés après persist
+    private final List&lt;DomainEvent&gt; events = new ArrayList&lt;&gt;();
+    protected void registerEvent(DomainEvent e) { events.add(e); }
+    public List&lt;DomainEvent&gt; pullEvents() { 
+        List&lt;DomainEvent&gt; copy = new ArrayList&lt;&gt;(events);
+        events.clear();
+        return copy;
+    }
+}</div>`,
+tip:"Les Domain Events enregistrés dans l'aggregate et publiés après la persistence est un pattern avancé très apprécié des recruteurs DDD."}
+]},
+
+{id:"soft-skills", label:"Leadership & Soft Skills", icon:"◇", color:"#E8A85A",
+ qs:[
+{q:"Comment vous positionnez-vous entre le rôle technique et le rôle de management ?",d:"med",tags:["Leadership","Positionnement","Consulting"],
+a:`<p>Je me positionne comme un <strong>Technical Lead hands-on</strong> — pas un manager pur, pas un développeur pur, mais le pont entre les deux.</p>
+<h4>Mon ratio en pratique</h4>
+<p>40% du temps en développement direct (architecture, modules critiques, code reviews approfondies) et 60% en leadership technique (standards, mentoring, coordination, pilotage delivery). Ce ratio évolue selon la maturité du projet.</p>
+<h4>Ce que j'apporte spécifiquement</h4>
+<ul>
+<li>Capacité à lire du code et identifier les problèmes de conception avant qu'ils deviennent des problèmes de production</li>
+<li>Traduction technique ↔ business (dans les deux sens)</li>
+<li>Prise de décisions architecturales sous incertitude en assumant les compromis</li>
+<li>Montée en compétence de l'équipe comme objectif permanent</li>
+</ul>
+<h4>Ce que je ne suis pas</h4>
+<p>Je ne suis pas le "super développeur qui code tout seul". Mon rôle est de rendre l'équipe plus forte collectivement. Chez Wafa Assurance, j'ai investi sur le mentoring de 3 développeurs juniors qui sont devenus autonomes sur Kafka et Spring Boot en 3 mois.</p>
+<h4>Pour un poste Chef de Projet Technique</h4>
+<p>J'assume pleinement la responsabilité du delivery. Le CdP technique doit être crédible techniquement pour les équipes ET interlocuteur fiable pour le business. La dualité est une force, pas une faiblesse.</p>`,
+tip:"En France, les ESN valorisent énormément cette posture hybride. Ne pas se présenter comme pure manager — ça rassure sur la crédibilité technique."},
+
+{q:"Comment expliquez-vous une décision architecturale complexe à des stakeholders non-techniques ?",d:"med",tags:["Communication","Vulgarisation","Stakeholders"],
+a:`<p>La communication vers les non-techniques est l'une des compétences les plus différenciantes d'un Tech Lead. J'ai développé une méthode en 3 temps.</p>
+<h4>1. Commencer par l'impact business, pas la solution</h4>
+<ul>
+<li>❌ "On doit migrer vers une architecture event-driven avec Kafka."</li>
+<li>✅ "Pour traiter 10× plus de factures en fin de mois sans ralentissement, nous devons changer la façon dont les composants communiquent."</li>
+</ul>
+<h4>2. Utiliser des analogies du monde réel</h4>
+<p><strong>Circuit Breaker</strong> : "C'est comme un disjoncteur électrique. Sans lui, une surcharge dans un circuit peut provoquer un incendie dans tout le réseau. Le Circuit Breaker coupe automatiquement le circuit défaillant pour protéger le reste du système."</p>
+<p><strong>Saga Pattern</strong> : "C'est comme un virement international : chaque banque peut annuler sa partie si l'étape suivante échoue. L'ensemble reste cohérent même en cas de panne partielle."</p>
+<p><strong>Kubernetes</strong> : "C'est comme un chef d'orchestre qui surveille en permanence ses musiciens. Si un musicien tombe malade, l'orchestre recrute automatiquement un remplaçant et continue sans interruption."</p>
+<h4>3. Présenter les compromis, pas des certitudes</h4>
+<p>Les stakeholders expérimentés se méfient des "solutions parfaites". Je présente toujours : "Cette approche est optimale pour X et Y, mais elle implique un coût Z et une complexité W. Voici pourquoi je recommande quand même de la prendre."</p>`,
+tip:"Les trois analogies (disjoncteur, virement international, chef d'orchestre) sont mémorables — préparez-les à l'avance pour l'entretien."},
+
+{q:"Comment gérez-vous votre montée en compétence et celle de votre équipe ?",d:"med",tags:["Apprentissage","Mentoring","Leadership"],
+a:`<p>La montée en compétence est un investissement qui rapporte sur toute la durée du projet.</p>
+<h4>Pour moi-même</h4>
+<p>Je structure mon apprentissage autour des gaps identifiés sur mes projets actuels. Quand on a commencé WebFlux chez Carrefour, j'ai passé 3 semaines à approfondir la programmation réactive. Ma règle : minimum 3h/semaine de veille, toujours liée à un besoin projet concret.</p>
+<p>Sources : documentation officielle (première source), conférences (Devoxx France, Paris JUG), blogs techniques (Spring Blog, Confluent Blog, Martin Fowler), et expérimentation sur projets personnels.</p>
+<h4>Pour l'équipe — modèle 70-20-10</h4>
+<ul>
+<li><strong>70% learning by doing</strong> : tickets légèrement au-dessus du niveau actuel, avec code review approfondie comme filet de sécurité</li>
+<li><strong>20% learning from others</strong> : pair programming, code reviews commentées, tech talks internes bi-mensuels</li>
+<li><strong>10% formal learning</strong> : certifications ciblées (OCA Java pour moi), formations courtes</li>
+</ul>
+<h4>Exemple concret</h4>
+<p>Chez Wafa Assurance, j'ai mentored un développeur junior sur les tests BDD (Cucumber). Méthode : 1h d'explication du principe → 3h de pair programming sur les premiers tests → il écrit seul avec ma review → en 2 sprints, il formait les autres. C'est la multiplication de l'impact.</p>`,
+tip:"Le modèle 70-20-10 est connu des RH et montre une culture L&D structurée appréciée des grandes ESN françaises."},
+
+{q:"Comment défendez-vous vos choix techniques face à un client qui impose une technologie ?",d:"hard",tags:["Négociation","Client","Consulting"],
+a:`<p>C'est l'une des situations les plus délicates en consulting. Mal gérée, elle nuit à la relation client. Bien gérée, elle renforce votre crédibilité.</p>
+<h4>Principe de base</h4>
+<p>Je ne défends pas "ma" technologie. Je défends les <strong>exigences non-fonctionnelles du projet</strong>. Si la technologie imposée par le client répond à ces exigences, je l'adopte. Si elle les compromet, je le démontrer factuellement.</p>
+<h4>Ma démarche</h4>
+<ol>
+<li><strong>Comprendre le "pourquoi" du choix client</strong> : compétence interne existante ? Accord contractuel avec un éditeur ? Politique DSI ? Le contexte change la réponse.</li>
+<li><strong>Analyser objectivement l'adéquation</strong> : la technologie répond-elle aux exigences de volumétrie, disponibilité, sécurité, conformité ?</li>
+<li><strong>Présenter l'analyse, pas l'opinion</strong> : "La technologie X a ces avantages [liste] mais ces limitations dans notre contexte [liste avec données]. La technologie Y apporterait [bénéfices mesurables]."</li>
+<li><strong>Proposer un POC limité</strong> si le désaccord persiste : 2 semaines de prototype sur le cas d'usage critique. Les faits tranchent mieux que les arguments.</li>
+</ol>
+<h4>Ce que je ne fais pas</h4>
+<ul>
+<li>Je ne dis pas "c'est une mauvaise décision" — trop confrontatif</li>
+<li>Je ne cède pas sans documenter les risques — je les note dans un ADR signé</li>
+<li>Je ne reviens pas sur un choix acté sans raison nouvelle — la stabilité des décisions est une valeur</li>
+</ul>`,
+tip:"La proposition d'un POC pour trancher est très mature et très appréciée — ça montre que vous privilégiez les faits aux opinions."},
+
+{q:"Comment gérez-vous un développeur senior qui résiste aux décisions architecturales ?",d:"hard",tags:["Leadership","Conflits","Management"],
+a:`<p>C'est un test de leadership réel. La résistance d'un senior cache souvent une préoccupation légitime — l'ignorer serait une erreur.</p>
+<h4>Étape 1 — Comprendre la résistance</h4>
+<p>Entretien individuel rapide (informal, pas formel). Questions ouvertes : "Qu'est-ce qui te préoccupe dans cette approche ?" La résistance peut cacher : une expertise que je n'ai pas considérée, une frustration de ne pas avoir été consulté, une préoccupation sur la faisabilité dans le contexte actuel.</p>
+<h4>Étape 2 — Distinguer les types de désaccord</h4>
+<ul>
+<li><strong>Désaccord technique fondé</strong> : je réévalue la décision avec les nouveaux arguments. Si pertinents → je change d'avis et je documente pourquoi. Ça ne me fait pas perdre de crédibilité — ça en gagne.</li>
+<li><strong>Préférence personnelle</strong> : j'explique le raisonnement derrière la décision, les contraintes qui ont pesé. "Je comprends ta préférence, voici pourquoi j'ai choisi autrement dans ce contexte."</li>
+<li><strong>Résistance au changement</strong> : j'implique la personne dans l'implémentation. L'ownership transforme les détracteurs en ambassadeurs.</li>
+</ul>
+<h4>Étape 3 — Documenter et avancer</h4>
+<p>Une fois la décision prise (avec ou sans consensus), elle est dans l'ADR avec les arguments de toutes les parties. L'équipe peut désaccorder et s'engager (<strong>"disagree and commit"</strong>). La décision est stable jusqu'à ce qu'une nouvelle donnée la remette en question.</p>
+<p>Ce que je ne fais pas : imposer sans expliquer, ni céder pour éviter le conflit. Les deux sont des faiblesses de leadership.</p>`,
+tip:"Le concept 'disagree and commit' (Amazon leadership principle) est très connu des recruteurs — le citer montre une culture professionnelle mature."},
+
+{q:"Quelles sont vos motivations pour vous installer en France ? Comment vous positionnez-vous sur le marché ?",d:"med",tags:["Consulting","France","Positionnement"],
+a:`<p>Cette question est quasi-certaine pour un profil basé au Maroc visant le marché français. Préparez une réponse authentique et confiante.</p>
+<h4>Les motivations (à adapter à votre réalité)</h4>
+<p>Le marché français de la tech offre des opportunités qui correspondent exactement à mon profil : projets de grande envergure (CAC 40, grands groupes bancaires et assurance), culture technique exigeante, et des challenges architecturaux complexes. Après 12 ans d'expérience sur des projets de niveau international (Carrefour France, programmes e-invoicing conformes à la réglementation européenne), je vise des missions où je peux apporter ma double expertise : technique hands-on ET leadership.</p>
+<h4>Mon positionnement sur le marché français</h4>
+<ul>
+<li><strong>Secteurs cibles</strong> : Banking/Finance/Assurance, Retail tech, e-Commerce. Ce sont les secteurs où j'ai le plus d'impact démontrable.</li>
+<li><strong>Missions cibles</strong> : Technical Lead sur programmes de transformation (migration microservices, mise en conformité réglementaire, modernisation SI)</li>
+<li><strong>TJM cible</strong> : 700-900€/j en fonction du contexte et des responsabilités</li>
+</ul>
+<h4>Ma valeur différenciante</h4>
+<p>Avoir travaillé sur l'eInvoicing (réglementation DGFiP) directement chez Carrefour est une référence très forte sur le marché français en 2024-2025, où la facturation électronique devient obligatoire pour toutes les entreprises.</p>`,
+tip:"Mentionner l'eInvoicing obligatoire en France comme levier de différentiation est très stratégique — c'est un sujet chaud sur le marché français."},
+
+{q:"Présentez-vous en 3 minutes (elevator pitch).",d:"easy",tags:["Présentation","Pitch","Entretien"],
+a:`<p>L'elevator pitch est souvent la première question d'un entretien. Il doit être mémorisé et naturel — pas récité.</p>
+<h4>Structure recommandée (3 minutes)</h4>
+<p><strong>Ouverture — Qui êtes-vous (20 sec)</strong><br>
+"Je suis Lola, Technical Lead spécialisée dans la conception et la transformation de systèmes distribués critiques, avec 12 ans d'expérience principalement dans les secteurs banking, assurance et retail."</p>
+<p><strong>Expérience marquante (60 sec)</strong><br>
+"Ma mission la plus récente est chez Carrefour, où je pilote une squad de 6 à 8 développeurs sur un programme de facturation électronique critique — conformité réglementaire européenne, architecture microservices réactive en Java 21 / Spring WebFlux, traitement de plusieurs milliers de factures quotidiennes. Avant ça, j'étais Technical Lead chez Wafa Assurance sur une plateforme digitale retraite, où nous avons obtenu -30% de time-to-market et -40% de régressions."</p>
+<p><strong>Valeur ajoutée (40 sec)</strong><br>
+"Ce qui me caractérise, c'est une posture hybride : je suis hands-on techniquement — je conçois l'architecture, je contribue au code sur les parties critiques — et je suis à l'aise avec le leadership technique : pilotage Agile, coordination transverse, montée en compétence des équipes, communication avec les directions."</p>
+<p><strong>Projection (20 sec)</strong><br>
+"Je suis en cours d'installation en France, et je recherche des missions de Technical Lead ou d'Architecte sur des programmes de transformation à fort enjeu technique, idéalement dans les secteurs que je connais bien : finance, assurance ou retail tech."</p>`,
+tip:"Entraînez-vous à répéter ce pitch jusqu'à ce qu'il soit fluide et naturel. Le recruteur évalue aussi votre aisance orale, pas seulement le contenu."}
+]}
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+const seen = {};
+let currentView = 'home';
+let searchActive = false;
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+function init() {
+  // Build nav
+  const navList = document.getElementById('nav-list');
+  M.forEach(m => {
+    const btn = document.createElement('button');
+    btn.className = 'nbtn';
+    btn.id = 'nav-' + m.id;
+    btn.style.setProperty('--c', m.color);
+    btn.onclick = () => showModule(m.id);
+    btn.innerHTML = `<span class="ni" style="color:${m.color}">${m.icon}</span><span class="nl">${m.label}</span><span class="nc">${m.qs.length}q</span>`;
+    navList.appendChild(btn);
+  });
+
+  // Build home grid
+  const hg = document.getElementById('home-grid');
+  M.forEach(m => {
+    const c = document.createElement('div');
+    c.className = 'mcard';
+    c.id = 'mcard-' + m.id;
+    c.onclick = () => showModule(m.id);
+    c.innerHTML = `
+      <div class="mg" style="background:radial-gradient(circle at 100% 0%,${m.color},transparent)"></div>
+      <div class="mi">${m.icon}</div>
+      <div class="mt">${m.label}</div>
+      <div class="mq">${m.qs.length} questions</div>
+      <div class="pbar"><div class="pfill" id="mc-prog-${m.id}" style="width:0%;background:${m.color}"></div></div>`;
+    hg.appendChild(c);
+  });
+
+  // Build module views
+  const mv = document.getElementById('module-views');
+  M.forEach(m => {
+    const div = document.createElement('div');
+    div.className = 'mview';
+    div.id = 'mv-' + m.id;
+    div.innerHTML = `
+      <div class="mv-hd">
+        <div class="mhi">${m.icon}</div>
+        <div>
+          <div class="mht">${m.label}</div>
+          <div class="mhs" style="color:${m.color}">${m.qs.length} questions · Cliquez sur une question pour voir la réponse</div>
+        </div>
+        <div class="mvp">
+          <div class="mvpn" id="mvp-n-${m.id}" style="color:${m.color}">0/${m.qs.length}</div>
+          <div class="mvpl">questions vues</div>
+          <div class="pbar" style="width:80px;margin-top:4px"><div class="pfill" id="mvp-f-${m.id}" style="background:${m.color};width:0%"></div></div>
+        </div>
+      </div>
+      <div id="qlist-${m.id}"></div>`;
+    mv.appendChild(div);
+
+    const ql = document.getElementById('qlist-' + m.id);
+    m.qs.forEach((q, i) => {
+      const key = m.id + '-' + i;
+      const el = document.createElement('div');
+      el.className = 'qcard';
+      el.id = 'qcard-' + key;
+      el.innerHTML = buildCard(q, i, m.color, key);
+      ql.appendChild(el);
+    });
+  });
+
+  updateStats();
+  document.getElementById('gtotal').textContent = totalQ();
+  document.getElementById('st-total').textContent = totalQ();
+}
+
+function buildCard(q, i, color, key) {
+  const diffClass = q.d === 'easy' ? 'de' : q.d === 'med' ? 'dm' : 'dh';
+  const diffLabel = q.d === 'easy' ? 'Facile' : q.d === 'med' ? 'Intermédiaire' : 'Avancé';
+  const tagsHtml = q.tags.map(t => `<span class="tag" style="color:${color}">${t}</span>`).join('');
+  const tipHtml = q.tip ? `
+    <button class="tipbtn" style="color:${color};border-color:${color}50" onclick="toggleTip('${key}',this)">💡 Conseil entretien</button>
+    <div class="tipbox" id="tip-${key}" style="border-color:${color}40;color:rgba(255,255,255,.75)">${q.tip}</div>` : '';
+  return `
+    <div class="qhead" onclick="toggleCard('${key}')">
+      <span class="qn" style="color:${color}">Q${String(i+1).padStart(2,'0')}</span>
+      <div style="flex:1">
+        <div class="qq">${q.q}</div>
+        <div class="qtags">${tagsHtml}</div>
+      </div>
+      <div class="qmeta">
+        <span class="diff ${diffClass}">${diffLabel}</span>
+        <span class="sdot" id="dot-${key}" style="background:transparent;border:1px solid rgba(255,255,255,0.2)"></span>
+        <span class="chv">▾</span>
+      </div>
+    </div>
+    <div class="qbody">
+      <div class="qdiv" style="background:linear-gradient(90deg,${color}40,transparent)"></div>
+      <div class="answer">${q.a}</div>
+      ${tipHtml}
+      <div class="cf">
+        <button class="seenbtn" id="sbtn-${key}" style="color:${color};border-color:${color}50" onclick="toggleSeen('${key}')">Marquer comme vue</button>
+      </div>
+    </div>`;
+}
+
+function toggleCard(key) {
+  const el = document.getElementById('qcard-' + key);
+  el.classList.toggle('open');
+}
+
+function toggleTip(key, btn) {
+  const box = document.getElementById('tip-' + key);
+  const visible = box.style.display === 'block';
+  box.style.display = visible ? 'none' : 'block';
+  btn.textContent = visible ? '💡 Conseil entretien' : '▲ Masquer le conseil';
+}
+
+function toggleSeen(key) {
+  seen[key] = !seen[key];
+  const card = document.getElementById('qcard-' + key);
+  const dot = document.getElementById('dot-' + key);
+  const btn = document.getElementById('sbtn-' + key);
+  if (seen[key]) {
+    card.classList.add('seen');
+    dot.style.background = '#7EC8A4';
+    dot.style.border = 'none';
+    btn.textContent = '✓ Vue';
+  } else {
+    card.classList.remove('seen');
+    dot.style.background = 'transparent';
+    dot.style.border = '1px solid rgba(255,255,255,0.2)';
+    btn.textContent = 'Marquer comme vue';
+  }
+  updateStats();
+}
+
+function totalQ() { return M.reduce((s, m) => s + m.qs.length, 0); }
+function totalSeen() { return Object.values(seen).filter(Boolean).length; }
+
+function getModuleSeen(id) {
+  const m = M.find(x => x.id === id);
+  if (!m) return 0;
+  return m.qs.filter((_, i) => seen[id + '-' + i]).length;
+}
+
+function updateStats() {
+  const ts = totalSeen(), tq = totalQ();
+  const pct = tq ? Math.round(ts / tq * 100) : 0;
+  document.getElementById('gseen').textContent = ts;
+  document.getElementById('gfill').style.width = pct + '%';
+  document.getElementById('st-seen').textContent = ts;
+  document.getElementById('st-left').textContent = tq - ts;
+  document.getElementById('st-pct').textContent = pct + '%';
+
+  M.forEach(m => {
+    const s = getModuleSeen(m.id);
+    const p = m.qs.length ? Math.round(s / m.qs.length * 100) : 0;
+    const pf = document.getElementById('mc-prog-' + m.id);
+    if (pf) pf.style.width = p + '%';
+    const mpf = document.getElementById('mvp-f-' + m.id);
+    if (mpf) mpf.style.width = p + '%';
+    const mpn = document.getElementById('mvp-n-' + m.id);
+    if (mpn) mpn.textContent = s + '/' + m.qs.length;
+  });
+}
+
+function showHome() {
+  hideAll();
+  document.getElementById('home').classList.add('vis');
+  document.getElementById('tb-title').textContent = 'Préparation Entretien';
+  setActiveNav('nav-home');
+  currentView = 'home';
+}
+
+function showModule(id) {
+  const m = M.find(x => x.id === id);
+  if (!m) return;
+  hideAll();
+  document.getElementById('mv-' + id).classList.add('vis');
+  document.getElementById('tb-title').textContent = m.label;
+  setActiveNav('nav-' + id);
+  currentView = id;
+}
+
+function hideAll() {
+  document.getElementById('home').classList.remove('vis');
+  document.getElementById('search-view').classList.remove('vis');
+  document.querySelectorAll('.mview').forEach(el => el.classList.remove('vis'));
+  searchActive = false;
+}
+
+function setActiveNav(id) {
+  document.querySelectorAll('.nbtn').forEach(b => b.classList.remove('on'));
+  const btn = document.getElementById(id);
+  if (btn) btn.classList.add('on');
+}
+
+function doSearch(val) {
+  const q = val.trim().toLowerCase();
+  if (!q) {
+    showModule(currentView !== 'home' ? currentView : null);
+    if (currentView === 'home') showHome();
+    return;
+  }
+  hideAll();
+  document.getElementById('search-view').classList.add('vis');
+  document.getElementById('sr-q').textContent = val;
+  setActiveNav('');
+
+  const results = [];
+  M.forEach(m => {
+    m.qs.forEach((question, i) => {
+      if (question.q.toLowerCase().includes(q) ||
+          question.tags.some(t => t.toLowerCase().includes(q)) ||
+          question.a.toLowerCase().includes(q)) {
+        results.push({ m, question, i, key: m.id + '-' + i });
+      }
+    });
+  });
+
+  document.getElementById('sr-n').textContent = results.length;
+  const list = document.getElementById('sr-list');
+  list.innerHTML = '';
+
+  if (!results.length) {
+    list.innerHTML = '<div class="noq">Aucune question trouvée pour "' + val + '"</div>';
+    return;
+  }
+
+  results.forEach(({ m, question, i, key }) => {
+    const wrap = document.createElement('div');
+    wrap.style.marginBottom = '6px';
+    const label = document.createElement('div');
+    label.style.cssText = 'font-size:10px;color:' + m.color + ';font-family:monospace;margin-bottom:3px;padding-left:2px';
+    label.textContent = m.icon + ' ' + m.label;
+    const el = document.createElement('div');
+    el.className = 'qcard';
+    el.id = 'qcard-sr-' + key;
+    el.innerHTML = buildCard(question, i, m.color, key);
+    wrap.appendChild(label);
+    wrap.appendChild(el);
+    list.appendChild(wrap);
+  });
+}
+
+// Start
+init();
+</script>
+</body>
+</html>
