@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Préparation Entretien — Lola · Technical Lead</title>
+<title>Préparation Entretien — Loubna Bounoun · Technical Lead</title>
 <style>
 :root{
   --bg:#07090F;--bg2:#0D1018;--bg3:#131720;--border:rgba(255,255,255,0.07);
@@ -123,13 +123,33 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .mview.vis,.qcard{animation:fi .22s ease}
 @media(max-width:850px){#sidebar{width:210px}#main{margin-left:210px}.mgrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){#sidebar{display:none}#main{margin-left:0}#content{padding:16px 14px 60px}.mgrid{grid-template-columns:1fr}}
+
+/* DOC SECTIONS */
+.doc-section{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:28px;overflow:hidden}
+.doc-section-header{padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer}
+.doc-section-header h3{font-size:15px;font-weight:700;flex:1}
+.doc-section-header .dsh-icon{font-size:20px}
+.doc-section-body{padding:20px 22px;display:none}
+.doc-section.open .doc-section-body{display:block}
+.doc-table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+.doc-table th{background:rgba(255,255,255,0.05);padding:8px 12px;text-align:left;font-weight:600;border-bottom:2px solid var(--border);color:rgba(255,255,255,.9)}
+.doc-table td{padding:7px 12px;border-bottom:1px solid rgba(255,255,255,0.04);color:rgba(255,255,255,.75);vertical-align:top}
+.doc-table tr:hover td{background:rgba(255,255,255,0.02)}
+.doc-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-family:monospace;margin:2px}
+.doc-note{background:rgba(255,255,255,0.03);border-left:3px solid;padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:12.5px;line-height:1.6;color:rgba(255,255,255,.75)}
+
+.doc-section-header:hover{background:rgba(255,255,255,0.03)}
+.doc-section.open .doc-section-header .dsh-icon{transform:rotate(90deg)}
+.doc-section-header .dsh-icon{display:inline-block;transition:transform .25s;font-style:normal}
+.doc-section-header span:last-child{transition:transform .25s}
+.doc-section.open .doc-section-header span:last-child{transform:rotate(180deg);display:inline-block}
 </style>
 </head>
 <body>
 
 <nav id="sidebar">
   <div id="sb-head">
-    <div class="nm">Lola</div>
+    <div class="nm">Loubna Bounoun</div>
     <div class="rl">Technical Lead · Architecte · Chef de Projet</div>
   </div>
   <div id="sb-prog">
@@ -1911,7 +1931,7 @@ tip:"Mentionner l'eInvoicing obligatoire en France comme levier de différentiat
 a:`<p>L'elevator pitch est souvent la première question d'un entretien. Il doit être mémorisé et naturel — pas récité.</p>
 <h4>Structure recommandée (3 minutes)</h4>
 <p><strong>Ouverture — Qui êtes-vous (20 sec)</strong><br>
-"Je suis Lola, Technical Lead spécialisée dans la conception et la transformation de systèmes distribués critiques, avec 12 ans d'expérience principalement dans les secteurs banking, assurance et retail."</p>
+"Je suis Loubna Bounoun, Technical Lead spécialisée dans la conception et la transformation de systèmes distribués critiques, avec 12 ans d'expérience principalement dans les secteurs banking, assurance et retail."</p>
 <p><strong>Expérience marquante (60 sec)</strong><br>
 "Ma mission la plus récente est chez Carrefour, où je pilote une squad de 6 à 8 développeurs sur un programme de facturation électronique critique — conformité réglementaire européenne, architecture microservices réactive en Java 21 / Spring WebFlux, traitement de plusieurs milliers de factures quotidiennes. Avant ça, j'étais Technical Lead chez Wafa Assurance sur une plateforme digitale retraite, où nous avons obtenu -30% de time-to-market et -40% de régressions."</p>
 <p><strong>Valeur ajoutée (40 sec)</strong><br>
@@ -1920,9 +1940,996 @@ a:`<p>L'elevator pitch est souvent la première question d'un entretien. Il doit
 "Je suis en cours d'installation en France, et je recherche des missions de Technical Lead ou d'Architecte sur des programmes de transformation à fort enjeu technique, idéalement dans les secteurs que je connais bien : finance, assurance ou retail tech."</p>`,
 tip:"Entraînez-vous à répéter ce pitch jusqu'à ce qu'il soit fluide et naturel. Le recruteur évalue aussi votre aisance orale, pas seulement le contenu."}
 ]}
-];
+,
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
+{id:"pmp", label:"PMP & Gestion de Projet Avancée", icon:"🏆", color:"#F4A261",
+ qs:[
+{q:"Quels sont les 5 groupes de processus PMI/PMP et leurs livrables clés ?",d:"med",tags:["PMP","PMI","Processus"],
+a:`<p>Le PMBOK (Project Management Body of Knowledge) organise le management de projet en <strong>5 groupes de processus</strong> :</p>
+<h4>1. Démarrage (Initiating)</h4>
+<ul><li>Charte de projet (Project Charter) : autorisation formelle du projet</li><li>Identification des parties prenantes (Stakeholder Register)</li><li>Nomination du Chef de Projet</li></ul>
+<h4>2. Planification (Planning)</h4>
+<ul><li>Plan de management de projet (PMP) — document maître</li><li>WBS (Work Breakdown Structure) : décomposition hiérarchique du travail</li><li>Planning (Gantt, chemin critique)</li><li>Plan des risques, plan qualité, plan communication</li></ul>
+<h4>3. Exécution (Executing)</h4>
+<ul><li>Direction et management du travail</li><li>Gestion de la qualité, des ressources, des communications</li><li>Mise à jour du registre des risques</li></ul>
+<h4>4. Surveillance & Maîtrise (Monitoring & Controlling)</h4>
+<ul><li>Earned Value Management (EVM) : mesure de la performance</li><li>Contrôle des changements (Change Control Board)</li><li>Rapports d'avancement (Status Reports)</li></ul>
+<h4>5. Clôture (Closing)</h4>
+<ul><li>Leçons apprises (Lessons Learned)</li><li>Livraison formelle et acceptation client</li><li>Archivage et clôture administrative</li></ul>
+<blockquote>En pratique Agile, ces groupes sont itérés à chaque sprint, pas séquentiels. La valeur du PMP est dans la rigueur des livrables, pas dans la linéarité.</blockquote>`,
+tip:"Le PMBOK est complémentaire à l'Agile — montrez que vous savez les combiner plutôt que les opposer."},
+
+{q:"Qu'est-ce que l'Earned Value Management (EVM) ? Calculez SPI et CPI.",d:"hard",tags:["EVM","PMP","KPIs"],
+a:`<p>L'EVM est la méthode de mesure objective de la performance d'un projet en combinant portée, délais et coûts.</p>
+<h4>Les 3 valeurs fondamentales</h4>
+<ul>
+<li><strong>PV (Planned Value)</strong> : valeur du travail planifié à date. "Combien devrait-on avoir fait ?"</li>
+<li><strong>EV (Earned Value)</strong> : valeur du travail réellement accompli. "Combien a-t-on réellement produit ?"</li>
+<li><strong>AC (Actual Cost)</strong> : coût réel dépensé. "Combien a-t-on dépensé ?"</li>
+</ul>
+<h4>Indicateurs de performance</h4>
+<div class="cb" style="border-color:var(--orange)">SPI (Schedule Performance Index) = EV / PV
+  > 1.0 : en avance sur le planning
+  = 1.0 : dans les temps
+  < 1.0 : en retard (ex: 0.8 = on a fait 80% de ce qui était prévu)
+
+CPI (Cost Performance Index) = EV / AC
+  > 1.0 : sous le budget (chaque euro dépensé produit plus d'1€ de valeur)
+  = 1.0 : dans le budget
+  < 1.0 : au-dessus du budget (ex: 0.85 = on dépense 1.18€ pour 1€ de valeur)
+
+Exemple concret :
+  Budget projet : 100 000€, durée 10 mois
+  Au mois 5 : PV = 50 000€ | EV = 40 000€ | AC = 48 000€
+  SPI = 40/50 = 0.80 → 20% de retard
+  CPI = 40/48 = 0.83 → 17% au-dessus du budget
+  
+Estimation à terminaison (EAC) = BAC / CPI = 100 000 / 0.83 = 120 000€</div>
+<h4>Utilisation concrète</h4>
+<p>Chez Carrefour, j'utilisais un dashboard EVM simplifié mensuel pour les sponsors : SPI et CPI en rouge/vert suffisaient pour déclencher les conversations nécessaires sans noyer les décideurs dans les détails.</p>`,
+tip:"Savoir calculer SPI et CPI de mémoire est attendu pour un chef de projet confirmé. Préparez cet exemple chiffré."},
+
+{q:"Qu'est-ce que le chemin critique (Critical Path Method) ? Comment l'utilisez-vous ?",d:"med",tags:["CPM","PMP","Planification"],
+a:`<p>Le chemin critique est la séquence de tâches la plus longue d'un projet, qui détermine la durée minimale du projet.</p>
+<h4>Principes clés</h4>
+<ul>
+<li>Toute tâche sur le chemin critique a une <strong>marge nulle (float = 0)</strong> : tout retard sur cette tâche retarde le projet entier</li>
+<li>Les tâches hors chemin critique ont une marge positive : elles peuvent être retardées sans impacter la date de fin</li>
+<li>Un projet peut avoir plusieurs chemins critiques</li>
+</ul>
+<h4>Calcul</h4>
+<div class="cb" style="border-color:var(--orange)">Exemple projet eInvoicing :
+A(2j) → B(5j) → C(3j) = 10j  ← CHEMIN CRITIQUE
+A(2j) → D(3j) → E(2j) = 7j
+A(2j) → F(4j)          = 6j
+
+Float de D = 10 - 7 = 3 jours (D peut prendre 3j de retard sans impact)
+Float de F = 10 - 6 = 4 jours</div>
+<h4>Utilisation pratique</h4>
+<p><strong>Fast-tracking</strong> : exécuter en parallèle des tâches normalement séquentielles. Risque de reprise si dépendances mal gérées.</p>
+<p><strong>Crashing</strong> : ajouter des ressources sur les tâches du chemin critique pour les accélérer (coût supplémentaire).</p>
+<p>Chez Attijariwafa Bank, sur le projet DSP2, le chemin critique passait par l'intégration Core Banking. En mobilisant une ressource expérimentée Core Banking supplémentaire (crashing), j'ai réduit cette tâche de 6 à 4 semaines, tenant la date de conformité réglementaire.</p>`,
+tip:"Les techniques Fast-tracking et Crashing sont des questions classiques PMP — les avoir en tête avec des exemples concrets fait la différence."},
+
+{q:"Comment gérez-vous les risques projet selon la méthodologie PMI ?",d:"hard",tags:["PMP","Risques","Mitigation"],
+a:`<p>La gestion des risques PMI suit un cycle en 6 étapes rigoureuses.</p>
+<h4>Le cycle de gestion des risques</h4>
+<ol>
+<li><strong>Planifier la gestion des risques</strong> : définir l'approche, les rôles, les seuils de tolérance</li>
+<li><strong>Identifier les risques</strong> : brainstorming, checklist, diagramme d'Ishikawa, SWOT</li>
+<li><strong>Analyse qualitative</strong> : probabilité × impact → matrice P×I. Priorisation.</li>
+<li><strong>Analyse quantitative</strong> : Monte Carlo, arbres de décision pour les risques critiques</li>
+<li><strong>Planifier les réponses</strong> : Éviter / Transférer / Atténuer / Accepter</li>
+<li><strong>Surveiller et maîtriser</strong> : registre des risques mis à jour chaque sprint</li>
+</ol>
+<h4>Matrice de priorisation</h4>
+<div class="cb" style="border-color:var(--orange)">         Impact
+         Faible   Moyen   Élevé
+Probable  MOYEN   ÉLEVÉ   CRITIQUE ← traiter en priorité
+Possible  FAIBLE  MOYEN   ÉLEVÉ
+Rare      FAIBLE  FAIBLE  MOYEN
+
+Exemple registre (projet eInvoicing) :
+R1: Spécifications PDP instables | Probable × Élevé = CRITIQUE
+    → Atténuer : buffer 20% + veille réglementaire hebdo
+R2: Indisponibilité Core Banking  | Possible × Élevé = ÉLEVÉ  
+    → Transférer : SLA contractuel + pénalités
+R3: Turnover développeur clé      | Rare × Moyen = FAIBLE
+    → Accepter : documentation knowledge transfer</div>
+<h4>Distinction risque vs problème</h4>
+<p>Un <strong>risque</strong> est un événement incertain (futur, peut ne pas arriver). Un <strong>problème (issue)</strong> est un risque qui s'est matérialisé et nécessite une action immédiate. Le registre des problèmes est distinct du registre des risques.</p>`,
+tip:"La distinction risque/problème et les 4 stratégies de réponse (ÉTAA) sont des questions fondamentales dans tout entretien PMP."},
+
+{q:"Qu'est-ce qu'un WBS (Work Breakdown Structure) ? Comment le construisez-vous ?",d:"med",tags:["WBS","PMP","Planification"],
+a:`<p>Le WBS est une décomposition hiérarchique du travail en livrables de plus en plus petits jusqu'au niveau des "work packages" (tâches élémentaires estimables et assignables).</p>
+<h4>Règle fondamentale : 100%</h4>
+<p>Le WBS doit capturer 100% du travail du projet — ni plus (scope creep), ni moins (oublis). Chaque niveau décompose exhaustivement le niveau supérieur.</p>
+<h4>Structure (projet eInvoicing)</h4>
+<div class="cb" style="border-color:var(--orange)">1. Projet eInvoicing Carrefour
+   1.1 Architecture & Infrastructure
+       1.1.1 Design architecture microservices (5j)
+       1.1.2 Setup Kubernetes GCP (3j)
+       1.1.3 Configuration CI/CD (4j)
+   1.2 Développement Services
+       1.2.1 InvoicingService (15j)
+       1.2.2 ValidationService (10j)
+       1.2.3 ReportingService (8j)
+   1.3 Intégrations
+       1.3.1 Intégration PDP1 (7j)
+       1.3.2 Intégration PDP2 (5j)
+   1.4 Tests & Validation
+       1.4.1 Tests d'intégration (6j)
+       1.4.2 Tests de charge Gatling (3j)
+       1.4.3 Tests de conformité réglementaire (5j)
+   1.5 Déploiement & Formation
+       1.5.1 Déploiement production (2j)
+       1.5.2 Formation équipes métier (2j)</div>
+<h4>Work Package</h4>
+<p>Le niveau le plus bas du WBS. Chaque work package doit être : assignable à une personne/équipe, estimable en coût et durée, livrable de façon vérifiable, < 80h de travail (règle empirique).</p>`,
+tip:"Le WBS est la fondation de toute planification — montrez que vous le construisez orienté livrables, pas activités."},
+
+{q:"Quelle est la différence entre Agile, Scrum, Kanban et SAFe ?",d:"med",tags:["Agile","Scrum","SAFe","Kanban"],
+a:`<p>Ces termes sont souvent confondus. Il est important de les distinguer précisément en entretien.</p>
+<h4>Agile</h4>
+<p>C'est un <strong>ensemble de valeurs et principes</strong> (Manifeste Agile, 2001). Pas une méthodologie en soi. 4 valeurs, 12 principes. Tout le reste (Scrum, Kanban, SAFe) sont des frameworks d'implémentation de l'Agile.</p>
+<h4>Scrum</h4>
+<p>Framework Agile le plus répandu. Sprints fixes (1-4 semaines), rôles définis (Scrum Master, Product Owner, équipe), cérémonies (Daily, Planning, Review, Retrospective), artefacts (Product Backlog, Sprint Backlog, Increment).</p>
+<h4>Kanban</h4>
+<p>Système de flux continu. Pas de sprints. WIP limits (Work In Progress) pour éviter la surcharge. Visualisation du flux. Adapté aux équipes support/maintenance ou à fort volume de demandes entrantes non planifiables.</p>
+<h4>SAFe (Scaled Agile Framework)</h4>
+<p>Framework pour scaler l'Agile à l'échelle de l'entreprise (100+ développeurs). Niveaux : Team (Scrum) → Program (Agile Release Train) → Portfolio. PI Planning (Program Increment) = event trimestriel de planification synchronisée de toutes les équipes.</p>
+<h4>Mon utilisation en pratique</h4>
+<ul>
+<li><strong>Carrefour</strong> : Scrum par squad + synchronisation inter-squads inspirée SAFe (PI Planning simplifié)</li>
+<li><strong>Wafa Assurance</strong> : Scrum classique, sprint de 2 semaines</li>
+<li><strong>Attijariwafa Bank</strong> : Hybride Scrum + Kanban (Scrumban) pour absorber les demandes urgentes réglementaires</li>
+</ul>`,
+tip:"Montrer que vous avez pratiqué plusieurs frameworks (et pas seulement lu leur description) est très valorisé."},
+
+{q:"Comment gérez-vous le scope creep (dérive du périmètre) ?",d:"hard",tags:["Scope","PMP","Gestion"],
+a:`<p>Le scope creep est l'une des causes principales d'échec des projets. Sa gestion requiert méthode et fermeté.</p>
+<h4>Prévention en amont</h4>
+<ul>
+<li>WBS et périmètre documentés et signés par toutes les parties avant le démarrage</li>
+<li>Définition explicite de ce qui est "hors périmètre" (out of scope) dans la charte projet</li>
+<li>Processus de gestion des changements (Change Control) formalisé dès le départ</li>
+</ul>
+<h4>Traitement d'une demande hors périmètre</h4>
+<ol>
+<li><strong>Ne pas dire oui immédiatement</strong> même si c'est techniquement simple</li>
+<li>Documenter la demande formellement (Change Request)</li>
+<li>Analyser l'impact : coût, délai, risques</li>
+<li>Présenter les options au sponsor : intégrer au projet actuel (avec impact) OU créer un nouveau projet OU reporter au backlog post-livraison</li>
+<li>Obtenir une décision formelle et documentée</li>
+</ol>
+<h4>Message type au client</h4>
+<blockquote>"Cette fonctionnalité n'est pas dans le périmètre initial signé. Je peux l'analyser et vous présenter l'impact sur le planning et le budget dans 48h. Souhaitez-vous que je procède à cette analyse ?"</blockquote>
+<h4>Ce que j'ai appris chez Attijariwafa Bank</h4>
+<p>Sur le projet DSP2, des demandes réglementaires changeaient en cours de projet (spécifications DSP2 évolutives). J'avais anticipé cela avec un buffer réglementaire de 15% et un processus de change request simplifié pour les modifications réglementaires — ce qui nous a permis d'absorber 3 changements majeurs sans dérapage de planning.</p>`,
+tip:"La phrase type au client est très mémorable — les recruteurs adorent les formules concrètes applicables immédiatement."}
+]},
+
+{id:"solid-doc", label:"SOLID — Documentation Complète", icon:"◈", color:"#6B9FD4",
+ qs:[
+{q:"S — Single Responsibility Principle : théorie, exemples, violations courantes.",d:"med",tags:["SOLID","SRP","Java"],
+a:`<p>Le SRP stipule qu'<strong>une classe ne doit avoir qu'une seule raison de changer</strong>. Formulé par Robert C. Martin.</p>
+<h4>Définition précise</h4>
+<p>"Une raison de changer" = un acteur métier (ou un groupe de parties prenantes) dont les besoins font évoluer la classe. Si une classe change pour satisfaire deux acteurs différents, elle a trop de responsabilités.</p>
+<h4>Violation typique</h4>
+<div class="cb" style="border-color:var(--blue)">// ❌ VIOLATION : 3 acteurs, 3 raisons de changer
+public class Employee {
+    // Raison 1 : DRH demande des modifs sur le calcul des heures
+    public double calculatePay() { ... }
+    // Raison 2 : DSI demande des modifs sur le format du rapport
+    public void saveReport() { ... }
+    // Raison 3 : Comptabilité demande des modifs sur la sauvegarde
+    public void saveToDatabase() { ... }
+}</div>
+<div class="cb" style="border-color:var(--blue)">// ✅ CORRECT : une classe = un acteur
+public class PayCalculator     { double calculatePay(Employee e) { ... } }
+public class ReportGenerator   { void generateReport(Employee e) { ... } }
+public class EmployeeRepository{ void save(Employee e) { ... } }</div>
+<h4>Violations fréquentes en Spring Boot</h4>
+<ul>
+<li>Un @Service qui fait validation + transformation + appel API + log + notification = 5 responsabilités</li>
+<li>Un @Controller qui contient de la logique métier</li>
+<li>Une entité JPA qui contient des méthodes de calcul complexes</li>
+</ul>
+<h4>Bénéfices</h4>
+<ul>
+<li>Classes plus petites et plus testables (moins de mocks nécessaires)</li>
+<li>Modifications localisées : changer la validation n'impacte pas la notification</li>
+<li>Réutilisabilité : PayCalculator réutilisable dans d'autres contextes</li>
+</ul>`,
+tip:"La définition précise 'une raison de changer = un acteur' est celle de Martin — la citer montre que vous connaissez la source primaire."},
+
+{q:"O — Open/Closed Principle : comment concevoir pour l'extension sans modification ?",d:"hard",tags:["SOLID","OCP","Java"],
+a:`<p>L'OCP stipule que les entités logicielles doivent être <strong>ouvertes à l'extension mais fermées à la modification</strong>. Bertrand Meyer, popularisé par Robert Martin.</p>
+<h4>Problème sans OCP</h4>
+<div class="cb" style="border-color:var(--blue)">// ❌ Chaque nouveau type de rapport → modification de cette classe
+public class ReportGenerator {
+    public void generate(String type, Data data) {
+        if ("PDF".equals(type)) { generatePDF(data); }
+        else if ("EXCEL".equals(type)) { generateExcel(data); }
+        else if ("CSV".equals(type)) { generateCSV(data); }
+        // Ajouter JSON ? → modifier cette classe → risque de régression
+    }
+}</div>
+<div class="cb" style="border-color:var(--blue)">// ✅ OCP : nouveau format = nouvelle classe, zéro modification existante
+public interface ReportExporter {
+    void export(Data data, OutputStream out);
+    String format();  // "PDF", "EXCEL", etc.
+}
+
+@Component public class PdfExporter implements ReportExporter { ... }
+@Component public class ExcelExporter implements ReportExporter { ... }
+@Component public class CsvExporter implements ReportExporter { ... }
+
+// Orchestration via Spring injection (Map<String, ReportExporter>)
+@Service
+public class ReportService {
+    @Autowired Map&lt;String, ReportExporter&gt; exporters;  // Spring injecte tous les beans
+    public void generate(String format, Data data) {
+        exporters.get(format).export(data, ...);
+    }
+    // Ajouter JsonExporter ? → créer la classe, c'est tout. Zéro modification ici.
+}</div>
+<h4>Mécanismes d'extension</h4>
+<ul>
+<li>Héritage (limité, couplage fort)</li>
+<li>Interfaces + injection de dépendances (recommandé en Java/Spring)</li>
+<li>Strategy Pattern, Template Method Pattern</li>
+<li>Décorateurs, plugins, points d'extension</li>
+</ul>`,
+tip:"L'exemple avec Map<String, Interface> injecté par Spring est exactement le pattern production OCP — les recruteurs seniors adorent cette implémentation."},
+
+{q:"L — Liskov Substitution Principle : violations fréquentes et solutions.",d:"hard",tags:["SOLID","LSP","Java"],
+a:`<p>Le LSP stipule que <strong>tout sous-type doit être substituable à son type de base sans altérer la correction du programme</strong>. Barbara Liskov, 1987.</p>
+<h4>Formulation précise</h4>
+<p>Si S est un sous-type de T, alors les objets de type T peuvent être remplacés par des objets de type S sans modifier les propriétés désirables du programme (correction, tâche accomplie, etc.)</p>
+<h4>Violation classique : Rectangle vs Square</h4>
+<div class="cb" style="border-color:var(--blue)">// ❌ Violation LSP — Square hérite de Rectangle mais viole ses invariants
+public class Rectangle {
+    protected int width, height;
+    public void setWidth(int w) { this.width = w; }
+    public void setHeight(int h) { this.height = h; }
+    public int area() { return width * height; }
+}
+public class Square extends Rectangle {
+    @Override public void setWidth(int w) { this.width = this.height = w; }  // !!!
+    @Override public void setHeight(int h) { this.height = this.width = h; } // !!!
+}
+
+// Test qui échoue avec Square alors qu'il réussit avec Rectangle
+Rectangle r = new Square();  // substitution LSP
+r.setWidth(5); r.setHeight(3);
+assert r.area() == 15;  // FAIL : Square retourne 9 (3×3)</div>
+<div class="cb" style="border-color:var(--blue)">// ✅ Solution : hiérarchie correcte via interface
+public interface Shape { int area(); }
+public class Rectangle implements Shape { 
+    private final int width, height;  // immutable
+    public int area() { return width * height; }
+}
+public class Square implements Shape {
+    private final int side;
+    public int area() { return side * side; }
+}</div>
+<h4>Violations fréquentes en entreprise</h4>
+<ul>
+<li>Sous-classe qui lève une exception sur une méthode que la classe parente implémente normalement</li>
+<li>Sous-classe qui retourne null quand la classe parente retourne une valeur</li>
+<li>Sous-classe qui ignore des paramètres que la classe parente utilise</li>
+</ul>
+<h4>Tests de conformité LSP</h4>
+<p>Un bon indicateur : si vous avez des <code>instanceof</code> dans votre code pour différencier les sous-types, vous violez probablement le LSP.</p>`,
+tip:"L'exemple Rectangle/Square est le classique LSP — mais connaître l'impact des instanceof comme signal de violation distingue les profils experts."},
+
+{q:"I — Interface Segregation Principle : interfaces trop larges, solutions.",d:"med",tags:["SOLID","ISP","Java"],
+a:`<p>L'ISP stipule que <strong>les clients ne doivent pas être forcés de dépendre d'interfaces qu'ils n'utilisent pas</strong>. Robert Martin.</p>
+<h4>Violation : "Fat Interface"</h4>
+<div class="cb" style="border-color:var(--blue)">// ❌ Interface trop large — les implémentations sont forcées d'implémenter tout
+public interface InvoiceService {
+    Invoice findById(String id);
+    void save(Invoice invoice);
+    void delete(String id);
+    List&lt;Invoice&gt; findForReporting();  // besoin uniquement du module reporting
+    void sendToGovernment(Invoice i);   // besoin uniquement du module compliance
+    byte[] generatePDF(Invoice i);      // besoin uniquement du module export
+    void archiveOldInvoices();          // besoin uniquement du module archivage
+}
+// Toutes les implémentations (mock de test, stub de démo) doivent tout implémenter</div>
+<div class="cb" style="border-color:var(--blue)">// ✅ ISP : interfaces spécifiques par client (rôle)
+public interface InvoiceReader    { Invoice findById(String id); }
+public interface InvoiceWriter    { void save(Invoice i); void delete(String id); }
+public interface InvoiceReporter  { List&lt;Invoice&gt; findForReporting(); }
+public interface InvoiceCompliance{ void sendToGovernment(Invoice i); }
+
+// Implémentation concrète implémente tout
+@Repository
+public class InvoiceRepositoryImpl 
+    implements InvoiceReader, InvoiceWriter, InvoiceReporter { ... }
+
+// Module reporting ne dépend que de InvoiceReporter
+public class ReportingService {
+    private final InvoiceReporter reporter;  // interface minimale
+    // → testable avec un simple lambda, pas de fat mock
+}</div>
+<h4>Bénéfice pour les tests</h4>
+<p>Les interfaces fines sont testables avec des lambdas ou des classes anonymes minimales. Les fat interfaces nécessitent des mocks complexes avec beaucoup de stubbing inutile.</p>`,
+tip:"L'impact sur la testabilité (lambdas vs fat mocks) est un angle original qui montre une vraie expérience pratique."},
+
+{q:"D — Dependency Inversion Principle : IoC, DI et Spring.",d:"hard",tags:["SOLID","DIP","Spring"],
+a:`<p>Le DIP stipule que : 1) les modules de haut niveau ne doivent pas dépendre des modules de bas niveau — les deux doivent dépendre d'abstractions ; 2) les abstractions ne doivent pas dépendre des détails — les détails doivent dépendre des abstractions.</p>
+<h4>Violation : dépendance vers le concret</h4>
+<div class="cb" style="border-color:var(--blue)">// ❌ InvoiceService (haut niveau) dépend de MySQLRepository (bas niveau)
+public class InvoiceService {
+    private MySQLInvoiceRepository repo = new MySQLInvoiceRepository();
+    // Problèmes :
+    // - Impossible de tester sans MySQL réel
+    // - Impossible de changer de DB sans modifier InvoiceService
+    // - Couplage fort = modification de bas niveau impacte haut niveau
+}</div>
+<div class="cb" style="border-color:var(--blue)">// ✅ Les deux dépendent de l'abstraction (interface)
+public interface InvoiceRepository {    // abstraction
+    void save(Invoice invoice);
+    Optional&lt;Invoice&gt; findById(String id);
+}
+
+public class InvoiceService {          // haut niveau → abstraction
+    private final InvoiceRepository repo;
+    public InvoiceService(InvoiceRepository repo) { this.repo = repo; }
+}
+
+public class MySQLInvoiceRepository    // bas niveau → abstraction
+    implements InvoiceRepository { ... }
+
+// Spring gère l'assemblage (IoC Container)
+@Configuration
+public class AppConfig {
+    @Bean public InvoiceRepository invoiceRepo() { 
+        return new MySQLInvoiceRepository(...);
+    }
+    @Bean public InvoiceService invoiceService(InvoiceRepository repo) {
+        return new InvoiceService(repo);
+    }
+}</div>
+<h4>IoC vs DI</h4>
+<ul>
+<li><strong>IoC (Inversion of Control)</strong> : principe général — le framework contrôle le flux, pas le développeur</li>
+<li><strong>DI (Dependency Injection)</strong> : une implémentation de IoC — les dépendances sont fournies de l'extérieur</li>
+<li>Spring est un IoC Container qui implémente la DI</li>
+</ul>`,
+tip:"La distinction IoC (principe) vs DI (implémentation) et le fait que Spring est un IoC Container sont des points de précision très appréciés."}
+]},
+
+{id:"ddd-doc", label:"DDD — Documentation Complète", icon:"◬", color:"#7EC8A4",
+ qs:[
+{q:"Qu'est-ce que le Domain-Driven Design ? Les concepts fondamentaux.",d:"hard",tags:["DDD","Architecture","Fondamentaux"],
+a:`<p>Le DDD (Domain-Driven Design) est une approche de conception logicielle introduite par Eric Evans (2003) qui place le domaine métier au centre de toutes les décisions techniques.</p>
+<h4>Philosophie centrale</h4>
+<blockquote>"Le cœur d'un logiciel est sa capacité à résoudre des problèmes métier. La complexité accidentelle (technique) doit s'effacer devant la complexité essentielle (métier)."</blockquote>
+<h4>Les deux niveaux du DDD</h4>
+<p><strong>Strategic Design</strong> (niveau macro) : comment découper le système en domaines ?</p>
+<ul>
+<li><strong>Bounded Context</strong> : frontière dans laquelle un modèle métier est cohérent</li>
+<li><strong>Ubiquitous Language</strong> : vocabulaire commun partagé entre développeurs et experts métier</li>
+<li><strong>Context Map</strong> : carte des relations entre bounded contexts</li>
+<li><strong>Domain</strong> : le problème métier à résoudre (Core Domain, Supporting Domain, Generic Domain)</li>
+</ul>
+<p><strong>Tactical Design</strong> (niveau micro) : comment coder le domaine ?</p>
+<ul>
+<li><strong>Entity</strong> : objet avec une identité persistante (Invoice avec ID unique)</li>
+<li><strong>Value Object</strong> : objet sans identité, défini par ses valeurs (Money, Address)</li>
+<li><strong>Aggregate</strong> : grappe d'objets traitée comme unité de cohérence</li>
+<li><strong>Aggregate Root</strong> : point d'entrée unique de l'aggregate</li>
+<li><strong>Domain Event</strong> : fait métier passé important (InvoiceSubmitted, PaymentValidated)</li>
+<li><strong>Repository</strong> : abstraction de persistance (ports hexagonaux)</li>
+<li><strong>Domain Service</strong> : logique métier ne tenant pas naturellement dans une entité</li>
+<li><strong>Factory</strong> : création d'objets complexes avec invariants</li>
+</ul>
+<h4>Core Domain vs Supporting Domain</h4>
+<p>Le Core Domain est ce qui différencie l'entreprise de ses concurrents → investissement maximum. Le Supporting Domain supporte le core mais n'est pas différenciant → peut être externalisé ou simplifié.</p>`,
+tip:"La distinction Strategic vs Tactical DDD est structurante — les montrer séparément dans votre réponse structure très bien la pensée."},
+
+{q:"Qu'est-ce que l'Ubiquitous Language ? Comment le construire et le maintenir ?",d:"med",tags:["DDD","Ubiquitous Language","Communication"],
+a:`<p>L'Ubiquitous Language est un vocabulaire commun, partagé et rigoureux, utilisé par tous — développeurs, experts métier, testeurs, PO — dans tous les artefacts : code, tests, documentation, conversations.</p>
+<h4>Pourquoi c'est crucial</h4>
+<p>Sans ubiquitous language, les développeurs traduisent mentalement entre leur modèle technique et le modèle métier. Ces traductions silencieuses sont une source majeure de bugs et de mauvaise compréhension.</p>
+<p>Exemple : si le métier dit "Facture soumise à la PDP" et le code dit "Invoice.status = PROCESSING", on a une traduction silencieuse qui génère de la confusion.</p>
+<h4>Construction</h4>
+<ol>
+<li><strong>Event Storming</strong> : session collaborative où experts métier et développeurs identifient ensemble tous les événements métier sur un tableau avec des post-its</li>
+<li><strong>Glossaire vivant</strong> : document partagé avec les termes clés, leur définition précise dans le contexte, et ce qu'ils ne signifient PAS</li>
+<li><strong>Le code parle le domaine</strong> : les noms de classes, méthodes et variables reflètent exactement le vocabulaire métier</li>
+</ol>
+<div class="cb" style="border-color:var(--green)">// ❌ Langage technique, pas métier
+invoiceDao.updateStatus("INV-123", 2);
+
+// ✅ Ubiquitous Language dans le code
+invoice.submitToGovernmentPlatform(platformId);
+// → lisible par un expert métier, pas besoin de traduction</div>
+<h4>Maintenance</h4>
+<p>Le glossaire est versionné avec le code (dans le repo Git). Toute évolution du vocabulaire métier déclenche un refactoring du code. Un développeur qui entend un nouveau terme chez le client le documente immédiatement.</p>`,
+tip:"L'Event Storming comme méthode de construction de l'Ubiquitous Language est très concret et moderne — c'est la pratique actuelle."},
+
+{q:"Expliquez les Bounded Contexts et la Context Map en détail.",d:"hard",tags:["DDD","Bounded Context","Context Map"],
+a:`<p>Le Bounded Context est la pierre angulaire du Strategic Design DDD.</p>
+<h4>Définition</h4>
+<p>Un Bounded Context est une <strong>frontière explicite</strong> dans laquelle un modèle de domaine a un sens précis et cohérent. À l'intérieur, chaque concept a une définition unique. À l'extérieur, le même mot peut signifier autre chose.</p>
+<h4>Exemple : le concept "Client" dans différents contextes</h4>
+<div class="cb" style="border-color:var(--green)">Contexte Facturation :
+  Client { id, SIRET, adresse facturation, TVA intracommunautaire }
+  → Intéresse la conformité fiscale
+
+Contexte CRM :
+  Client { id, contact commercial, historique, score fidélité }
+  → Intéresse les commerciaux
+
+Contexte Livraison :
+  Client { id, adresse livraison, instructions }
+  → Intéresse la logistique
+
+Même mot "Client" = 3 modèles différents dans 3 contextes
+→ Chaque contexte a sa propre base de données, son propre service</div>
+<h4>Context Map — Relations entre contextes</h4>
+<ul>
+<li><strong>Shared Kernel</strong> : deux contextes partagent un sous-ensemble de modèle. Risque de fort couplage.</li>
+<li><strong>Customer/Supplier</strong> : le contexte aval (Customer) dépend du contexte amont (Supplier). Le supplier s'engage à ne pas casser l'interface.</li>
+<li><strong>Conformist</strong> : le contexte aval accepte de se conformer au modèle du contexte amont sans négociation.</li>
+<li><strong>Anti-Corruption Layer (ACL)</strong> : une couche de traduction protège un contexte des modèles d'un autre contexte.</li>
+<li><strong>Open Host Service</strong> : un contexte publie une API bien définie (REST, événements) consommable par les autres.</li>
+<li><strong>Published Language</strong> : un format partagé standardisé (ex: JSON Schema, Avro) entre contextes.</li>
+</ul>
+<h4>Chez Carrefour</h4>
+<p>3 bounded contexts : Invoicing (Core Domain), Validation, Reporting. Relations : Customer/Supplier entre Invoicing et Validation, Open Host Service via Kafka entre tous les contextes.</p>`,
+tip:"L'Anti-Corruption Layer est un pattern très important souvent oublié — le mentionner avec l'exemple de traduction entre contextes impressionne."},
+
+{q:"Entity vs Value Object vs Domain Event : distinctions clés et exemples.",d:"hard",tags:["DDD","Entity","Value Object"],
+a:`<p>Ces trois blocs de construction du Tactical DDD sont souvent confondus.</p>
+<h4>Entity</h4>
+<p>Objet défini par son <strong>identité</strong> (pas ses attributs). Deux entités avec les mêmes attributs mais des IDs différents sont deux objets distincts. Mutable dans le temps.</p>
+<div class="cb" style="border-color:var(--green)">public class Invoice {
+    private final InvoiceId id;  // identité — immuable
+    private InvoiceStatus status; // état — mutable via méthodes domaine
+    private List&lt;InvoiceLine&gt; lines;
+    
+    // Égalité basée sur l'identité
+    @Override public boolean equals(Object o) {
+        if (!(o instanceof Invoice)) return false;
+        return this.id.equals(((Invoice) o).id);
+    }
+}</div>
+<h4>Value Object</h4>
+<p>Objet défini par ses <strong>valeurs</strong> (pas d'identité). Deux VO avec les mêmes valeurs sont identiques. <strong>Toujours immuable.</strong></p>
+<div class="cb" style="border-color:var(--green)">@Value  // Lombok : immuable, equals/hashCode sur tous les champs
+public class Money {
+    private final BigDecimal amount;
+    private final Currency currency;
+    
+    // Comportement métier encapsulé
+    public Money add(Money other) {
+        if (!this.currency.equals(other.currency)) 
+            throw new DomainException("Devises incompatibles");
+        return new Money(this.amount.add(other.amount), this.currency);
+    }
+}
+// Usage : invoice.getTotal() retourne Money, pas BigDecimal
+// → le type porte la sémantique métier</div>
+<h4>Domain Event</h4>
+<p>Fait métier passé, immuable, nommé au passé. Publie ce qui s'est passé dans le domaine. Découple les bounded contexts.</p>
+<div class="cb" style="border-color:var(--green)">@Value
+public class InvoiceSubmittedEvent {
+    private final InvoiceId invoiceId;
+    private final CustomerId customerId;
+    private final Money totalAmount;
+    private final Instant occurredAt;  // toujours immuable, passé
+    // → autres contextes réagissent à cet événement sans couplage
+}</div>
+<h4>Règle de décision</h4>
+<ul>
+<li>Besoin de traçabilité dans le temps ? → Entity</li>
+<li>Décrit une mesure, une quantité, une valeur ? → Value Object</li>
+<li>Quelque chose d'important qui s'est passé ? → Domain Event</li>
+</ul>`,
+tip:"La règle 'VO = immuable + égalité sur valeurs + comportement métier' est la définition complète — beaucoup oublient le comportement métier."},
+
+{q:"Qu'est-ce que l'Aggregate Root ? Règles de cohérence et de conception.",d:"hard",tags:["DDD","Aggregate","Cohérence"],
+a:`<p>L'Aggregate est l'un des concepts les plus importants et les plus mal compris du DDD.</p>
+<h4>Définition</h4>
+<p>Un Aggregate est un <strong>cluster d'objets métier traités comme une unité de cohérence</strong>. L'Aggregate Root est l'objet racine qui contrôle l'accès à l'ensemble et garantit les invariants.</p>
+<h4>Les 4 règles des Aggregates</h4>
+<ol>
+<li><strong>Protéger les invariants métier</strong> : toutes les règles de cohérence interne sont garanties par la root. On ne peut pas mettre l'aggregate dans un état invalide.</li>
+<li><strong>Petits aggregates</strong> : la règle d'or DDD — un aggregate doit être petit. Si deux entités n'ont pas d'invariant partagé, elles appartiennent à des aggregates séparés.</li>
+<li><strong>Référencer par identité</strong> : deux aggregates ne se référencent que par ID (pas par référence objet directe). Cela facilite la scalabilité et la distribution.</li>
+<li><strong>Un aggregate = une transaction</strong> : chaque transaction ne modifie qu'un seul aggregate. La cohérence entre aggregates est éventuelle (via événements).</li>
+</ol>
+<div class="cb" style="border-color:var(--green)">// ❌ Aggregate trop large (violation règle 2)
+public class Order {
+    private Customer customer;          // entité complète → trop grand
+    private List&lt;Product&gt; products;    // entité complète → trop grand
+    private ShippingProvider provider;  // entité complète → trop grand
+}
+
+// ✅ Aggregates petits, références par ID
+public class Order {          // Aggregate Root
+    private CustomerId customerId;        // référence par ID
+    private List&lt;OrderLine&gt; lines;       // Value Objects dans l'aggregate
+    private ShippingProviderId providerId; // référence par ID
+    
+    // Invariant : une commande ne peut être confirmée que si toutes les lignes ont un stock
+    public void confirm(StockChecker checker) {
+        lines.forEach(line -> {
+            if (!checker.hasStock(line.getProductId(), line.getQuantity()))
+                throw new InsufficientStockException(line.getProductId());
+        });
+        this.status = OrderStatus.CONFIRMED;
+        registerEvent(new OrderConfirmedEvent(this.id));
+    }
+}</div>`,
+tip:"La règle 'un aggregate = une transaction' est fondamentale pour comprendre la cohérence distribuée. C'est la connexion DDD ↔ microservices."},
+
+{q:"Qu'est-ce que l'Event Storming ? Comment le conduire ?",d:"med",tags:["DDD","Event Storming","Collaboration"],
+a:`<p>L'Event Storming est un atelier de modélisation collaborative inventé par Alberto Brandolini. C'est la technique principale pour explorer un domaine métier complexe et découvrir les bounded contexts.</p>
+<h4>Format et durée</h4>
+<p>Atelier de 1 à 3 jours (selon la complexité du domaine) avec tous les acteurs : experts métier, développeurs, Product Owner, architectes. Grande surface de travail (mur ou tableau en ligne) avec des post-its colorés.</p>
+<h4>Les 7 types de post-its</h4>
+<div class="cb" style="border-color:var(--green)">🟠 Domain Event   : fait métier au passé (FactureSoumise, PaiementValidé)
+🔵 Command        : action déclenchant l'événement (SoumettreFact)
+🟡 Aggregate      : entité qui traite la commande (Facture)
+🟣 Policy         : règle "quand X alors Y" (Quand facture validée → notifier)
+🟢 Read Model     : vue des données pour l'IHM
+🩷 External System: système externe (PDP gouvernementale, Core Banking)
+🔴 Hot Spot       : zone de débat, d'incertitude à approfondir</div>
+<h4>Les 4 phases</h4>
+<ol>
+<li><strong>Big Picture</strong> : tous écrivent les événements sur le mur. Chaos créatif, pas d'ordre.</li>
+<li><strong>Enforce the timeline</strong> : ordonner les événements chronologiquement sur la frise.</li>
+<li><strong>Identify Commands & Aggregates</strong> : qui déclenche quoi ? Quels objets métier sont impliqués ?</li>
+<li><strong>Bounded Contexts</strong> : regrouper les événements cohérents en bounded contexts. Les lignes de frontière émergent naturellement.</li>
+</ol>
+<h4>Pourquoi c'est puissant</h4>
+<p>En 2 jours d'Event Storming, j'obtiens plus de compréhension du domaine qu'en 2 mois de réunions classiques. Les experts métier voient immédiatement si le modèle reflète leur réalité.</p>`
+,tip:"Pouvoir décrire et animer un Event Storming distingue immédiatement un Architecte DDD d'un développeur qui a juste lu le livre."}
+]},
+
+{id:"acid-transactions", label:"ACID, Transactions & Cohérence", icon:"⚛", color:"#E07B5A",
+ qs:[
+{q:"Expliquez ACID : chaque propriété avec exemples concrets.",d:"hard",tags:["ACID","Base de données","Transactions"],
+a:`<p>ACID est l'acronyme des 4 propriétés garantissant la fiabilité des transactions en base de données relationnelle.</p>
+<h4>A — Atomicité (Atomicity)</h4>
+<p>Une transaction est <strong>tout ou rien</strong>. Soit toutes les opérations réussissent et sont commitées, soit toutes échouent et sont rollbackées.</p>
+<div class="cb" style="border-color:var(--red)">// Virement bancaire : debit + credit doivent être atomiques
+@Transactional
+public void transfer(Account from, Account to, Money amount) {
+    from.debit(amount);     // op 1
+    to.credit(amount);      // op 2 — si ça plante ici, op 1 est rollbackée
+    // Sans atomicité : de l'argent disparaît (debit sans credit)
+}</div>
+<h4>C — Cohérence (Consistency)</h4>
+<p>Une transaction amène la base d'un état cohérent à un autre état cohérent. Toutes les contraintes d'intégrité (contraintes, triggers, règles métier) sont respectées avant et après.</p>
+<p>Exemple : contrainte "solde >= 0" — une transaction qui tenterait de débiter plus que le solde est refusée, la base reste cohérente.</p>
+<h4>I — Isolation</h4>
+<p>Les transactions concurrentes s'exécutent comme si elles étaient séquentielles. Les transactions en cours sont invisibles les unes aux autres (selon le niveau d'isolation).</p>
+<div class="cb" style="border-color:var(--red)">Niveaux d'isolation (du plus laxiste au plus strict) :
+READ UNCOMMITTED : lit les données non commitées (dirty reads)
+READ COMMITTED   : lit seulement les données commitées (défaut PostgreSQL)
+REPEATABLE READ  : même résultat si on relit dans la transaction (défaut MySQL)
+SERIALIZABLE     : isolation totale, comme si séquentiel (le plus strict)</div>
+<h4>D — Durabilité (Durability)</h4>
+<p>Une fois commitée, une transaction survit à toute panne (crash, coupure électrique). Les données sont écrites sur disque (WAL - Write-Ahead Log) avant que le commit soit confirmé.</p>
+<h4>ACID en microservices</h4>
+<p>ACID n'est garanti qu'au sein d'une seule base de données. En microservices avec plusieurs bases → impossible → <strong>on utilise le Saga Pattern</strong> pour gérer la cohérence distribuée avec des compensations.</p>`,
+tip:"La phrase finale 'ACID impossible entre microservices → Saga Pattern' est la connexion parfaite avec l'architecture distribuée."},
+
+{q:"Isolation : les anomalies (Dirty Read, Non-Repeatable Read, Phantom Read) et comment les éviter.",d:"hard",tags:["ACID","Isolation","Transactions"],
+a:`<p>Les anomalies de concurrence sont les problèmes qui surviennent quand des transactions s'exécutent simultanément sans isolation suffisante.</p>
+<h4>1. Dirty Read (Lecture Sale)</h4>
+<p>Une transaction lit des données modifiées par une autre transaction qui n'a pas encore committé.</p>
+<div class="cb" style="border-color:var(--red)">T1 : UPDATE invoice SET amount = 1000 WHERE id = 'X'  (pas encore commité)
+T2 : SELECT amount FROM invoice WHERE id = 'X'  → lit 1000  (dirty !)
+T1 : ROLLBACK  → T2 a travaillé avec une valeur qui n'existe plus
+→ Évité par : READ COMMITTED ou supérieur</div>
+<h4>2. Non-Repeatable Read</h4>
+<p>Une transaction lit la même ligne deux fois et obtient des résultats différents car une autre transaction a modifié et commité entre les deux lectures.</p>
+<div class="cb" style="border-color:var(--red)">T1 : SELECT amount FROM invoice WHERE id = 'X'  → 500
+T2 : UPDATE invoice SET amount = 800 WHERE id = 'X' ; COMMIT
+T1 : SELECT amount FROM invoice WHERE id = 'X'  → 800  (différent !)
+→ Évité par : REPEATABLE READ ou supérieur</div>
+<h4>3. Phantom Read</h4>
+<p>Une transaction exécute la même requête deux fois et obtient un ensemble de lignes différent car une autre transaction a inséré ou supprimé des lignes.</p>
+<div class="cb" style="border-color:var(--red)">T1 : SELECT COUNT(*) FROM invoice WHERE status = 'VALIDATED'  → 10
+T2 : INSERT INTO invoice (status) VALUES ('VALIDATED') ; COMMIT
+T1 : SELECT COUNT(*) FROM invoice WHERE status = 'VALIDATED'  → 11  (fantôme !)
+→ Évité par : SERIALIZABLE uniquement</div>
+<h4>Tableau des niveaux d'isolation</h4>
+<div class="cb" style="border-color:var(--red)">Niveau           | Dirty Read | Non-Repeatable | Phantom
+READ UNCOMMITTED |     ✓      |       ✓        |    ✓
+READ COMMITTED   |     ✗      |       ✓        |    ✓
+REPEATABLE READ  |     ✗      |       ✗        |    ✓ (MySQL ✗ via MVCC)
+SERIALIZABLE     |     ✗      |       ✗        |    ✗</div>
+<h4>En Spring</h4>
+<div class="cb" style="border-color:var(--red)">@Transactional(isolation = Isolation.REPEATABLE_READ)
+public void processInvoice(String id) { ... }</div>`,
+tip:"Savoir citer les trois anomalies avec des exemples SQL est une question classique des entretiens architecte — préparez ces exemples."},
+
+{q:"Qu'est-ce que le théorème CAP ? Comment s'applique-t-il aux systèmes distribués ?",d:"hard",tags:["CAP","Distribué","Architecture"],
+a:`<p>Le théorème CAP (Brewer, 2000) affirme qu'un système distribué ne peut garantir simultanément que 2 des 3 propriétés suivantes.</p>
+<h4>Les 3 propriétés</h4>
+<ul>
+<li><strong>C — Consistency (Cohérence)</strong> : toutes les lectures retournent la valeur la plus récente écrite. Tous les nœuds voient les mêmes données au même moment.</li>
+<li><strong>A — Availability (Disponibilité)</strong> : chaque requête reçoit une réponse (succès ou erreur). Le système répond toujours.</li>
+<li><strong>P — Partition Tolerance</strong> : le système continue de fonctionner même si des messages sont perdus ou retardés entre les nœuds.</li>
+</ul>
+<h4>En pratique : P est obligatoire</h4>
+<p>Dans un réseau distribué, les partitions réseau sont inévitables. On ne peut pas choisir de les ignorer. Le vrai choix est donc entre C et A en cas de partition.</p>
+<div class="cb" style="border-color:var(--red)">CP (Consistency + Partition Tolerance) :
+→ En cas de partition : le système refuse de répondre plutôt que de répondre avec des données potentiellement incohérentes
+→ Exemples : HBase, MongoDB (mode strict), Zookeeper
+→ Usage : transactions financières, coordination distribuée
+
+AP (Availability + Partition Tolerance) :
+→ En cas de partition : le système répond avec des données potentiellement stale
+→ Exemples : Cassandra, DynamoDB, CouchDB
+→ Usage : réseaux sociaux, catalogue produits, systèmes de recommandation
+
+CA (Consistency + Availability) :
+→ Impossible en distribué. C'est le monde des RDBMS mono-nœud.</div>
+<h4>BASE vs ACID</h4>
+<p>Les systèmes AP adoptent le modèle BASE :</p>
+<ul>
+<li><strong>B</strong>asically Available : disponibilité garantie</li>
+<li><strong>S</strong>oft state : l'état peut changer même sans nouvelle écriture (propagation)</li>
+<li><strong>E</strong>ventually consistent : les données convergent vers la cohérence avec le temps</li>
+</ul>
+<p>Chez Carrefour, Kafka est AP (éventuellement cohérent), PostgreSQL est CP. Les deux coexistent — on choisit selon l'exigence de cohérence de chaque opération.</p>`,
+tip:"La clarification 'P est obligatoire donc le vrai choix est C vs A' est un niveau de précision qui distingue les experts des autres."},
+
+{q:"Transactions distribuées : 2PC, 3PC, Saga. Quand utiliser quoi ?",d:"hard",tags:["Transactions distribuées","Saga","2PC"],
+a:`<p>La gestion des transactions distribuées est l'un des problèmes les plus complexes des architectures microservices.</p>
+<h4>2PC — Two-Phase Commit</h4>
+<p>Protocole classique pour les transactions distribuées synchrones.</p>
+<div class="cb" style="border-color:var(--red)">Phase 1 — Prepare :
+  Coordinator → tous les participants : "Êtes-vous prêts à commiter ?"
+  Participant A : "Oui (j'ai réservé le verrou)"
+  Participant B : "Oui (j'ai réservé le verrou)"
+
+Phase 2 — Commit/Rollback :
+  Si tous OK : Coordinator → Commit à tous
+  Si un KO   : Coordinator → Rollback à tous</div>
+<p><strong>Problèmes du 2PC</strong> : bloquant (les verrous sont maintenus pendant la phase 2), single point of failure (le coordinator), latence, pas scalable horizontalement.</p>
+<h4>3PC — Three-Phase Commit</h4>
+<p>Amélioration du 2PC qui ajoute une phase "Pre-Commit" pour éviter le blocage en cas de crash du coordinator. Rarement utilisé en pratique — complexité élevée pour des garanties limitées.</p>
+<h4>Saga Pattern — L'approche microservices</h4>
+<p>Remplace la transaction distribuée par une séquence de transactions locales compensables.</p>
+<div class="cb" style="border-color:var(--red)">Saga eInvoicing :
+T1: InvoicingService.createInvoice()        → compensate: cancelInvoice()
+T2: ValidationService.validateInvoice()    → compensate: revertValidation()
+T3: ReportingService.generateReport()      → compensate: deleteReport()
+T4: GovernmentService.submitToPDP()        → compensate: (irreversible — dernier pas)
+
+Si T3 échoue :
+→ Compensation T2 (revertValidation)
+→ Compensation T1 (cancelInvoice)
+→ Système retourne à l'état initial</div>
+<h4>Quand utiliser quoi</h4>
+<ul>
+<li><strong>2PC</strong> : systèmes legacy avec XA, transactions courtes, même datacenter</li>
+<li><strong>Saga</strong> : microservices, haute disponibilité, opérations longues, scalabilité</li>
+<li><strong>Outbox + Idempotence</strong> : toujours, pour garantir at-least-once delivery</li>
+</ul>`,
+tip:"Expliquer pourquoi 2PC ne fonctionne pas en microservices (bloquant, SPOF) avant de présenter Saga montre une compréhension architecturale profonde."},
+
+{q:"Qu'est-ce que la cohérence éventuelle (Eventually Consistent) ? Implications pratiques.",d:"hard",tags:["Cohérence éventuelle","Distributed","CAP"],
+a:`<p>La cohérence éventuelle signifie que si aucune nouvelle mise à jour n'est effectuée, toutes les répliques convergeront vers la même valeur — mais il peut y avoir une fenêtre temporelle de divergence.</p>
+<h4>Exemples concrets</h4>
+<ul>
+<li><strong>Kafka consumer lag</strong> : un événement publié prend 100ms à être traité. Pendant ces 100ms, le service producteur est à jour, le service consommateur ne l'est pas encore.</li>
+<li><strong>Cache Redis</strong> : la base est mise à jour, le cache expire dans 60s. Pendant ce temps, les lectures du cache retournent une valeur stale.</li>
+<li><strong>DNS propagation</strong> : un changement DNS peut prendre 48h à se propager mondialement.</li>
+</ul>
+<h4>Implication 1 : l'idempotence est obligatoire</h4>
+<div class="cb" style="border-color:var(--red)">// Le même message peut arriver plusieurs fois (at-least-once)
+// L'handler doit être idempotent
+@KafkaListener(topics = "invoice.submitted")
+public void handleInvoiceSubmitted(InvoiceSubmittedEvent event) {
+    // Vérifier si déjà traité (clé d'idempotence)
+    if (processedEventRepo.exists(event.getEventId())) {
+        log.info("Event {} already processed, skipping", event.getEventId());
+        return;
+    }
+    // Traitement...
+    processedEventRepo.save(event.getEventId());
+}</div>
+<h4>Implication 2 : lire ses propres écritures</h4>
+<p>Après un POST (écriture), un GET immédiat peut retourner l'ancien état. Solutions : read-after-write consistency (lire depuis le leader, pas le réplica), ou tolérer le lag et informer l'utilisateur ("Votre facture est en cours de traitement").</p>
+<h4>Implication 3 : conflits de mise à jour concurrente</h4>
+<p>Deux nœuds modifient la même donnée → conflit à la convergence. Résolution : last-write-wins (simple), vector clocks (précis), CRDTs (Conflict-free Replicated Data Types, complexe).</p>`,
+tip:"Mentionner les CRDTs comme solution avancée aux conflits montre une connaissance des systèmes distribués au niveau expert."}
+]},
+
+{id:"patterns-avances", label:"Patterns Avancés & Architecture", icon:"⬡", color:"#B07DC8",
+ qs:[
+{q:"Expliquez le Repository Pattern en DDD. Différence avec DAO.",d:"med",tags:["Repository","DDD","Pattern"],
+a:`<p>Le Repository Pattern est l'un des patterns les plus importants en DDD. Il représente l'abstraction de la persistance du point de vue du domaine.</p>
+<h4>Repository vs DAO</h4>
+<div class="cb" style="border-color:var(--purple)">DAO (Data Access Object) — vision orientée données :
+  - Mappe directement les opérations SQL/DB
+  - Orienté table (InvoiceDao → table INVOICE)
+  - Retourne des DTOs ou des Row Maps
+  - Pas de logique métier
+
+Repository — vision orientée domaine (DDD) :
+  - Simule une collection d'objets en mémoire
+  - Orienté Aggregate (InvoiceRepository → Invoice aggregate)
+  - Retourne des objets de domaine riches (pas des DTOs)
+  - Cache l'infrastructure de persistance complètement</div>
+<h4>Implémentation avec Clean Architecture</h4>
+<div class="cb" style="border-color:var(--purple)">// Dans le domaine (aucune dépendance JPA/Spring)
+public interface InvoiceRepository {  // Port
+    void save(Invoice invoice);
+    Optional&lt;Invoice&gt; findById(InvoiceId id);
+    List&lt;Invoice&gt; findByCustomerId(CustomerId cId);
+    // Méthode métier, pas SQL
+    List&lt;Invoice&gt; findPendingSubmissionOlderThan(Duration maxAge);
+}
+
+// Dans l'infrastructure (Adapter)
+@Repository
+public class InvoiceJpaRepository implements InvoiceRepository {
+    private final InvoiceJpaEntityRepository jpa;  // Spring Data
+    private final InvoiceMapper mapper;
+    
+    public void save(Invoice invoice) {
+        InvoiceJpaEntity entity = mapper.toEntity(invoice);
+        jpa.save(entity);
+        // Publier les domain events après persistence
+        invoice.pullEvents().forEach(eventPublisher::publish);
+    }
+    
+    public Optional&lt;Invoice&gt; findById(InvoiceId id) {
+        return jpa.findById(id.getValue()).map(mapper::toDomain);
+    }
+}</div>
+<h4>Règle de design</h4>
+<p>Le Repository expose des méthodes en langage métier (findPendingSubmission), jamais en langage technique (findByStatusAndCreatedAtBefore). Le domaine ne doit pas savoir qu'il y a une base de données.</p>`,
+tip:"La différence 'méthodes en langage métier vs SQL' est la distinction fondamentale DAO vs Repository — un détail qui fait toute la différence."},
+
+{q:"Expliquez le Mediator Pattern et son rôle dans la Clean Architecture (MediatR/CQRS bus).",d:"hard",tags:["Mediator","CQRS","Clean Architecture"],
+a:`<p>Le Mediator Pattern définit un objet qui encapsule la façon dont d'autres objets interagissent. Dans le contexte CQRS/Clean Architecture, il est utilisé comme bus de commandes et requêtes.</p>
+<h4>Problème sans Mediator</h4>
+<div class="cb" style="border-color:var(--purple)">// Controller dépend directement de multiples services
+@RestController
+public class InvoiceController {
+    private final InvoiceCommandService commandService;
+    private final InvoiceQueryService queryService;
+    private final ValidationService validationService;
+    private final NotificationService notificationService;
+    // N dépendances → couplage fort, test difficile</div>
+<h4>Avec Mediator (pattern CQRS bus)</h4>
+<div class="cb" style="border-color:var(--purple)">// Command = intention
+public record CreateInvoiceCommand(String customerId, List&lt;LineItem&gt; lines) {}
+
+// Handler = logique
+@Component
+public class CreateInvoiceCommandHandler 
+    implements CommandHandler&lt;CreateInvoiceCommand, InvoiceId&gt; {
+    
+    public InvoiceId handle(CreateInvoiceCommand cmd) {
+        Invoice invoice = Invoice.create(cmd.customerId(), cmd.lines());
+        invoiceRepository.save(invoice);
+        return invoice.getId();
+    }
+}
+
+// Controller ne connaît que le Mediator
+@RestController
+public class InvoiceController {
+    private final Mediator mediator;  // une seule dépendance
+    
+    @PostMapping("/invoices")
+    public ResponseEntity&lt;String&gt; create(@RequestBody CreateInvoiceRequest req) {
+        InvoiceId id = mediator.send(new CreateInvoiceCommand(req.customerId(), req.lines()));
+        return ResponseEntity.created(URI.create("/invoices/" + id)).build();
+    }
+}</div>
+<h4>Avantages</h4>
+<ul>
+<li>Controller découplé de la logique métier</li>
+<li>Ajout de cross-cutting concerns (logging, validation, autorisation) via décorateurs</li>
+<li>Test du Handler indépendamment du Controller</li>
+</ul>`,
+tip:"La Clean Architecture avec Mediator (Commands/Queries/Handlers) est le pattern dominant dans les architectures modernes — savoir le décrire et l'implémenter est un grand plus."},
+
+{q:"Expliquez le Sidecar Pattern et le Service Mesh (Istio). Quand sont-ils utiles ?",d:"hard",tags:["Sidecar","Istio","Kubernetes"],
+a:`<p>Le Sidecar Pattern est un pattern architectural cloud-native qui permet d'ajouter des fonctionnalités transverses à un service sans modifier son code.</p>
+<h4>Principe du Sidecar</h4>
+<p>Un container secondaire (sidecar) s'exécute dans le même pod Kubernetes que le container applicatif. Il partage le réseau et le filesystem. Il gère les préoccupations transverses.</p>
+<div class="cb" style="border-color:var(--purple)">Pod invoice-service :
+├── Container principal : invoice-service (Java Spring Boot)
+└── Sidecar container  : Envoy Proxy (Istio)
+    ├── mTLS entre services (sans modifier le code Java)
+    ├── Load balancing avancé
+    ├── Circuit breaker niveau réseau
+    ├── Distributed tracing (injection de headers)
+    ├── Rate limiting
+    └── Traffic management (canary, blue/green)</div>
+<h4>Service Mesh (Istio)</h4>
+<p>Un Service Mesh est une infrastructure dédiée à la communication service-à-service. Istio injecte automatiquement un sidecar Envoy dans chaque pod (injection automatique si namespace annoté).</p>
+<div class="cb" style="border-color:var(--purple)"># Activation Istio injection automatique dans le namespace
+kubectl label namespace invoice-prod istio-injection=enabled
+
+# PeerAuthentication : mTLS strict pour tous les services
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+spec:
+  mtls:
+    mode: STRICT  # tout trafic inter-services chiffré + authentifié</div>
+<h4>Quand utiliser Istio vs Resilience4j</h4>
+<ul>
+<li><strong>Resilience4j</strong> : patterns de résilience dans le code Java (Circuit Breaker, Retry). Visibilité des exceptions, logique fine.</li>
+<li><strong>Istio</strong> : préoccupations réseau transverses (mTLS, observabilité, traffic management). Aucun code applicatif.</li>
+<li>Les deux sont complémentaires : Resilience4j pour la logique, Istio pour l'infrastructure.</li>
+</ul>`,
+tip:"Expliquer la complémentarité Resilience4j (code) et Istio (infra) montre une vision architecturale complète très appréciée."},
+
+{q:"Expliquez le CQRS avec Event Sourcing : implémentation complète étape par étape.",d:"hard",tags:["CQRS","Event Sourcing","Architecture"],
+a:`<p>CQRS + Event Sourcing est une combinaison puissante pour les domaines à fort besoin d'audit et de traçabilité.</p>
+<h4>Architecture globale</h4>
+<div class="cb" style="border-color:var(--purple)">Command Side (écriture) :
+  Command → CommandBus → CommandHandler → Aggregate → DomainEvents
+  → EventStore (append-only) → EventBus → Projections (Read Models)
+
+Query Side (lecture) :
+  Query → QueryBus → QueryHandler → Read Model (dénormalisé) → Response</div>
+<h4>Event Store</h4>
+<div class="cb" style="border-color:var(--purple)">// Table event_store
+CREATE TABLE event_store (
+    event_id     UUID PRIMARY KEY,
+    aggregate_id UUID NOT NULL,
+    aggregate_type VARCHAR(100) NOT NULL,
+    event_type   VARCHAR(100) NOT NULL,
+    event_data   JSONB NOT NULL,
+    sequence_nr  BIGINT NOT NULL,  -- version de l'aggregate
+    occurred_at  TIMESTAMP NOT NULL
+);
+// Index sur aggregate_id pour le replay rapide
+CREATE INDEX idx_es_aggregate ON event_store(aggregate_id, sequence_nr);</div>
+<h4>Reconstruction de l'état (Replay)</h4>
+<div class="cb" style="border-color:var(--purple)">public class Invoice {
+    private InvoiceId id;
+    private InvoiceStatus status;
+    private List&lt;InvoiceLine&gt; lines = new ArrayList&lt;&gt;();
+    
+    // Apply : reconstruit l'état depuis les événements
+    public void apply(InvoiceCreated e) {
+        this.id = e.invoiceId(); this.status = DRAFT; this.lines = new ArrayList&lt;&gt;();
+    }
+    public void apply(InvoiceLineAdded e) {
+        this.lines.add(new InvoiceLine(e.description(), e.amount()));
+    }
+    public void apply(InvoiceSubmitted e) { this.status = SUBMITTED; }
+    
+    // Reload depuis event store
+    public static Invoice reconstitute(List&lt;DomainEvent&gt; events) {
+        Invoice i = new Invoice();
+        events.forEach(e -> i.apply(e));
+        return i;
+    }
+}
+// On peut reconstruire l'état à n'importe quel moment dans le temps !</div>
+<h4>Projections (Read Models)</h4>
+<p>Des "projectors" consomment les événements de l'event store et construisent des vues optimisées pour la lecture (tables dénormalisées, index Elasticsearch, caches Redis). Une même source d'événements → multiple projections pour différents besoins.</p>`,
+tip:"Montrer le schéma SQL de l'event store avec le sequence_nr pour l'optimistic locking est un niveau de détail très impressionnant en entretien Architecte."}
+]},
+
+{id:"interview-hr", label:"Questions RH & Comportementales", icon:"💬", color:"#5AC8C8",
+ qs:[
+{q:"Méthode STAR : comment structurer vos réponses aux questions comportementales ?",d:"easy",tags:["Entretien","STAR","Comportemental"],
+a:`<p>La méthode STAR est le standard pour répondre aux questions comportementales ("Décrivez une situation où..."). Elle structure une réponse claire et convaincante.</p>
+<h4>STAR = Situation · Tâche · Action · Résultat</h4>
+<ul>
+<li><strong>S — Situation</strong> : quel était le contexte ? (20% du temps)</li>
+<li><strong>T — Tâche</strong> : quelle était votre responsabilité spécifique ? (10%)</li>
+<li><strong>A — Action</strong> : qu'avez-vous fait VOUS concrètement ? (50%)</li>
+<li><strong>R — Résultat</strong> : quel a été l'impact mesurable ? (20%)</li>
+</ul>
+<h4>Exemple appliqué à votre parcours</h4>
+<div class="cb" style="border-color:var(--teal)">Question : "Décrivez une situation où vous avez dû gérer un projet sous forte pression."
+
+S: "Chez Carrefour, en novembre 2023, à J-30 de la date de conformité réglementaire
+    pour la facturation électronique DSP2, nous avions un retard significatif."
+
+T: "En tant que Technical Lead, j'étais responsable de tenir la date réglementaire
+    — un retard impliquait des pénalités pour Carrefour."
+
+A: "J'ai immédiatement réévalué le chemin critique, identifié les 3 tâches bloquantes,
+    mobilisé un expert externe sur l'intégration PDP pendant 2 semaines,
+    réduit le scope aux fonctionnalités réglementaires essentielles (fast-tracking),
+    et mis en place un daily standup 15 min avec les stakeholders pour la visibilité."
+
+R: "Nous avons livré à temps le périmètre réglementaire. Les fonctionnalités
+    enrichies ont été livrées 3 semaines après, avec zéro pénalité pour Carrefour."</div>
+<h4>Vos top 5 histoires STAR à préparer</h4>
+<ol>
+<li>Un incident production que vous avez géré</li>
+<li>Un conflit technique ou humain que vous avez résolu</li>
+<li>Un projet livré sous contrainte de temps ou de budget</li>
+<li>Un moment où vous avez dit non à un client / scope</li>
+<li>Un exemple de mentoring ou de montée en compétence d'un collaborateur</li>
+</ol>`,
+tip:"Préparez 5 histoires STAR en amont — vous pourrez les réutiliser pour 90% des questions comportementales."},
+
+{q:"Les questions pièges les plus fréquentes et comment y répondre.",d:"hard",tags:["Entretien","Questions pièges","HR"],
+a:`<p>Certaines questions en entretien sont conçues pour révéler des faiblesses. Voici les plus fréquentes et les meilleures réponses.</p>
+<h4>"Quelle est votre plus grande faiblesse ?"</h4>
+<p><strong>Piège</strong> : soit vous dites une vraie faiblesse qui vous disqualifie, soit une fausse faiblesse déguisée en qualité ("je suis trop perfectionniste").</p>
+<p><strong>Bonne réponse</strong> : une vraie faiblesse réelle mais non rédhibitoire pour le poste, avec la preuve que vous en êtes consciente et que vous travaillez dessus.</p>
+<blockquote>"J'ai tendance à vouloir comprendre les détails avant de déléguer, ce qui peut parfois ralentir la montée en autonomie de l'équipe. J'ai travaillé là-dessus en Wafa Assurance : j'ai formalisé des critères clairs de délégation par niveau de compétence, et ça a bien fonctionné."</blockquote>
+<h4>"Où vous voyez-vous dans 5 ans ?"</h4>
+<p><strong>Bonne réponse</strong> : ambitieuse mais réaliste, alignée avec l'entreprise.</p>
+<blockquote>"Je vise un rôle d'Architecte Solution ou de Principal Tech Lead sur des programmes de grande envergure. À 5 ans, j'aimerais avoir une influence sur les choix technologiques à l'échelle d'une direction IT, tout en restant proche du terrain technique."</blockquote>
+<h4>"Pourquoi quittez-vous votre poste actuel ?"</h4>
+<p><strong>Piège</strong> : critiquer votre employeur actuel.</p>
+<blockquote>"Ma mission chez Carrefour arrive à une phase de maturité. J'ai envie de nouveaux challenges, notamment de m'installer en France et d'apporter mon expertise à des projets de transformation SI dans un nouveau contexte."</blockquote>
+<h4>"Vous semblez surqualifiée pour ce poste."</h4>
+<blockquote>"Je me positionne sur ce poste précisément parce que le contexte technique est exigeant et que les enjeux métier sont proches de mon expertise. Un profil surqualifié qui s'ennuie est un risque — ce n'est pas mon cas ici."</blockquote>`,
+tip:"Préparez ces 4 réponses mot pour mot. Elles sont posées dans presque tous les entretiens — l'improvisation est risquée."},
+
+{q:"Négociation du TJM : comment justifier 700-900€/j sur le marché français ?",d:"hard",tags:["Négociation","TJM","Consulting"],
+a:`<p>La négociation du TJM en consulting repose sur la valeur apportée, pas sur le temps facturé. Voici comment structurer votre argumentaire.</p>
+<h4>Ancrer sur la valeur, pas le coût</h4>
+<p>Ne commencez jamais par annoncer votre TJM. Laissez le client parler du projet et de ses enjeux d'abord. Puis ancrez votre tarif sur l'impact que vous pouvez apporter.</p>
+<blockquote>"Sur ce type de programme de conformité eInvoicing, j'ai livré chez Carrefour une architecture qui traite 2 factures/sec/microservice sans incident réglementaire sur 18 mois. Pour un programme à fort enjeu de conformité, le coût d'un retard ou d'une non-conformité dépasse largement le delta de TJM entre les profils."</blockquote>
+<h4>Votre argumentaire de valeur</h4>
+<ul>
+<li><strong>Expérience sectorielle directe</strong> : Banking + Assurance + Retail. Pas de courbe d'apprentissage.</li>
+<li><strong>Expertise réglementaire</strong> : DSP2, eInvoicing DGFiP — rares sur le marché français.</li>
+<li><strong>Profil hybride</strong> : Technical Lead qui code + pilote + communique avec le business. Remplace 1.5 profils.</li>
+<li><strong>Track record chiffré</strong> : -30% time-to-market, -40% régressions, zéro incident réglementaire.</li>
+</ul>
+<h4>Tactiques de négociation</h4>
+<ul>
+<li>Toujours donner une fourchette : "750-900€ selon la durée et le contexte"</li>
+<li>Ne jamais être la première à baisser sans contrepartie</li>
+<li>Si la fourchette est trop basse : "Quel budget avez-vous ?" plutôt que baisser directement</li>
+<li>Valeur du long terme : "Je m'investis comme un membre de l'équipe, pas comme un prestataire distant"</li>
+</ul>`,
+tip:"Préparez 3 exemples chiffrés de votre impact que vous pouvez citer naturellement pendant la négociation."},
+
+{q:"Comment répondre à 'Avez-vous des questions ?' en fin d'entretien ?",d:"easy",tags:["Entretien","Questions","HR"],
+a:`<p>Cette question est une opportunité déguisée — ne jamais répondre "non". C'est votre chance de montrer votre sérieux et de collecter des informations décisives.</p>
+<h4>Les questions à préparer (choisissez 3-4)</h4>
+<p><strong>Sur le projet/mission</strong></p>
+<ul>
+<li>"Quels sont les principaux défis techniques sur lesquels vous attendez une contribution immédiate ?"</li>
+<li>"Quelle est la dette technique actuelle et comment est-elle priorisée ?"</li>
+<li>"Comment les décisions architecturales sont-elles prises ? Y a-t-il un comité d'architecture ?"</li>
+</ul>
+<p><strong>Sur l'équipe</strong></p>
+<ul>
+<li>"Quelle est la composition de l'équipe et les niveaux de séniorité ?"</li>
+<li>"Comment se passe l'onboarding des nouvelles recrues/consultants ?"</li>
+</ul>
+<p><strong>Sur le succès</strong></p>
+<ul>
+<li>"Qu'est-ce qui fait qu'un profil comme le mien réussit particulièrement bien dans ce contexte ?"</li>
+<li>"À quoi ressemble le succès de cette mission à 6 mois ?"</li>
+</ul>
+<p><strong>Sur la suite</strong></p>
+<ul>
+<li>"Quelles sont les prochaines étapes du processus ?"</li>
+<li>"Y a-t-il des points que vous souhaiteriez approfondir sur mon profil ?"</li>
+</ul>
+<h4>À éviter</h4>
+<ul>
+<li>Les questions sur le salaire au premier entretien</li>
+<li>Les questions dont la réponse est sur le site web de l'entreprise</li>
+<li>Les questions fermées qui donnent des réponses oui/non</li>
+</ul>`,
+tip:"La question 'Y a-t-il des points sur mon profil que vous souhaiteriez approfondir ?' est très tactique — elle vous donne une chance de lever des doutes non exprimés."}
+]}
+];// ─── STATE ────────────────────────────────────────────────────────────────────
 const seen = {};
 let currentView = 'home';
 let searchActive = false;
@@ -2165,7 +3172,281 @@ function doSearch(val) {
   });
 }
 
+
+// ─── DOCUMENTATION ────────────────────────────────────────────────────────────
+const DOCS = [
+  {
+    id:"doc-pmp", title:"PMP — Cheat Sheet Complet", icon:"🏆", color:"#F4A261",
+    sections:[
+      {title:"5 Groupes de Processus", content:`
+        <table class="doc-table">
+          <tr><th>Groupe</th><th>Livrables clés</th><th>Outils</th></tr>
+          <tr><td><strong>Démarrage</strong></td><td>Charte projet, Registre stakeholders</td><td>Interviews, Analyse stakeholders</td></tr>
+          <tr><td><strong>Planification</strong></td><td>PMP, WBS, Planning, Plan risques</td><td>Gantt, CPM, MoSCoW, RACI</td></tr>
+          <tr><td><strong>Exécution</strong></td><td>Livrables, Journaux qualité</td><td>Daily standup, Code reviews, CI/CD</td></tr>
+          <tr><td><strong>Surveillance</strong></td><td>Rapports EVM, Change requests</td><td>SPI, CPI, Dashboard, KPIs</td></tr>
+          <tr><td><strong>Clôture</strong></td><td>Lessons learned, Livraison signée</td><td>Rétrospective, Archivage</td></tr>
+        </table>`},
+      {title:"EVM — Formules à retenir", content:`
+        <table class="doc-table">
+          <tr><th>Métrique</th><th>Formule</th><th>Interprétation</th></tr>
+          <tr><td>SPI</td><td>EV / PV</td><td>&gt;1 en avance, &lt;1 en retard</td></tr>
+          <tr><td>CPI</td><td>EV / AC</td><td>&gt;1 sous budget, &lt;1 hors budget</td></tr>
+          <tr><td>CV (Cost Variance)</td><td>EV - AC</td><td>positif = économies</td></tr>
+          <tr><td>SV (Schedule Variance)</td><td>EV - PV</td><td>positif = avance</td></tr>
+          <tr><td>EAC (Estimate at Completion)</td><td>BAC / CPI</td><td>coût final estimé</td></tr>
+          <tr><td>ETC (Estimate to Complete)</td><td>EAC - AC</td><td>coût restant estimé</td></tr>
+          <tr><td>VAC (Variance at Completion)</td><td>BAC - EAC</td><td>écart final prévu</td></tr>
+        </table>`},
+      {title:"Gestion des Risques — Matrice P×I", content:`
+        <table class="doc-table">
+          <tr><th>Probabilité \ Impact</th><th>Faible</th><th>Moyen</th><th>Élevé</th></tr>
+          <tr><td><strong>Probable</strong></td><td style="color:#E8A85A">MOYEN</td><td style="color:#E07B5A">ÉLEVÉ</td><td style="color:#E07B5A;font-weight:700">CRITIQUE</td></tr>
+          <tr><td><strong>Possible</strong></td><td style="color:#7EC8A4">FAIBLE</td><td style="color:#E8A85A">MOYEN</td><td style="color:#E07B5A">ÉLEVÉ</td></tr>
+          <tr><td><strong>Rare</strong></td><td style="color:#7EC8A4">FAIBLE</td><td style="color:#7EC8A4">FAIBLE</td><td style="color:#E8A85A">MOYEN</td></tr>
+        </table>
+        <div class="doc-note" style="border-color:#F4A261">Stratégies : <strong>Éviter</strong> (changer le plan), <strong>Transférer</strong> (assurance, contrat), <strong>Atténuer</strong> (réduire probabilité/impact), <strong>Accepter</strong> (provisionner)</div>`},
+      {title:"Agile vs Waterfall vs Hybride", content:`
+        <table class="doc-table">
+          <tr><th>Critère</th><th>Waterfall</th><th>Agile/Scrum</th><th>Hybride</th></tr>
+          <tr><td>Périmètre</td><td>Fixe</td><td>Variable</td><td>Core fixe + flex</td></tr>
+          <tr><td>Délais</td><td>Fixe</td><td>Fixe (sprint)</td><td>Milestones fixes</td></tr>
+          <tr><td>Coût</td><td>Variable</td><td>Variable</td><td>Enveloppe fixe</td></tr>
+          <tr><td>Risque</td><td>Élevé (découvert tard)</td><td>Faible (découvert tôt)</td><td>Modéré</td></tr>
+          <tr><td>Adapté à</td><td>Exigences stables, conformité</td><td>Innovation, incertitude</td><td>Transformation SI</td></tr>
+        </table>`}
+    ]
+  },
+  {
+    id:"doc-solid", title:"SOLID — Référence Complète", icon:"◈", color:"#6B9FD4",
+    sections:[
+      {title:"Les 5 Principes en un coup d'œil", content:`
+        <table class="doc-table">
+          <tr><th>Principe</th><th>Énoncé</th><th>Pattern associé</th><th>Signal de violation</th></tr>
+          <tr><td><strong style="color:#6B9FD4">S</strong> — SRP</td><td>Une seule raison de changer</td><td>Facade, Command</td><td>Classe > 200 lignes, méthode > 20 lignes</td></tr>
+          <tr><td><strong style="color:#6B9FD4">O</strong> — OCP</td><td>Ouvert extension, fermé modification</td><td>Strategy, Decorator</td><td>switch/if sur le type à chaque nouvelle feature</td></tr>
+          <tr><td><strong style="color:#6B9FD4">L</strong> — LSP</td><td>Sous-types substituables</td><td>Template Method</td><td>instanceof dans le code client</td></tr>
+          <tr><td><strong style="color:#6B9FD4">I</strong> — ISP</td><td>Interfaces spécifiques par client</td><td>Adapter, Visitor</td><td>Implémenter des méthodes vides (UnsupportedOp)</td></tr>
+          <tr><td><strong style="color:#6B9FD4">D</strong> — DIP</td><td>Dépendre d'abstractions</td><td>Factory, Proxy</td><td>new dans le code métier, import de classes concrètes</td></tr>
+        </table>`},
+      {title:"SOLID dans Spring Boot", content:`
+        <table class="doc-table">
+          <tr><th>Principe</th><th>Application Spring</th><th>Exemple</th></tr>
+          <tr><td>SRP</td><td>@Service séparés, @Repository distinct</td><td>InvoiceService ≠ NotificationService</td></tr>
+          <tr><td>OCP</td><td>Map&lt;String, Interface&gt; @Autowired</td><td>Map&lt;String, ExportStrategy&gt;</td></tr>
+          <tr><td>LSP</td><td>Tester avec mocks via interfaces</td><td>MockInvoiceRepository dans les tests</td></tr>
+          <tr><td>ISP</td><td>Interfaces de Repository fines</td><td>InvoiceReader / InvoiceWriter séparés</td></tr>
+          <tr><td>DIP</td><td>Constructor injection (@Autowired)</td><td>@Autowired InvoiceRepository (interface)</td></tr>
+        </table>`}
+    ]
+  },
+  {
+    id:"doc-ddd", title:"DDD — Référence Complète", icon:"◬", color:"#7EC8A4",
+    sections:[
+      {title:"Strategic Design — Vue d'ensemble", content:`
+        <table class="doc-table">
+          <tr><th>Concept</th><th>Définition</th><th>Exemple eInvoicing</th></tr>
+          <tr><td><strong>Domain</strong></td><td>Le problème métier à résoudre</td><td>Facturation électronique conforme</td></tr>
+          <tr><td><strong>Core Domain</strong></td><td>Ce qui différencie l'entreprise</td><td>Moteur de conformité réglementaire</td></tr>
+          <tr><td><strong>Supporting Domain</strong></td><td>Support du core, non différenciant</td><td>Gestion des utilisateurs, Notifications</td></tr>
+          <tr><td><strong>Generic Domain</strong></td><td>Standard, externalisable</td><td>Auth (Keycloak), Email (SES)</td></tr>
+          <tr><td><strong>Bounded Context</strong></td><td>Frontière de cohérence du modèle</td><td>Invoicing / Validation / Reporting</td></tr>
+          <tr><td><strong>Ubiquitous Language</strong></td><td>Vocabulaire commun dev+métier</td><td>"Facture soumise à la PDP" dans le code</td></tr>
+          <tr><td><strong>Context Map</strong></td><td>Relations entre bounded contexts</td><td>Invoicing → Customer/Supplier → Validation</td></tr>
+        </table>`},
+      {title:"Tactical Design — Building Blocks", content:`
+        <table class="doc-table">
+          <tr><th>Concept</th><th>Caractéristique clé</th><th>Exemple</th></tr>
+          <tr><td><strong>Entity</strong></td><td>Identité persistante, mutable</td><td>Invoice (avec ID unique)</td></tr>
+          <tr><td><strong>Value Object</strong></td><td>Égalité par valeur, immuable</td><td>Money(amount, currency)</td></tr>
+          <tr><td><strong>Aggregate</strong></td><td>Unité de cohérence transactionnelle</td><td>Invoice + ses InvoiceLines</td></tr>
+          <tr><td><strong>Aggregate Root</strong></td><td>Point d'entrée unique de l'aggregate</td><td>Invoice (pas InvoiceLine directement)</td></tr>
+          <tr><td><strong>Domain Event</strong></td><td>Fait passé, immuable, nommé au passé</td><td>InvoiceSubmittedEvent</td></tr>
+          <tr><td><strong>Repository</strong></td><td>Abstraction de persistance orientée domaine</td><td>InvoiceRepository (interface)</td></tr>
+          <tr><td><strong>Domain Service</strong></td><td>Logique métier qui ne tient pas dans une entité</td><td>TaxCalculationService</td></tr>
+          <tr><td><strong>Factory</strong></td><td>Création d'objets complexes avec invariants</td><td>InvoiceFactory.createFromRequest()</td></tr>
+        </table>`},
+      {title:"Context Map — Relations entre contextes", content:`
+        <table class="doc-table">
+          <tr><th>Relation</th><th>Description</th><th>Quand l'utiliser</th></tr>
+          <tr><td><strong>Shared Kernel</strong></td><td>Modèle partagé entre deux contextes</td><td>Équipes très proches, petit périmètre partagé</td></tr>
+          <tr><td><strong>Customer/Supplier</strong></td><td>Aval dépend d'amont, avec engagement</td><td>Dépendance avec SLA contractualisé</td></tr>
+          <tr><td><strong>Conformist</strong></td><td>Aval accepte le modèle d'amont tel quel</td><td>API tierce non modifiable (Core Banking)</td></tr>
+          <tr><td><strong>ACL (Anti-Corruption Layer)</strong></td><td>Couche de traduction protectrice</td><td>Intégrer un legacy sans polluer votre modèle</td></tr>
+          <tr><td><strong>Open Host Service</strong></td><td>API publique bien définie</td><td>Publier des événements Kafka vers d'autres contextes</td></tr>
+          <tr><td><strong>Published Language</strong></td><td>Format partagé standardisé</td><td>Avro Schema Registry, OpenAPI</td></tr>
+        </table>`}
+    ]
+  },
+  {
+    id:"doc-patterns", title:"Design Patterns — Tableau de Référence", icon:"⬡", color:"#B07DC8",
+    sections:[
+      {title:"23 Patterns GoF — Référence Rapide", content:`
+        <table class="doc-table">
+          <tr><th>Pattern</th><th>Famille</th><th>Intention</th><th>Usage Java/Spring</th></tr>
+          <tr><td>Singleton</td><td>Créationnel</td><td>Instance unique</td><td>@Bean Spring, Logger</td></tr>
+          <tr><td>Factory Method</td><td>Créationnel</td><td>Déléguer l'instanciation</td><td>DriverManager.getConnection()</td></tr>
+          <tr><td>Abstract Factory</td><td>Créationnel</td><td>Familles d'objets cohérentes</td><td>DocumentBuilderFactory</td></tr>
+          <tr><td>Builder</td><td>Créationnel</td><td>Construction complexe</td><td>Lombok @Builder, StringBuilder</td></tr>
+          <tr><td>Prototype</td><td>Créationnel</td><td>Copie d'objets coûteux</td><td>Object.clone(), Jackson</td></tr>
+          <tr><td>Adapter</td><td>Structural</td><td>Interfaces incompatibles</td><td>InputStreamReader, SDK tiers</td></tr>
+          <tr><td>Bridge</td><td>Structural</td><td>Abstraction/impl séparées</td><td>SLF4J, JDBC drivers</td></tr>
+          <tr><td>Composite</td><td>Structural</td><td>Hiérarchies tout/partie</td><td>JComponent, Menu/MenuItem</td></tr>
+          <tr><td>Decorator</td><td>Structural</td><td>Ajout dynamique comportements</td><td>java.io, Spring AOP</td></tr>
+          <tr><td>Facade</td><td>Structural</td><td>Interface simplifiée</td><td>JdbcTemplate, API Gateway</td></tr>
+          <tr><td>Flyweight</td><td>Structural</td><td>Partage objets légers</td><td>Integer.valueOf(), String pool</td></tr>
+          <tr><td>Proxy</td><td>Structural</td><td>Contrôle d'accès</td><td>Spring AOP, Hibernate lazy</td></tr>
+          <tr><td>Chain of Resp.</td><td>Comportemental</td><td>Pipeline de traitement</td><td>Servlet Filters, Spring Security</td></tr>
+          <tr><td>Command</td><td>Comportemental</td><td>Encapsulation requête/undo</td><td>Runnable, Saga, CQRS</td></tr>
+          <tr><td>Interpreter</td><td>Comportemental</td><td>Évaluation DSL/grammaire</td><td>SpEL, java.util.regex</td></tr>
+          <tr><td>Iterator</td><td>Comportemental</td><td>Parcours collections</td><td>java.util.Iterator, for-each</td></tr>
+          <tr><td>Mediator</td><td>Comportemental</td><td>Découplage inter-composants</td><td>Event Bus, Saga Orchestration</td></tr>
+          <tr><td>Memento</td><td>Comportemental</td><td>Capture/restauration état</td><td>Undo/Redo, Event Sourcing</td></tr>
+          <tr><td>Observer</td><td>Comportemental</td><td>Notification changements</td><td>Kafka Consumer, Spring Events</td></tr>
+          <tr><td>State</td><td>Comportemental</td><td>Comportement selon état</td><td>Order lifecycle, Session</td></tr>
+          <tr><td>Strategy</td><td>Comportemental</td><td>Algorithmes interchangeables</td><td>Comparator, Spring Security Auth</td></tr>
+          <tr><td>Template Method</td><td>Comportemental</td><td>Squelette algorithme</td><td>JdbcTemplate, AbstractBeanFactory</td></tr>
+          <tr><td>Visitor</td><td>Comportemental</td><td>Opérations sur structure stable</td><td>AST, Jackson Serializer</td></tr>
+        </table>`},
+      {title:"Patterns Cloud/Microservices (extensions GoF)", content:`
+        <table class="doc-table">
+          <tr><th>Pattern</th><th>Pattern GoF sous-jacent</th><th>Description</th></tr>
+          <tr><td><strong>Circuit Breaker</strong></td><td>Proxy + State</td><td>Coupe les appels vers service défaillant</td></tr>
+          <tr><td><strong>Saga</strong></td><td>Command + Mediator</td><td>Transactions distribuées avec compensations</td></tr>
+          <tr><td><strong>Outbox</strong></td><td>Observer + Command</td><td>Garantie cohérence DB + messagerie</td></tr>
+          <tr><td><strong>API Gateway</strong></td><td>Facade + Proxy</td><td>Point d'entrée unique vers microservices</td></tr>
+          <tr><td><strong>Strangler Fig</strong></td><td>Adapter + Facade</td><td>Migration progressive monolithe → micro</td></tr>
+          <tr><td><strong>Event Sourcing</strong></td><td>Command + Memento</td><td>Persistance basée sur les événements</td></tr>
+          <tr><td><strong>CQRS</strong></td><td>Command + Strategy</td><td>Séparation lecture/écriture</td></tr>
+          <tr><td><strong>Sidecar</strong></td><td>Decorator + Proxy</td><td>Fonctionnalités transverses en container séparé</td></tr>
+          <tr><td><strong>Bulkhead</strong></td><td>Strategy + Chain</td><td>Isolation des pools de ressources</td></tr>
+        </table>`},
+      {title:"Anti-Patterns à éviter", content:`
+        <table class="doc-table">
+          <tr><th>Anti-Pattern</th><th>Symptôme</th><th>Solution</th></tr>
+          <tr><td><strong>God Object</strong></td><td>Classe > 500 lignes, > 15 méthodes</td><td>SRP — décomposer par responsabilité</td></tr>
+          <tr><td><strong>Anemic Domain Model</strong></td><td>Entités avec seulement des getters/setters</td><td>DDD — objets riches avec logique métier</td></tr>
+          <tr><td><strong>Golden Hammer</strong></td><td>Microservices pour tout, même CRUD simple</td><td>Choisir l'outil adapté au problème</td></tr>
+          <tr><td><strong>Distributed Monolith</strong></td><td>Services séparés mais DB partagée</td><td>Database per service, boundaries DDD</td></tr>
+          <tr><td><strong>Premature Optimization</strong></td><td>Optimiser avant de mesurer</td><td>Mesurer d'abord, profiler, puis optimiser</td></tr>
+          <tr><td><strong>Shotgun Surgery</strong></td><td>Un changement → 10 fichiers modifiés</td><td>Meilleure cohésion, SRP</td></tr>
+          <tr><td><strong>Magic Numbers</strong></td><td>Valeurs numériques en dur</td><td>Constantes nommées, Enum, Config</td></tr>
+        </table>`}
+    ]
+  },
+  {
+    id:"doc-acid", title:"ACID, CAP, BASE & Transactions", icon:"⚛", color:"#E07B5A",
+    sections:[
+      {title:"ACID — Tableau de référence", content:`
+        <table class="doc-table">
+          <tr><th>Propriété</th><th>Définition</th><th>Garantie</th><th>Mécanisme DB</th></tr>
+          <tr><td><strong style="color:#E07B5A">A</strong>tomicité</td><td>Tout ou rien</td><td>Pas de transaction partielle</td><td>Rollback automatique</td></tr>
+          <tr><td><strong style="color:#E07B5A">C</strong>ohérence</td><td>État valide → état valide</td><td>Contraintes toujours respectées</td><td>Contraintes, triggers, FK</td></tr>
+          <tr><td><strong style="color:#E07B5A">I</strong>solation</td><td>Transactions indépendantes</td><td>Pas de lecture sale entre concurrent</td><td>MVCC, verrous, niveaux d'isolation</td></tr>
+          <tr><td><strong style="color:#E07B5A">D</strong>urabilité</td><td>Commit = persisté</td><td>Survit aux pannes</td><td>WAL (Write-Ahead Log), fsync</td></tr>
+        </table>`},
+      {title:"Niveaux d'isolation — Anomalies", content:`
+        <table class="doc-table">
+          <tr><th>Niveau</th><th>Dirty Read</th><th>Non-Repeatable Read</th><th>Phantom Read</th><th>Performance</th></tr>
+          <tr><td>READ UNCOMMITTED</td><td style="color:#E07B5A">✓ possible</td><td style="color:#E07B5A">✓ possible</td><td style="color:#E07B5A">✓ possible</td><td style="color:#7EC8A4">Maximale</td></tr>
+          <tr><td>READ COMMITTED</td><td style="color:#7EC8A4">✗ évité</td><td style="color:#E07B5A">✓ possible</td><td style="color:#E07B5A">✓ possible</td><td style="color:#7EC8A4">Bonne</td></tr>
+          <tr><td>REPEATABLE READ</td><td style="color:#7EC8A4">✗ évité</td><td style="color:#7EC8A4">✗ évité</td><td style="color:#E07B5A">✓ possible</td><td style="color:#E8A85A">Moyenne</td></tr>
+          <tr><td>SERIALIZABLE</td><td style="color:#7EC8A4">✗ évité</td><td style="color:#7EC8A4">✗ évité</td><td style="color:#7EC8A4">✗ évité</td><td style="color:#E07B5A">Faible</td></tr>
+        </table>
+        <div class="doc-note" style="border-color:#E07B5A">PostgreSQL défaut : READ COMMITTED | MySQL défaut : REPEATABLE READ | Spring : READ COMMITTED via @Transactional</div>`},
+      {title:"CAP Theorem — Choix par technologie", content:`
+        <table class="doc-table">
+          <tr><th>Technologie</th><th>Choix CAP</th><th>Cas d'usage typique</th></tr>
+          <tr><td>PostgreSQL, MySQL</td><td><span class="doc-badge" style="background:rgba(107,159,212,.2);color:#6B9FD4">CP</span></td><td>Transactions financières, données critiques</td></tr>
+          <tr><td>Apache Kafka</td><td><span class="doc-badge" style="background:rgba(126,200,164,.2);color:#7EC8A4">AP</span></td><td>Event streaming, découplage services</td></tr>
+          <tr><td>Redis</td><td><span class="doc-badge" style="background:rgba(126,200,164,.2);color:#7EC8A4">AP</span></td><td>Cache, sessions, rate limiting</td></tr>
+          <tr><td>Cassandra</td><td><span class="doc-badge" style="background:rgba(126,200,164,.2);color:#7EC8A4">AP</span></td><td>IoT, logs, time-series haute volumétrie</td></tr>
+          <tr><td>Zookeeper</td><td><span class="doc-badge" style="background:rgba(107,159,212,.2);color:#6B9FD4">CP</span></td><td>Coordination distribuée, leader election</td></tr>
+          <tr><td>MongoDB</td><td><span class="doc-badge" style="background:rgba(107,159,212,.2);color:#6B9FD4">CP</span></td><td>Documents, configurations</td></tr>
+          <tr><td>DynamoDB</td><td><span class="doc-badge" style="background:rgba(126,200,164,.2);color:#7EC8A4">AP</span></td><td>E-commerce, profils utilisateurs</td></tr>
+          <tr><td>Elasticsearch</td><td><span class="doc-badge" style="background:rgba(126,200,164,.2);color:#7EC8A4">AP</span></td><td>Recherche full-text, logs, analytics</td></tr>
+        </table>`},
+      {title:"Saga Pattern — Flux de compensation", content:`
+        <div class="doc-note" style="border-color:#E07B5A">
+          <strong>Règle fondamentale</strong> : chaque étape de la Saga doit avoir une transaction de compensation idempotente. La dernière étape n'a pas de compensation (elle doit donc être la plus fiable ou pivot).
+        </div>
+        <table class="doc-table">
+          <tr><th>Critère</th><th>Orchestration</th><th>Chorégraphie</th></tr>
+          <tr><td>Coordination</td><td>Saga Orchestrator centralisé</td><td>Événements Kafka distribués</td></tr>
+          <tr><td>Visibilité du flux</td><td>Haute (dans l'orchestrateur)</td><td>Faible (flux distribué)</td></tr>
+          <tr><td>Couplage</td><td>Services couplés à l'orchestrateur</td><td>Faible couplage</td></tr>
+          <tr><td>Complexité debug</td><td>Plus simple</td><td>Plus complexe (correlation IDs)</td></tr>
+          <tr><td>Adapté pour</td><td>Workflows complexes, conditionnels</td><td>Équipes autonomes, flux simples</td></tr>
+          <tr><td>Frameworks Java</td><td>Axon Framework, Conductor</td><td>Kafka + custom handlers</td></tr>
+        </table>`}
+    ]
+  }
+];
+
+function buildDocs() {
+  const navList = document.getElementById('nav-list');
+  const mv = document.getElementById('module-views');
+  
+  // Add doc nav section header
+  const sep = document.createElement('div');
+  sep.style.cssText = 'padding:12px 18px 4px;font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;font-family:monospace;border-top:1px solid var(--border);margin-top:8px';
+  sep.textContent = 'Documentation';
+  navList.appendChild(sep);
+
+  DOCS.forEach(doc => {
+    // Nav button
+    const btn = document.createElement('button');
+    btn.className = 'nbtn';
+    btn.id = 'nav-' + doc.id;
+    btn.style.setProperty('--c', doc.color);
+    btn.onclick = () => showDoc(doc.id);
+    btn.innerHTML = `<span class="ni" style="color:${doc.color}">${doc.icon}</span><span class="nl">${doc.title.split('—')[0].trim()}</span><span class="nc">📖</span>`;
+    navList.appendChild(btn);
+
+    // Doc view
+    const div = document.createElement('div');
+    div.className = 'mview';
+    div.id = 'mv-' + doc.id;
+    
+    let sectionsHtml = doc.sections.map((s, i) => `
+      <div class="doc-section open" id="ds-${doc.id}-${i}">
+        <div class="doc-section-header" onclick="toggleDocSection('ds-${doc.id}-${i}')">
+          <span class="dsh-icon" style="color:${doc.color}">▶</span>
+          <h3>${s.title}</h3>
+          <span style="color:var(--muted);font-size:11px">▾</span>
+        </div>
+        <div class="doc-section-body">${s.content}</div>
+      </div>`).join('');
+
+    div.innerHTML = `
+      <div class="mv-hd">
+        <div class="mhi">${doc.icon}</div>
+        <div>
+          <div class="mht">${doc.title}</div>
+          <div class="mhs" style="color:${doc.color}">Documentation de référence · ${doc.sections.length} sections</div>
+        </div>
+      </div>
+      ${sectionsHtml}`;
+    mv.appendChild(div);
+  });
+}
+
+function toggleDocSection(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+function showDoc(id) {
+  hideAll();
+  document.getElementById('mv-' + id).classList.add('vis');
+  document.getElementById('tb-title').textContent = DOCS.find(d => d.id === id)?.title || 'Documentation';
+  setActiveNav('nav-' + id);
+  currentView = id;
+}
+
+
 // Start
+buildDocs();
 init();
 </script>
 </body>
