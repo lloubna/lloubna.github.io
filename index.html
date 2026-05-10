@@ -1942,173 +1942,469 @@ tip:"Entraînez-vous à répéter ce pitch jusqu'à ce qu'il soit fluide et natu
 ]}
 ,
 
-{id:"pmp", label:"PMP & Gestion de Projet Avancée", icon:"🏆", color:"#F4A261",
+{id:"pmp", label:"PMP & Gestion de Projet", icon:"🏆", color:"#F4A261",
  qs:[
-{q:"Quels sont les 5 groupes de processus PMI/PMP et leurs livrables clés ?",d:"med",tags:["PMP","PMI","Processus"],
-a:`<p>Le PMBOK (Project Management Body of Knowledge) organise le management de projet en <strong>5 groupes de processus</strong> :</p>
-<h4>1. Démarrage (Initiating)</h4>
-<ul><li>Charte de projet (Project Charter) : autorisation formelle du projet</li><li>Identification des parties prenantes (Stakeholder Register)</li><li>Nomination du Chef de Projet</li></ul>
-<h4>2. Planification (Planning)</h4>
-<ul><li>Plan de management de projet (PMP) — document maître</li><li>WBS (Work Breakdown Structure) : décomposition hiérarchique du travail</li><li>Planning (Gantt, chemin critique)</li><li>Plan des risques, plan qualité, plan communication</li></ul>
-<h4>3. Exécution (Executing)</h4>
-<ul><li>Direction et management du travail</li><li>Gestion de la qualité, des ressources, des communications</li><li>Mise à jour du registre des risques</li></ul>
-<h4>4. Surveillance & Maîtrise (Monitoring & Controlling)</h4>
-<ul><li>Earned Value Management (EVM) : mesure de la performance</li><li>Contrôle des changements (Change Control Board)</li><li>Rapports d'avancement (Status Reports)</li></ul>
-<h4>5. Clôture (Closing)</h4>
-<ul><li>Leçons apprises (Lessons Learned)</li><li>Livraison formelle et acceptation client</li><li>Archivage et clôture administrative</li></ul>
-<blockquote>En pratique Agile, ces groupes sont itérés à chaque sprint, pas séquentiels. La valeur du PMP est dans la rigueur des livrables, pas dans la linéarité.</blockquote>`,
-tip:"Le PMBOK est complémentaire à l'Agile — montrez que vous savez les combiner plutôt que les opposer."},
 
-{q:"Qu'est-ce que l'Earned Value Management (EVM) ? Calculez SPI et CPI.",d:"hard",tags:["EVM","PMP","KPIs"],
-a:`<p>L'EVM est la méthode de mesure objective de la performance d'un projet en combinant portée, délais et coûts.</p>
-<h4>Les 3 valeurs fondamentales</h4>
+{q:"C'est quoi le PMP et le PMI ? Pourquoi c'est important ?",d:"easy",tags:["PMP","PMI","Fondamentaux"],
+a:`<p>Commençons par les bases, car c'est souvent mal compris.</p>
+
+<h4>PMI = Project Management Institute</h4>
+<p>C'est une organisation américaine fondée en 1969, leader mondial du management de projet. Elle publie le <strong>PMBOK (Project Management Body of Knowledge)</strong> — le guide de référence qui recense les meilleures pratiques mondiales en gestion de projet.</p>
+
+<h4>PMP = Project Management Professional</h4>
+<p>C'est la <strong>certification la plus reconnue au monde</strong> en management de projet, délivrée par le PMI. Elle valide qu'une personne maîtrise les méthodes, outils et pratiques pour gérer des projets de toute taille.</p>
+<p>Pour l'obtenir : 36 mois d'expérience en gestion de projet + 35h de formation + examen de 180 questions.</p>
+
+<h4>Pourquoi c'est important pour vous en tant que Technical Lead ?</h4>
+<p>En tant que Technical Lead ou Chef de Projet Technique, vous êtes à l'intersection du technique et du management de projet. Le PMP vous donne un <strong>langage commun avec les chefs de projet, les PMO et les sponsors</strong>. Quand vous dites "SPI = 0.8" ou "nous avons un risque de criticité ÉLEVÉ sur la dépendance Core Banking", tout le monde comprend immédiatement.</p>
+
+<h4>PMBOK vs Agile</h4>
+<p>Le PMBOK n'est pas en opposition avec l'Agile. La 7ème édition (2021) intègre pleinement l'Agile. En pratique sur vos projets :</p>
 <ul>
-<li><strong>PV (Planned Value)</strong> : valeur du travail planifié à date. "Combien devrait-on avoir fait ?"</li>
-<li><strong>EV (Earned Value)</strong> : valeur du travail réellement accompli. "Combien a-t-on réellement produit ?"</li>
-<li><strong>AC (Actual Cost)</strong> : coût réel dépensé. "Combien a-t-on dépensé ?"</li>
-</ul>
-<h4>Indicateurs de performance</h4>
-<div class="cb" style="border-color:var(--orange)">SPI (Schedule Performance Index) = EV / PV
-  > 1.0 : en avance sur le planning
-  = 1.0 : dans les temps
-  < 1.0 : en retard (ex: 0.8 = on a fait 80% de ce qui était prévu)
-
-CPI (Cost Performance Index) = EV / AC
-  > 1.0 : sous le budget (chaque euro dépensé produit plus d'1€ de valeur)
-  = 1.0 : dans le budget
-  < 1.0 : au-dessus du budget (ex: 0.85 = on dépense 1.18€ pour 1€ de valeur)
-
-Exemple concret :
-  Budget projet : 100 000€, durée 10 mois
-  Au mois 5 : PV = 50 000€ | EV = 40 000€ | AC = 48 000€
-  SPI = 40/50 = 0.80 → 20% de retard
-  CPI = 40/48 = 0.83 → 17% au-dessus du budget
-  
-Estimation à terminaison (EAC) = BAC / CPI = 100 000 / 0.83 = 120 000€</div>
-<h4>Utilisation concrète</h4>
-<p>Chez Carrefour, j'utilisais un dashboard EVM simplifié mensuel pour les sponsors : SPI et CPI en rouge/vert suffisaient pour déclencher les conversations nécessaires sans noyer les décideurs dans les détails.</p>`,
-tip:"Savoir calculer SPI et CPI de mémoire est attendu pour un chef de projet confirmé. Préparez cet exemple chiffré."},
-
-{q:"Qu'est-ce que le chemin critique (Critical Path Method) ? Comment l'utilisez-vous ?",d:"med",tags:["CPM","PMP","Planification"],
-a:`<p>Le chemin critique est la séquence de tâches la plus longue d'un projet, qui détermine la durée minimale du projet.</p>
-<h4>Principes clés</h4>
-<ul>
-<li>Toute tâche sur le chemin critique a une <strong>marge nulle (float = 0)</strong> : tout retard sur cette tâche retarde le projet entier</li>
-<li>Les tâches hors chemin critique ont une marge positive : elles peuvent être retardées sans impacter la date de fin</li>
-<li>Un projet peut avoir plusieurs chemins critiques</li>
-</ul>
-<h4>Calcul</h4>
-<div class="cb" style="border-color:var(--orange)">Exemple projet eInvoicing :
-A(2j) → B(5j) → C(3j) = 10j  ← CHEMIN CRITIQUE
-A(2j) → D(3j) → E(2j) = 7j
-A(2j) → F(4j)          = 6j
-
-Float de D = 10 - 7 = 3 jours (D peut prendre 3j de retard sans impact)
-Float de F = 10 - 6 = 4 jours</div>
-<h4>Utilisation pratique</h4>
-<p><strong>Fast-tracking</strong> : exécuter en parallèle des tâches normalement séquentielles. Risque de reprise si dépendances mal gérées.</p>
-<p><strong>Crashing</strong> : ajouter des ressources sur les tâches du chemin critique pour les accélérer (coût supplémentaire).</p>
-<p>Chez Attijariwafa Bank, sur le projet DSP2, le chemin critique passait par l'intégration Core Banking. En mobilisant une ressource expérimentée Core Banking supplémentaire (crashing), j'ai réduit cette tâche de 6 à 4 semaines, tenant la date de conformité réglementaire.</p>`,
-tip:"Les techniques Fast-tracking et Crashing sont des questions classiques PMP — les avoir en tête avec des exemples concrets fait la différence."},
-
-{q:"Comment gérez-vous les risques projet selon la méthodologie PMI ?",d:"hard",tags:["PMP","Risques","Mitigation"],
-a:`<p>La gestion des risques PMI suit un cycle en 6 étapes rigoureuses.</p>
-<h4>Le cycle de gestion des risques</h4>
-<ol>
-<li><strong>Planifier la gestion des risques</strong> : définir l'approche, les rôles, les seuils de tolérance</li>
-<li><strong>Identifier les risques</strong> : brainstorming, checklist, diagramme d'Ishikawa, SWOT</li>
-<li><strong>Analyse qualitative</strong> : probabilité × impact → matrice P×I. Priorisation.</li>
-<li><strong>Analyse quantitative</strong> : Monte Carlo, arbres de décision pour les risques critiques</li>
-<li><strong>Planifier les réponses</strong> : Éviter / Transférer / Atténuer / Accepter</li>
-<li><strong>Surveiller et maîtriser</strong> : registre des risques mis à jour chaque sprint</li>
-</ol>
-<h4>Matrice de priorisation</h4>
-<div class="cb" style="border-color:var(--orange)">         Impact
-         Faible   Moyen   Élevé
-Probable  MOYEN   ÉLEVÉ   CRITIQUE ← traiter en priorité
-Possible  FAIBLE  MOYEN   ÉLEVÉ
-Rare      FAIBLE  FAIBLE  MOYEN
-
-Exemple registre (projet eInvoicing) :
-R1: Spécifications PDP instables | Probable × Élevé = CRITIQUE
-    → Atténuer : buffer 20% + veille réglementaire hebdo
-R2: Indisponibilité Core Banking  | Possible × Élevé = ÉLEVÉ  
-    → Transférer : SLA contractuel + pénalités
-R3: Turnover développeur clé      | Rare × Moyen = FAIBLE
-    → Accepter : documentation knowledge transfer</div>
-<h4>Distinction risque vs problème</h4>
-<p>Un <strong>risque</strong> est un événement incertain (futur, peut ne pas arriver). Un <strong>problème (issue)</strong> est un risque qui s'est matérialisé et nécessite une action immédiate. Le registre des problèmes est distinct du registre des risques.</p>`,
-tip:"La distinction risque/problème et les 4 stratégies de réponse (ÉTAA) sont des questions fondamentales dans tout entretien PMP."},
-
-{q:"Qu'est-ce qu'un WBS (Work Breakdown Structure) ? Comment le construisez-vous ?",d:"med",tags:["WBS","PMP","Planification"],
-a:`<p>Le WBS est une décomposition hiérarchique du travail en livrables de plus en plus petits jusqu'au niveau des "work packages" (tâches élémentaires estimables et assignables).</p>
-<h4>Règle fondamentale : 100%</h4>
-<p>Le WBS doit capturer 100% du travail du projet — ni plus (scope creep), ni moins (oublis). Chaque niveau décompose exhaustivement le niveau supérieur.</p>
-<h4>Structure (projet eInvoicing)</h4>
-<div class="cb" style="border-color:var(--orange)">1. Projet eInvoicing Carrefour
-   1.1 Architecture & Infrastructure
-       1.1.1 Design architecture microservices (5j)
-       1.1.2 Setup Kubernetes GCP (3j)
-       1.1.3 Configuration CI/CD (4j)
-   1.2 Développement Services
-       1.2.1 InvoicingService (15j)
-       1.2.2 ValidationService (10j)
-       1.2.3 ReportingService (8j)
-   1.3 Intégrations
-       1.3.1 Intégration PDP1 (7j)
-       1.3.2 Intégration PDP2 (5j)
-   1.4 Tests & Validation
-       1.4.1 Tests d'intégration (6j)
-       1.4.2 Tests de charge Gatling (3j)
-       1.4.3 Tests de conformité réglementaire (5j)
-   1.5 Déploiement & Formation
-       1.5.1 Déploiement production (2j)
-       1.5.2 Formation équipes métier (2j)</div>
-<h4>Work Package</h4>
-<p>Le niveau le plus bas du WBS. Chaque work package doit être : assignable à une personne/équipe, estimable en coût et durée, livrable de façon vérifiable, < 80h de travail (règle empirique).</p>`,
-tip:"Le WBS est la fondation de toute planification — montrez que vous le construisez orienté livrables, pas activités."},
-
-{q:"Quelle est la différence entre Agile, Scrum, Kanban et SAFe ?",d:"med",tags:["Agile","Scrum","SAFe","Kanban"],
-a:`<p>Ces termes sont souvent confondus. Il est important de les distinguer précisément en entretien.</p>
-<h4>Agile</h4>
-<p>C'est un <strong>ensemble de valeurs et principes</strong> (Manifeste Agile, 2001). Pas une méthodologie en soi. 4 valeurs, 12 principes. Tout le reste (Scrum, Kanban, SAFe) sont des frameworks d'implémentation de l'Agile.</p>
-<h4>Scrum</h4>
-<p>Framework Agile le plus répandu. Sprints fixes (1-4 semaines), rôles définis (Scrum Master, Product Owner, équipe), cérémonies (Daily, Planning, Review, Retrospective), artefacts (Product Backlog, Sprint Backlog, Increment).</p>
-<h4>Kanban</h4>
-<p>Système de flux continu. Pas de sprints. WIP limits (Work In Progress) pour éviter la surcharge. Visualisation du flux. Adapté aux équipes support/maintenance ou à fort volume de demandes entrantes non planifiables.</p>
-<h4>SAFe (Scaled Agile Framework)</h4>
-<p>Framework pour scaler l'Agile à l'échelle de l'entreprise (100+ développeurs). Niveaux : Team (Scrum) → Program (Agile Release Train) → Portfolio. PI Planning (Program Increment) = event trimestriel de planification synchronisée de toutes les équipes.</p>
-<h4>Mon utilisation en pratique</h4>
-<ul>
-<li><strong>Carrefour</strong> : Scrum par squad + synchronisation inter-squads inspirée SAFe (PI Planning simplifié)</li>
-<li><strong>Wafa Assurance</strong> : Scrum classique, sprint de 2 semaines</li>
-<li><strong>Attijariwafa Bank</strong> : Hybride Scrum + Kanban (Scrumban) pour absorber les demandes urgentes réglementaires</li>
+<li>Le PMBOK vous donne le cadre : charte projet, plan de management, registre des risques, suivi EVM</li>
+<li>Scrum/Agile vous donne la mécanique d'exécution : sprints, backlog, daily standup</li>
+<li>Les deux ensemble = un projet bien piloté ET livré de façon itérative</li>
 </ul>`,
-tip:"Montrer que vous avez pratiqué plusieurs frameworks (et pas seulement lu leur description) est très valorisé."},
+tip:"Commencer par 'PMI = organisation, PMP = certification' montre que vous maîtrisez les fondamentaux — beaucoup confondent les deux."},
 
-{q:"Comment gérez-vous le scope creep (dérive du périmètre) ?",d:"hard",tags:["Scope","PMP","Gestion"],
-a:`<p>Le scope creep est l'une des causes principales d'échec des projets. Sa gestion requiert méthode et fermeté.</p>
-<h4>Prévention en amont</h4>
+{q:"Qu'est-ce que le triangle Scope-Délai-Coût (Triple Contrainte) ?",d:"easy",tags:["PMP","Triple Contrainte","Fondamentaux"],
+a:`<p>Le triangle des contraintes est le concept le plus fondamental du management de projet. Comprenez-le bien et tout le reste s'explique naturellement.</p>
+
+<h4>Le Triangle (ou Triple Contrainte)</h4>
+<p>Tout projet est défini par 3 contraintes interdépendantes :</p>
 <ul>
-<li>WBS et périmètre documentés et signés par toutes les parties avant le démarrage</li>
-<li>Définition explicite de ce qui est "hors périmètre" (out of scope) dans la charte projet</li>
-<li>Processus de gestion des changements (Change Control) formalisé dès le départ</li>
+<li>🎯 <strong>Scope (Périmètre)</strong> : QUE fait-on ? Les fonctionnalités, livrables, et travail inclus dans le projet.</li>
+<li>⏰ <strong>Time (Délai)</strong> : QUAND livre-t-on ? La date de fin et les jalons intermédiaires.</li>
+<li>💰 <strong>Cost (Coût)</strong> : COMBIEN cela coûte ? Le budget humain et matériel.</li>
 </ul>
-<h4>Traitement d'une demande hors périmètre</h4>
-<ol>
-<li><strong>Ne pas dire oui immédiatement</strong> même si c'est techniquement simple</li>
-<li>Documenter la demande formellement (Change Request)</li>
-<li>Analyser l'impact : coût, délai, risques</li>
-<li>Présenter les options au sponsor : intégrer au projet actuel (avec impact) OU créer un nouveau projet OU reporter au backlog post-livraison</li>
-<li>Obtenir une décision formelle et documentée</li>
-</ol>
-<h4>Message type au client</h4>
-<blockquote>"Cette fonctionnalité n'est pas dans le périmètre initial signé. Je peux l'analyser et vous présenter l'impact sur le planning et le budget dans 48h. Souhaitez-vous que je procède à cette analyse ?"</blockquote>
-<h4>Ce que j'ai appris chez Attijariwafa Bank</h4>
-<p>Sur le projet DSP2, des demandes réglementaires changeaient en cours de projet (spécifications DSP2 évolutives). J'avais anticipé cela avec un buffer réglementaire de 15% et un processus de change request simplifié pour les modifications réglementaires — ce qui nous a permis d'absorber 3 changements majeurs sans dérapage de planning.</p>`,
-tip:"La phrase type au client est très mémorable — les recruteurs adorent les formules concrètes applicables immédiatement."}
-]},
+<p>Et au centre : <strong>🏆 Quality (Qualité)</strong> — ce qui est impacté quand on joue sur les 3 contraintes.</p>
 
+<h4>La règle fondamentale</h4>
+<blockquote>Si vous touchez à l'une des contraintes, les deux autres sont automatiquement impactées. On ne peut pas avoir les trois optimales en même temps.</blockquote>
+
+<h4>Exemples concrets</h4>
+<div class="cb" style="border-color:var(--orange)">Scénario 1 — Le client veut plus de fonctionnalités (↑ Scope) :
+→ Soit le délai augmente (+ 2 mois)
+→ Soit le coût augmente (+ 2 développeurs)
+→ Soit la qualité baisse (on fait vite et mal)
+
+Scénario 2 — Le client veut livrer plus tôt (↓ Délai) :
+→ Soit on réduit le scope (moins de fonctionnalités)
+→ Soit on augmente le budget (crashing : ajouter des ressources)
+→ Soit on accepte plus de bugs (qualité réduite)
+
+Scénario 3 — Budget réduit (↓ Coût) :
+→ Soit on allonge les délais (les mêmes personnes travaillent plus longtemps)
+→ Soit on réduit le scope (moins de fonctionnalités)
+→ Soit on réduit la qualité</div>
+
+<h4>Chez Carrefour — exemple réel</h4>
+<p>Sur le projet eInvoicing, la date réglementaire était fixe (délai non négociable). Quand de nouvelles exigences PDP sont arrivées (scope +), j'ai obtenu du budget supplémentaire pour un expert (+coût) plutôt que de sacrifier la qualité de conformité.</p>
+
+<h4>Comment l'utiliser en entretien</h4>
+<p>Quand un recruteur vous demande "comment gérez-vous les conflits de priorité ?", répondez avec ce triangle : "Je pose toujours la question : sur les trois contraintes, laquelle est non-négociable ? Et quelle est la variable d'ajustement ?"</p>`,
+tip:"Ce concept simple mais puissant montre immédiatement que vous pensez en chef de projet, pas seulement en développeur."},
+
+{q:"Expliquez les 5 groupes de processus PMP de façon simple et concrète.",d:"med",tags:["PMP","Processus","Fondamentaux"],
+a:`<p>Le PMBOK organise la gestion de projet en 5 groupes de processus. Pensez-y comme les 5 grandes phases de la vie d'un projet — même si en Agile elles se répètent à chaque sprint.</p>
+
+<h4>1. Démarrage (Initiating) — "On autorise le projet"</h4>
+<p><strong>Ce qui se passe</strong> : le projet est officiellement approuvé et lancé. On définit les grandes lignes et on identifie les parties prenantes.</p>
+<p><strong>Le livrable clé : la Charte Projet (Project Charter)</strong></p>
+<ul>
+<li>C'est le document d'autorisation officielle du projet</li>
+<li>Il contient : l'objectif, le budget alloué, le délai cible, le Chef de Projet nommé, les parties prenantes clés</li>
+<li>Signé par le sponsor — sans ça, le projet n'a pas d'autorité officielle</li>
+</ul>
+<p><strong>Analogie</strong> : c'est comme signer un contrat de mission. Avant de commencer à travailler, tout le monde s'accorde sur ce qu'on fait et pourquoi.</p>
+<div class="cb" style="border-color:var(--orange)">Exemple Carrefour — Charte eInvoicing :
+Objectif : mettre en conformité la facturation électronique avant le 1er sept 2024
+Budget autorisé : 850 000€
+Chef de Projet Technique : Loubna Bounoun
+Sponsor : DSI France Carrefour
+Parties prenantes : Équipe fiscale, DGFiP, PDPs partenaires</div>
+
+<h4>2. Planification (Planning) — "On définit COMMENT on va y arriver"</h4>
+<p><strong>Ce qui se passe</strong> : c'est la phase la plus longue et la plus importante. On crée le Plan de Management de Projet (PMP) — le document qui répond à toutes les questions du "comment".</p>
+<p><strong>Les livrables clés</strong> :</p>
+<ul>
+<li><strong>WBS (Work Breakdown Structure)</strong> : on décompose tout le travail en petites tâches gérables. Comme un organigramme du travail.</li>
+<li><strong>Planning (Gantt / Sprint plan)</strong> : on séquence les tâches dans le temps et on identifie le chemin critique</li>
+<li><strong>Plan des risques</strong> : on anticipe ce qui peut mal tourner et on prépare les réponses</li>
+<li><strong>Plan de communication</strong> : qui informe qui, quand, comment ?</li>
+<li><strong>Plan qualité</strong> : comment on s'assure que les livrables sont conformes aux attentes ?</li>
+</ul>
+<p><strong>Analogie</strong> : c'est comme planifier un voyage. Avant de partir, vous définissez la destination (scope), l'itinéraire (planning), le budget, et ce que vous faites si votre vol est annulé (risques).</p>
+
+<h4>3. Exécution (Executing) — "On fait le travail"</h4>
+<p><strong>Ce qui se passe</strong> : l'équipe travaille selon le plan. C'est là que se consomme la majorité du budget (80-90%).</p>
+<p><strong>Activités clés</strong> :</p>
+<ul>
+<li>Développement des livrables (code, documents, configurations)</li>
+<li>Management de l'équipe (résolution de conflits, motivation, décisions)</li>
+<li>Communication avec les parties prenantes (rapports d'avancement)</li>
+<li>Gestion de la qualité (tests, code reviews, audits)</li>
+</ul>
+<p><strong>En Agile</strong> : chaque sprint EST un mini-cycle Planification + Exécution + Surveillance. Les groupes de processus se répètent à chaque itération.</p>
+
+<h4>4. Surveillance et Maîtrise (Monitoring & Controlling) — "On s'assure qu'on est sur la bonne voie"</h4>
+<p><strong>Ce qui se passe</strong> : tout au long du projet (en parallèle de l'exécution), on mesure, compare, et corrige.</p>
+<p><strong>Activités clés</strong> :</p>
+<ul>
+<li><strong>EVM (Earned Value Management)</strong> : mesure objective de la performance (SPI, CPI)</li>
+<li><strong>Contrôle des changements</strong> : toute modification du scope, délai ou coût passe par un processus formel</li>
+<li><strong>Mise à jour du registre des risques</strong> : les risques évoluent, on les réévalue</li>
+</ul>
+<p><strong>Analogie</strong> : c'est le GPS pendant votre voyage. Il compare en permanence votre position réelle à l'itinéraire prévu et recalcule si vous déviez.</p>
+
+<h4>5. Clôture (Closing) — "On ferme officiellement le projet"</h4>
+<p><strong>Ce qui se passe</strong> : le projet est officiellement terminé, les livrables sont acceptés, et on capitalise sur l'expérience.</p>
+<p><strong>Livrables clés</strong> :</p>
+<ul>
+<li><strong>Lessons Learned (Leçons apprises)</strong> : qu'est-ce qui a bien marché ? Qu'est-ce qu'on ferait différemment ? C'est la mémoire de l'organisation.</li>
+<li><strong>Rapport de clôture</strong> : bilan final (scope réalisé, budget dépensé, délai réel vs prévu)</li>
+<li><strong>Acceptation formelle du client</strong> : signature qui confirme que les livrables sont conformes</li>
+<li><strong>Archivage</strong> : documentation disponible pour les projets futurs</li>
+</ul>`,
+tip:"Expliquer chaque groupe avec une analogie simple (GPS, voyage, contrat) aide à mémoriser ET à expliquer à des non-techniques."},
+
+{q:"Qu'est-ce que l'EVM (Earned Value Management) ? Expliqué simplement.",d:"med",tags:["EVM","PMP","KPIs"],
+a:`<p>L'EVM est la méthode la plus puissante pour mesurer objectivement si un projet est en bonne santé. Elle répond à une question simple : <strong>"On a dépensé X€ — a-t-on obtenu X€ de valeur en retour ?"</strong></p>
+
+<h4>Le problème que l'EVM résout</h4>
+<p>Sans EVM, comment savoir si un projet avance bien ? Souvent on entend "on a dépensé 50% du budget" — mais a-t-on accompli 50% du travail ? Peut-être seulement 30%... L'EVM répond à cette question précisément.</p>
+
+<h4>Les 3 valeurs fondamentales — avec une analogie</h4>
+<p>Imaginez que vous construisez une maison de 100 000€ en 10 mois :</p>
+<div class="cb" style="border-color:var(--orange)">PV — Planned Value (Valeur Planifiée)
+= "Combien de travail AURAIT DÛ être fait à ce jour selon le plan ?"
+→ Au mois 5 : PV = 50 000€  (50% du budget prévu = 50% du travail prévu)
+
+EV — Earned Value (Valeur Acquise)
+= "Combien de travail A ÉTÉ réellement accompli ?"
+→ Au mois 5 : EV = 40 000€  (on n'a fait que 40% du travail prévu)
+→ C'est la vraie mesure de l'avancement !
+
+AC — Actual Cost (Coût Réel)
+= "Combien d'argent A ÉTÉ réellement dépensé ?"
+→ Au mois 5 : AC = 48 000€  (on a dépensé 48 000€ pour 40 000€ de valeur)</div>
+
+<h4>Les indicateurs de performance</h4>
+<div class="cb" style="border-color:var(--orange)">SPI = Schedule Performance Index = EV / PV = 40 000 / 50 000 = 0.80
+→ Signification : on a accompli 80% de ce qui était prévu
+→ SPI < 1 = en retard | SPI = 1 = dans les temps | SPI > 1 = en avance
+
+CPI = Cost Performance Index = EV / AC = 40 000 / 48 000 = 0.83
+→ Signification : pour 1€ dépensé, on produit 0.83€ de valeur
+→ CPI < 1 = hors budget | CPI = 1 = dans le budget | CPI > 1 = sous le budget
+
+Dans notre exemple :
+SPI = 0.80 → on a 20% de retard
+CPI = 0.83 → on dépense 17% de trop
+
+→ Estimation du coût final (EAC) = Budget Total / CPI = 100 000 / 0.83 = 120 500€
+→ On va dépenser 20 500€ de plus que prévu si rien ne change !</div>
+
+<h4>Comment l'utiliser concrètement</h4>
+<p>Je présente un dashboard EVM simplifié mensuellement aux sponsors :</p>
+<ul>
+<li>🟢 SPI > 0.95 et CPI > 0.95 : projet en bonne santé</li>
+<li>🟡 SPI ou CPI entre 0.85 et 0.95 : vigilance, actions correctives en cours</li>
+<li>🔴 SPI ou CPI < 0.85 : alerte, révision du plan nécessaire</li>
+</ul>
+<p>Chez Carrefour, un CPI de 0.88 en mois 3 nous a alertés tôt sur un problème d'estimation des intégrations PDP — ce qui nous a permis de réajuster avant que le retard ne soit irrattrapable.</p>`,
+tip:"L'analogie de la maison (PV = ce qui devait être fait, EV = ce qui est fait, AC = ce qui a été dépensé) est très pédagogique pour un non-initié."},
+
+{q:"Qu'est-ce que le WBS (Work Breakdown Structure) ? Comment le construire étape par étape.",d:"med",tags:["WBS","Planification","PMP"],
+a:`<p>Le WBS est probablement l'outil le plus important de la planification de projet. Maîtrisez-le et votre estimation sera toujours meilleure.</p>
+
+<h4>Définition simple</h4>
+<p>Le WBS est une <strong>décomposition hiérarchique de tout le travail du projet</strong> en éléments de plus en plus petits, jusqu'à ce que chaque élément soit estimable et assignable à une personne.</p>
+<p><strong>Analogie</strong> : c'est comme démonter une voiture. D'abord vous voyez la voiture entière (le projet). Puis les grands ensembles (moteur, carrosserie, intérieur). Puis les sous-ensembles (le moteur : bloc, pistons, culasse...). Jusqu'aux vis et boulons (les tâches élémentaires).</p>
+
+<h4>La règle des 100%</h4>
+<blockquote>Le WBS doit capturer 100% du travail du projet — ni plus (scope creep), ni moins (oublis). Si ce n'est pas dans le WBS, ça n'existe pas dans le projet.</blockquote>
+
+<h4>Comment construire un WBS étape par étape</h4>
+<div class="cb" style="border-color:var(--orange)">ÉTAPE 1 — Le niveau 1 : le projet entier
+  → "Projet eInvoicing Carrefour"
+
+ÉTAPE 2 — Le niveau 2 : les grands livrables (phases ou domaines)
+  → Architecture | Développement | Intégrations | Tests | Déploiement
+
+ÉTAPE 3 — Le niveau 3 : les sous-livrables
+  → Développement : InvoicingService | ValidationService | ReportingService
+
+ÉTAPE 4 — Le niveau 4 : les Work Packages (tâches élémentaires)
+  → InvoicingService : Conception (3j) | Développement (10j) | Tests unitaires (3j)
+
+Critères d'un bon Work Package :
+  ✓ Assignable à une personne ou une équipe
+  ✓ Durée entre 8h et 80h (règle du 8/80)
+  ✓ Livrable vérifiable (on peut dire OUI ou NON : "c'est fait")
+  ✓ Estimable en coût et durée</div>
+
+<h4>WBS du projet eInvoicing (exemple réel)</h4>
+<div class="cb" style="border-color:var(--orange)">1. eInvoicing Carrefour
+├── 1.1 Architecture & Infra
+│   ├── 1.1.1 Architecture microservices (5j)
+│   ├── 1.1.2 Setup Kubernetes GCP (3j)
+│   └── 1.1.3 Pipeline CI/CD (4j)
+├── 1.2 Développement
+│   ├── 1.2.1 InvoicingService (15j)
+│   ├── 1.2.2 ValidationService (10j)
+│   └── 1.2.3 ReportingService (8j)
+├── 1.3 Intégrations
+│   ├── 1.3.1 PDP Chorus Pro (7j)
+│   └── 1.3.2 PDP Partenaire (5j)
+├── 1.4 Tests
+│   ├── 1.4.1 Tests intégration (6j)
+│   ├── 1.4.2 Tests charge Gatling (3j)
+│   └── 1.4.3 Tests conformité (5j)
+└── 1.5 Déploiement
+    ├── 1.5.1 Déploiement prod (2j)
+    └── 1.5.2 Formation équipes (2j)
+Total : 75 jours/homme</div>
+
+<h4>WBS vs Planning : quelle différence ?</h4>
+<ul>
+<li><strong>WBS</strong> = QUOI faire ? (structure du travail, sans dates)</li>
+<li><strong>Planning (Gantt)</strong> = QUAND le faire ? (séquencement avec dates, dépendances)</li>
+<li>On crée d'abord le WBS, puis on le séquence dans le Gantt</li>
+</ul>`,
+tip:"La règle des 100% et la règle 8/80 pour les work packages sont deux critères très concrets que les recruteurs apprécient."},
+
+{q:"Qu'est-ce que le chemin critique (CPM) et comment l'utilisez-vous pour piloter un projet ?",d:"med",tags:["CPM","Planification","PMP"],
+a:`<p>Le chemin critique est le concept de planification le plus important. Comprendre cela transforme votre façon de piloter un projet.</p>
+
+<h4>La définition simple</h4>
+<p>Le chemin critique est <strong>la séquence de tâches la plus longue du projet</strong>. C'est ce qui détermine la date de fin minimale possible du projet.</p>
+<p><strong>Propriété fondamentale</strong> : si une tâche du chemin critique prend 1 jour de plus, le projet prend 1 jour de plus. Il n'y a aucune marge.</p>
+
+<h4>La notion de "flottement" (Float ou Slack)</h4>
+<p>Le flottement d'une tâche = le nombre de jours dont elle peut être retardée sans impacter la date de fin du projet.</p>
+<ul>
+<li>Tâches sur le chemin critique → flottement = 0 (zéro tolérance)</li>
+<li>Tâches hors chemin critique → flottement > 0 (flexibilité)</li>
+</ul>
+
+<h4>Exemple complet calculé</h4>
+<div class="cb" style="border-color:var(--orange)">Projet : 6 tâches avec dépendances
+A(3j) → B(5j) → E(4j) = 12j   ← CHEMIN CRITIQUE
+A(3j) → C(4j) → F(2j) = 9j
+A(3j) → D(2j)          = 5j
+
+Chemin critique = A → B → E = 12 jours (durée minimale du projet)
+
+Calcul des flottements :
+  C et F : 12 - 9 = 3j de flottement
+  D       : 12 - 5 = 7j de flottement
+  B et E  : 0j de flottement (chemin critique)
+
+Conclusion pratique :
+  → Toute l'attention du chef de projet va sur A, B et E
+  → C peut prendre 3j de retard sans conséquence
+  → D peut attendre 7j sans impacter le projet</div>
+
+<h4>Comment l'utiliser concrètement</h4>
+<p><strong>1. Identifier le chemin critique dès la planification</strong><br>
+Toutes mes ressources "seniors" sont prioritairement affectées aux tâches du chemin critique. Les tâches hors chemin critique peuvent être faites par des juniors ou externalisées.</p>
+
+<p><strong>2. Surveiller le chemin critique chaque semaine</strong><br>
+En standup ou en revue hebdo : "Les tâches du chemin critique sont-elles en bonne voie ?" Un retard de 2 jours sur une tâche critique = alerte immédiate.</p>
+
+<p><strong>3. Fast-tracking : compresser en parallélisant</strong><br>
+Si on est en retard sur le chemin critique, on cherche quelles tâches normalement séquentielles peuvent être faites en parallèle.</p>
+<div class="cb" style="border-color:var(--orange)">Normal : Tests d'intégration APRÈS développement complet
+Fast-tracking : Tests commencent dès que le 1er microservice est prêt
+→ Gain de temps : 2-3 semaines
+→ Risque : retravailler les tests si le dev change</div>
+
+<p><strong>4. Crashing : ajouter des ressources sur le chemin critique</strong><br>
+Chez Attijariwafa Bank, la tâche d'intégration DSP2 était sur le chemin critique et accusait 2 semaines de retard. En ajoutant un expert Core Banking supplémentaire pendant 3 semaines (coût +15 000€), j'ai récupéré le retard et tenu la date réglementaire.</p>
+
+<h4>Attention à la Loi de Brooks !</h4>
+<blockquote>"Ajouter des ressources à un projet en retard le met encore plus en retard." — Fred Brooks</blockquote>
+<p>Le crashing fonctionne UNIQUEMENT si la tâche est parallélisable et si la période d'onboarding de la nouvelle ressource est courte. Ajouter 5 développeurs sur un projet à 2 mois de la fin est une catastrophe — le temps de les former, c'est terminé.</p>`,
+tip:"La Loi de Brooks est connue de tous les recruteurs seniors — la citer avec 'ça fonctionne uniquement si...' montre une vraie maturité."},
+
+{q:"Comment gérez-vous les risques projet de A à Z ?",d:"hard",tags:["PMP","Risques","Mitigation"],
+a:`<p>La gestion des risques est ce qui sépare un chef de projet réactif (il subit les problèmes) d'un chef de projet proactif (il les anticipe). Voici comment je l'applique concrètement.</p>
+
+<h4>D'abord : Risque vs Problème, c'est quoi la différence ?</h4>
+<ul>
+<li><strong>Risque</strong> = événement FUTUR et INCERTAIN. Il peut se produire ou non. Ex : "La livraison du Core Banking API pourrait prendre du retard."</li>
+<li><strong>Problème (Issue)</strong> = risque qui s'est MATÉRIALISÉ. Il est là maintenant. Ex : "La livraison du Core Banking API a pris 2 semaines de retard."</li>
+</ul>
+<p>Les deux ont leurs propres registres et leurs propres processus de gestion.</p>
+
+<h4>Le cycle complet en 6 étapes</h4>
+
+<p><strong>Étape 1 — Identifier les risques</strong></p>
+<p>En début de projet, j'organise un atelier de 2h avec l'équipe et les parties prenantes. On liste TOUS les risques possibles sans les filtrer (brainstorming).</p>
+<p>Techniques : brainstorming d'équipe, check-list de risques types (technique, organisationnel, externe, réglementaire), interviews des experts.</p>
+
+<p><strong>Étape 2 — Analyser qualitativement (Probabilité × Impact)</strong></p>
+<p>Pour chaque risque identifié, on évalue :</p>
+<div class="cb" style="border-color:var(--orange)">Probabilité : Rare (1) | Possible (2) | Probable (3)
+Impact      : Faible (1) | Moyen (2) | Élevé (3)
+Score = Probabilité × Impact
+
+Score 1-2 : FAIBLE (surveiller, accepter)
+Score 3-4 : MOYEN  (atténuer)
+Score 6-9 : ÉLEVÉ / CRITIQUE (traiter en priorité absolue)</div>
+
+<p><strong>Étape 3 — Analyser quantitativement (pour les risques critiques)</strong></p>
+<p>Pour les risques à fort impact, on chiffre l'impact financier et de délai. Ex : "Si la PDP ne livre pas son API à temps (proba 40%), l'impact est 3 semaines de retard soit 60 000€ de pénalités."</p>
+
+<p><strong>Étape 4 — Planifier les réponses (les 4 stratégies)</strong></p>
+<div class="cb" style="border-color:var(--orange)">🚫 ÉVITER : changer le plan pour éliminer le risque
+   Ex : choisir un autre PDP moins risqué
+
+📤 TRANSFÉRER : déplacer l'impact vers un tiers
+   Ex : clause contractuelle avec pénalité fournisseur
+
+🔧 ATTÉNUER : réduire la probabilité ou l'impact
+   Ex : commencer l'intégration PDP 3 mois plus tôt
+
+✅ ACCEPTER : vivre avec le risque (actif = provisionner, passif = rien faire)
+   Ex : risque météo sur une démo client en extérieur</div>
+
+<p><strong>Étape 5 — Le Registre des Risques</strong></p>
+<p>Document vivant mis à jour à chaque sprint ou semaine. Il contient pour chaque risque : ID, description, probabilité, impact, score, stratégie de réponse, responsable (risk owner), et statut.</p>
+<div class="cb" style="border-color:var(--orange)">Extrait registre risques eInvoicing :
+R01 | Specs PDP instables       | Prob:3 | Imp:3 | Score:9 | CRITIQUE
+     → Atténuer : veille hebdo DGFiP, buffer 20% planning
+     → Owner : Loubna | Statut : En cours
+R02 | Retard Core Banking API   | Prob:2 | Imp:3 | Score:6 | ÉLEVÉ
+     → Transférer : SLA contractuel + mock API en parallèle
+     → Owner : Responsable infra | Statut : Actif
+R03 | Turnover dev senior       | Prob:1 | Imp:2 | Score:2 | FAIBLE
+     → Accepter : documentation continue, pair programming
+     → Owner : Loubna | Statut : Surveillé</div>
+
+<p><strong>Étape 6 — Surveiller et maîtriser</strong></p>
+<p>Revue du registre des risques à chaque sprint retrospective. Questions : de nouveaux risques sont-ils apparus ? Des risques existants ont-ils changé de probabilité ? Des risques se sont-ils matérialisés (→ issues) ?</p>`,
+tip:"Montrer un vrai registre des risques avec des colonnes précises (probabilité, impact, score, owner) est très concret et impressionnant."},
+
+{q:"Qu'est-ce que le scope creep et comment l'éviter ?",d:"med",tags:["Scope","Scope Creep","PMP"],
+a:`<p>Le scope creep (dérive du périmètre) est l'une des premières causes d'échec des projets IT. Comprendre comment le prévenir est essentiel pour un chef de projet technique.</p>
+
+<h4>Qu'est-ce que le scope creep ?</h4>
+<p>C'est l'accumulation de petites modifications, ajouts ou extensions du périmètre initial d'un projet, souvent sans analyse d'impact ni validation formelle.</p>
+<p><strong>Exemple typique</strong> : "Ce serait bien d'ajouter aussi un export Excel..." puis "Et une notification email..." puis "Et un tableau de bord..." — chacun semble petit, mais l'ensemble déraille le projet.</p>
+
+<h4>Les causes fréquentes</h4>
+<ul>
+<li>Périmètre mal défini au départ (flou = porte ouverte aux interprétations)</li>
+<li>Absence de processus de gestion des changements</li>
+<li>Tendance naturelle à dire "oui" pour faire plaisir au client</li>
+<li>Parties prenantes qui découvrent leurs vrais besoins en voyant l'avancement</li>
+</ul>
+
+<h4>Prévention : la défense en profondeur</h4>
+<p><strong>Avant le projet</strong> :</p>
+<ul>
+<li>Rédiger un WBS détaillé et le faire signer</li>
+<li>Inclure explicitement une liste "Out of Scope" (ce qui N'est PAS dans le projet)</li>
+<li>Définir le processus de Change Request dès la charte projet</li>
+</ul>
+
+<p><strong>Pendant le projet</strong> :</p>
+<div class="cb" style="border-color:var(--orange)">Processus Change Request (CR) :
+1. Client ou partie prenante soumet une demande de modification
+2. Chef de projet analyse l'impact (délai, coût, risques) en 48-72h
+3. Présentation au sponsor avec 3 options :
+   Option A : intégrer au projet actuel → planning +X semaines, budget +Y€
+   Option B : reporter dans un projet Phase 2
+   Option C : remplacer une fonctionnalité existante (scope swap)
+4. Décision documentée et signée
+5. Si approuvé : plan de projet mis à jour officiellement</div>
+
+<h4>Comment répondre à un client qui ajoute des demandes</h4>
+<blockquote>"C'est une très bonne idée, et je comprends l'intérêt. Cette fonctionnalité n'est pas dans le périmètre initial que nous avons validé ensemble. Laissez-moi analyser l'impact sur notre planning et notre budget — je vous reviens dans 48h avec les options."</blockquote>
+<p>Cette réponse est professionnelle, ne dit pas "non" sèchement, et déclenche le processus formel de change request.</p>
+
+<h4>En Agile : le scope creep est géré différemment</h4>
+<p>En Scrum, les nouvelles demandes vont dans le Product Backlog et sont priorisées par le Product Owner. On ne bloque pas les demandes — on les priorise. Le délai ou le périmètre s'ajuste à chaque sprint. C'est l'un des grands avantages de l'Agile sur Waterfall pour les projets à exigences changeantes.</p>`,
+tip:"La formule de réponse au client est très mémorable — entraînez-vous à la dire naturellement, elle sera utile dans n'importe quel entretien."},
+
+{q:"Qu'est-ce qu'un RACI et comment l'utilisez-vous ?",d:"easy",tags:["RACI","Communication","PMP"],
+a:`<p>Le RACI est l'un des outils les plus simples et les plus puissants pour éviter les conflits de responsabilité sur un projet. Utilisez-le systématiquement.</p>
+
+<h4>Définition</h4>
+<p>Le RACI est une matrice qui définit le rôle de chaque partie prenante pour chaque tâche ou livrable du projet.</p>
+<ul>
+<li><strong>R — Responsible</strong> : celui qui FAIT le travail. Il peut y en avoir plusieurs. Ex : le développeur qui code le microservice.</li>
+<li><strong>A — Accountable</strong> : celui qui est RESPONSABLE du résultat. Un seul par tâche. C'est lui qui signe. Ex : le Technical Lead.</li>
+<li><strong>C — Consulted</strong> : celui qu'on CONSULTE avant de décider. Échange bidirectionnel. Ex : l'expert sécurité consulté sur l'authentification.</li>
+<li><strong>I — Informed</strong> : celui qu'on INFORME du résultat. Communication unidirectionnelle. Ex : le DSI informé de la livraison.</li>
+</ul>
+
+<h4>Exemple RACI — Projet eInvoicing</h4>
+<div class="cb" style="border-color:var(--orange)">                        Loubna  Dev  Archi  DSI  Métier  Sécu
+Architecture micro       A/R     C    R      I    I       C
+Développement services   A       R    C      I    I       I
+Tests conformité PDP     A       R    C      I    C       I
+Déploiement production   A/R     C    C      I    I       C
+Acceptation livraison    C       I    I      I    A/R     I
+Décision go-live         C       I    C      A    R       C</div>
+
+<h4>Règles d'or du RACI</h4>
+<ul>
+<li>Chaque ligne doit avoir exactement <strong>un seul A</strong>. Plusieurs A = personne n'est vraiment responsable.</li>
+<li>Pas trop de R par ligne = le travail doit être clairement assigné</li>
+<li>Si quelqu'un a trop de A = surcharge, vérifiez la répartition</li>
+<li>Si quelqu'un n'a que des I = peut-être inutile dans la réunion</li>
+</ul>
+
+<h4>Pourquoi c'est utile concrètement</h4>
+<p>Sur le projet Attijariwafa Bank, un conflit a émergé entre mon équipe et l'équipe Core Banking sur "qui valide les specs d'API ?". En 30 minutes, j'ai créé un RACI et le conflit a disparu — tout le monde savait exactement son rôle.</p>`,
+tip:"Le RACI est connu de tous les chefs de projet — montrer que vous l'avez utilisé pour résoudre un conflit réel est très concret."},
+
+{q:"Comment organisez-vous la communication sur un projet : plan de communication et réunions efficaces ?",d:"med",tags:["Communication","PMP","Stakeholders"],
+a:`<p>La communication est la compétence n°1 du chef de projet. Les études PMI montrent que 56% des projets échouent à cause d'une communication inefficace.</p>
+
+<h4>Le Plan de Communication</h4>
+<p>C'est un document simple qui répond à : QUI a besoin de QUELLE information, QUAND, et COMMENT ?</p>
+<div class="cb" style="border-color:var(--orange)">Plan de communication — eInvoicing Carrefour :
+┌─────────────────┬──────────────────────┬──────────┬──────────────┐
+│ Audience        │ Information          │ Fréquence│ Format       │
+├─────────────────┼──────────────────────┼──────────┼──────────────┤
+│ Sponsor DSI     │ SPI, CPI, risques    │ Mensuel  │ Dashboard 1p │
+│ Équipe projet   │ Avancement sprint    │ Quotidien│ Daily standup│
+│ Métier/Fiscal   │ Démos, jalons        │ Bi-mensuel│ Demo sprint  │
+│ Équipe sécurité │ Changements archi    │ À la demande│ ADR email │
+│ Équipe DevOps   │ Planning déploiement │ Hebdo    │ Slack + wiki │
+└─────────────────┴──────────────────────┴──────────┴──────────────┘</div>
+
+<h4>Les réunions efficaces : moins mais mieux</h4>
+<p>Ma règle : toute réunion doit avoir un objectif clair et un compte-rendu avec des décisions. Sinon, c'est une conversation, pas une réunion.</p>
+
+<p><strong>Daily Standup (15 min max)</strong> :</p>
+<ul>
+<li>Qu'ai-je fait hier ? (pas une liste exhaustive — juste l'essentiel)</li>
+<li>Que vais-je faire aujourd'hui ?</li>
+<li>Quels sont mes blocages ?</li>
+<li>Règle : les débats techniques → après le standup, hors de la réunion</li>
+</ul>
+
+<p><strong>Sprint Review (démo)</strong> : montrer aux parties prenantes ce qui fonctionne. Pas de slides — seulement du logiciel qui tourne.</p>
+
+<p><strong>Rétrospective</strong> : What went well? What to improve? Action items avec owner et date.</p>
+
+<p><strong>Comité de pilotage mensuel (COPIL)</strong> :</p>
+<div class="cb" style="border-color:var(--orange)">Structure COPIL (45-60 min) :
+1. Bilan période (10 min) : SPI/CPI, jalons atteints, jalons manqués
+2. Risques et décisions (15 min) : top 3 risques, décisions nécessaires
+3. Planning prochaine période (10 min) : jalons à venir, dépendances
+4. Questions des sponsors (15 min)
+→ Pas de détails techniques → slides synthétiques, 1 chiffre = 1 slide</div>
+
+<h4>La règle d'or de la communication de projet</h4>
+<blockquote>Communiquer tôt les mauvaises nouvelles. Un sponsor qui apprend un retard en semaine 8 alors qu'on le savait depuis la semaine 4 perd confiance pour tout le reste du projet.</blockquote>`,
+tip:"La structure COPIL en 4 blocs est très actionnable et montre que vous savez adapter le niveau de communication à l'audience."}
+]},
 {id:"solid-doc", label:"SOLID — Documentation Complète", icon:"◈", color:"#6B9FD4",
  qs:[
 {q:"S — Single Responsibility Principle : théorie, exemples, violations courantes.",d:"med",tags:["SOLID","SRP","Java"],
@@ -3175,45 +3471,73 @@ function doSearch(val) {
 
 // ─── DOCUMENTATION ────────────────────────────────────────────────────────────
 const DOCS = [
-  {
-    id:"doc-pmp", title:"PMP — Cheat Sheet Complet", icon:"🏆", color:"#F4A261",
+    {
+    id:"doc-pmp", title:"PMP — Guide Complet Débutant", icon:"🏆", color:"#F4A261",
     sections:[
-      {title:"5 Groupes de Processus", content:`
+      {title:"Le Triangle Scope-Délai-Coût : la base de tout", content:`
+        <div class="doc-note" style="border-color:#F4A261"><strong>Principe fondamental</strong> : dans tout projet, vous ne pouvez pas avoir en même temps le maximum de fonctionnalités (scope), le délai le plus court, et le coût le plus bas. Si vous touchez à l'un, les deux autres sont impactés.</div>
         <table class="doc-table">
-          <tr><th>Groupe</th><th>Livrables clés</th><th>Outils</th></tr>
-          <tr><td><strong>Démarrage</strong></td><td>Charte projet, Registre stakeholders</td><td>Interviews, Analyse stakeholders</td></tr>
-          <tr><td><strong>Planification</strong></td><td>PMP, WBS, Planning, Plan risques</td><td>Gantt, CPM, MoSCoW, RACI</td></tr>
-          <tr><td><strong>Exécution</strong></td><td>Livrables, Journaux qualité</td><td>Daily standup, Code reviews, CI/CD</td></tr>
-          <tr><td><strong>Surveillance</strong></td><td>Rapports EVM, Change requests</td><td>SPI, CPI, Dashboard, KPIs</td></tr>
-          <tr><td><strong>Clôture</strong></td><td>Lessons learned, Livraison signée</td><td>Rétrospective, Archivage</td></tr>
+          <tr><th>Contrainte</th><th>Question</th><th>Si elle augmente...</th></tr>
+          <tr><td>🎯 <strong>Scope</strong></td><td>Que fait-on ?</td><td>Il faut plus de temps OU plus de budget</td></tr>
+          <tr><td>⏰ <strong>Délai</strong></td><td>Quand livre-t-on ?</td><td>On doit réduire le scope OU augmenter le budget</td></tr>
+          <tr><td>💰 <strong>Coût</strong></td><td>Combien ça coûte ?</td><td>On doit réduire le scope OU allonger le délai</td></tr>
+          <tr><td>🏆 <strong>Qualité</strong></td><td>À quel niveau ?</td><td>Impactée si on force trop sur les 3 autres</td></tr>
+        </table>
+        <div class="doc-note" style="border-color:#F4A261">Question magique à poser : <strong>"Sur ces trois contraintes, laquelle est non-négociable ?"</strong> La réponse guide toutes les décisions du projet.</div>`},
+      {title:"5 Groupes de Processus — Vue synthétique", content:`
+        <table class="doc-table">
+          <tr><th>Groupe</th><th>Question centrale</th><th>Livrables clés</th><th>En Agile</th></tr>
+          <tr><td>🚀 <strong>Démarrage</strong></td><td>A-t-on l'autorisation ?</td><td>Charte projet, Registre parties prenantes</td><td>Vision produit, Product Owner nommé</td></tr>
+          <tr><td>📋 <strong>Planification</strong></td><td>Comment va-t-on y arriver ?</td><td>WBS, Planning, Plan risques, Plan comm.</td><td>Product Backlog, Sprint Planning</td></tr>
+          <tr><td>⚙️ <strong>Exécution</strong></td><td>On fait le travail</td><td>Livrables, Rapports qualité</td><td>Sprints, Développement incrémental</td></tr>
+          <tr><td>📊 <strong>Surveillance</strong></td><td>Est-on sur la bonne voie ?</td><td>Rapports EVM (SPI/CPI), Change requests</td><td>Burndown chart, Vélocité</td></tr>
+          <tr><td>✅ <strong>Clôture</strong></td><td>A-t-on bien terminé ?</td><td>Lessons learned, Acceptation formelle</td><td>Sprint Retrospective finale</td></tr>
         </table>`},
       {title:"EVM — Formules à retenir", content:`
+        <div class="doc-note" style="border-color:#F4A261">Moyen mnémotechnique : <strong>PV = Prévu | EV = Effectué | AC = Argent dépensé</strong></div>
         <table class="doc-table">
-          <tr><th>Métrique</th><th>Formule</th><th>Interprétation</th></tr>
-          <tr><td>SPI</td><td>EV / PV</td><td>&gt;1 en avance, &lt;1 en retard</td></tr>
-          <tr><td>CPI</td><td>EV / AC</td><td>&gt;1 sous budget, &lt;1 hors budget</td></tr>
-          <tr><td>CV (Cost Variance)</td><td>EV - AC</td><td>positif = économies</td></tr>
-          <tr><td>SV (Schedule Variance)</td><td>EV - PV</td><td>positif = avance</td></tr>
-          <tr><td>EAC (Estimate at Completion)</td><td>BAC / CPI</td><td>coût final estimé</td></tr>
-          <tr><td>ETC (Estimate to Complete)</td><td>EAC - AC</td><td>coût restant estimé</td></tr>
-          <tr><td>VAC (Variance at Completion)</td><td>BAC - EAC</td><td>écart final prévu</td></tr>
-        </table>`},
-      {title:"Gestion des Risques — Matrice P×I", content:`
-        <table class="doc-table">
-          <tr><th>Probabilité \ Impact</th><th>Faible</th><th>Moyen</th><th>Élevé</th></tr>
-          <tr><td><strong>Probable</strong></td><td style="color:#E8A85A">MOYEN</td><td style="color:#E07B5A">ÉLEVÉ</td><td style="color:#E07B5A;font-weight:700">CRITIQUE</td></tr>
-          <tr><td><strong>Possible</strong></td><td style="color:#7EC8A4">FAIBLE</td><td style="color:#E8A85A">MOYEN</td><td style="color:#E07B5A">ÉLEVÉ</td></tr>
-          <tr><td><strong>Rare</strong></td><td style="color:#7EC8A4">FAIBLE</td><td style="color:#7EC8A4">FAIBLE</td><td style="color:#E8A85A">MOYEN</td></tr>
+          <tr><th>Valeur/Indice</th><th>Formule</th><th>Signification</th><th>Signal d'alerte</th></tr>
+          <tr><td><strong>PV</strong> (Planned Value)</td><td>Budget × % prévu</td><td>Ce qui devait être fait</td><td>—</td></tr>
+          <tr><td><strong>EV</strong> (Earned Value)</td><td>Budget × % réellement fait</td><td>Ce qui a été accompli</td><td>—</td></tr>
+          <tr><td><strong>AC</strong> (Actual Cost)</td><td>Coût réel mesuré</td><td>Ce qui a été dépensé</td><td>—</td></tr>
+          <tr><td><strong>SPI</strong></td><td>EV ÷ PV</td><td>Performance planning</td><td>🔴 &lt; 0.85</td></tr>
+          <tr><td><strong>CPI</strong></td><td>EV ÷ AC</td><td>Performance coût</td><td>🔴 &lt; 0.85</td></tr>
+          <tr><td><strong>EAC</strong></td><td>Budget ÷ CPI</td><td>Coût final estimé</td><td>🔴 &gt; Budget</td></tr>
+          <tr><td><strong>VAC</strong></td><td>Budget − EAC</td><td>Écart final prévu</td><td>🔴 Négatif</td></tr>
         </table>
-        <div class="doc-note" style="border-color:#F4A261">Stratégies : <strong>Éviter</strong> (changer le plan), <strong>Transférer</strong> (assurance, contrat), <strong>Atténuer</strong> (réduire probabilité/impact), <strong>Accepter</strong> (provisionner)</div>`},
-      {title:"Agile vs Waterfall vs Hybride", content:`
+        <div class="doc-note" style="border-color:#7EC8A4">Lecture rapide : <strong>SPI &gt; 1 = en avance | SPI &lt; 1 = en retard | CPI &gt; 1 = sous budget | CPI &lt; 1 = hors budget</strong></div>`},
+      {title:"Gestion des Risques — Les 4 stratégies", content:`
         <table class="doc-table">
-          <tr><th>Critère</th><th>Waterfall</th><th>Agile/Scrum</th><th>Hybride</th></tr>
-          <tr><td>Périmètre</td><td>Fixe</td><td>Variable</td><td>Core fixe + flex</td></tr>
-          <tr><td>Délais</td><td>Fixe</td><td>Fixe (sprint)</td><td>Milestones fixes</td></tr>
-          <tr><td>Coût</td><td>Variable</td><td>Variable</td><td>Enveloppe fixe</td></tr>
-          <tr><td>Risque</td><td>Élevé (découvert tard)</td><td>Faible (découvert tôt)</td><td>Modéré</td></tr>
-          <tr><td>Adapté à</td><td>Exigences stables, conformité</td><td>Innovation, incertitude</td><td>Transformation SI</td></tr>
+          <tr><th>Stratégie</th><th>Définition simple</th><th>Quand l'utiliser</th><th>Exemple concret</th></tr>
+          <tr><td>🚫 <strong>Éviter</strong></td><td>Changer le plan pour que le risque ne puisse plus arriver</td><td>Risque critique, impact inacceptable</td><td>Changer de fournisseur API instable</td></tr>
+          <tr><td>📤 <strong>Transférer</strong></td><td>Déplacer l'impact financier vers un tiers</td><td>Impact financier, expertise externe</td><td>Clause contractuelle pénalité retard, assurance</td></tr>
+          <tr><td>🔧 <strong>Atténuer</strong></td><td>Réduire la probabilité ou l'impact du risque</td><td>Risque élevé mais inévitable</td><td>Démarrer l'intégration plus tôt, ajouter des tests</td></tr>
+          <tr><td>✅ <strong>Accepter</strong></td><td>Vivre avec le risque (actif = provisions, passif = rien)</td><td>Risque faible ou coût de mitigation trop élevé</td><td>Risque météo mineur, bug de faible impact</td></tr>
+        </table>
+        <div class="doc-note" style="border-color:#E07B5A">Matrice P×I : Probabilité × Impact = Score de criticité. Score ≥ 6 = traitement obligatoire. Score 3-5 = surveiller. Score 1-2 = accepter.</div>`},
+      {title:"Checklist Chef de Projet — Démarrage de projet", content:`
+        <table class="doc-table">
+          <tr><th>✓</th><th>Action</th><th>Livrable</th></tr>
+          <tr><td>□</td><td>Définir et signer le périmètre avec le sponsor</td><td>Charte projet signée</td></tr>
+          <tr><td>□</td><td>Identifier toutes les parties prenantes</td><td>Registre stakeholders</td></tr>
+          <tr><td>□</td><td>Construire le WBS complet</td><td>WBS validé (100%)</td></tr>
+          <tr><td>□</td><td>Séquencer et créer le planning</td><td>Gantt / Sprint plan</td></tr>
+          <tr><td>□</td><td>Identifier le chemin critique</td><td>CPM calculé</td></tr>
+          <tr><td>□</td><td>Créer le registre des risques</td><td>Registre avec P×I</td></tr>
+          <tr><td>□</td><td>Définir le processus de change request</td><td>Procédure CR documentée</td></tr>
+          <tr><td>□</td><td>Créer le plan de communication</td><td>Tableau qui/quoi/quand/comment</td></tr>
+          <tr><td>□</td><td>Créer le RACI</td><td>Matrice RACI signée</td></tr>
+          <tr><td>□</td><td>Définir la Definition of Done</td><td>DoD validée équipe + PO</td></tr>
+        </table>`},
+      {title:"Agile vs Waterfall vs SAFe — Quand choisir quoi", content:`
+        <table class="doc-table">
+          <tr><th>Critère</th><th>Waterfall</th><th>Scrum/Agile</th><th>SAFe</th></tr>
+          <tr><td>Taille équipe</td><td>Toute taille</td><td>5-12 personnes</td><td>50-200+ personnes</td></tr>
+          <tr><td>Stabilité des exigences</td><td>Stables dès le début</td><td>Changeantes, évolutives</td><td>Mixte, multi-équipes</td></tr>
+          <tr><td>Fréquence de livraison</td><td>Une seule livraison finale</td><td>Chaque sprint (2 sem)</td><td>PI (Program Increment, 10-12 sem)</td></tr>
+          <tr><td>Conformité/Réglementaire</td><td>Très adapté (audit trail)</td><td>Adapté si DoD rigoureuse</td><td>Adapté avec compliance intégrée</td></tr>
+          <tr><td>Idéal pour</td><td>Construction, infrastructure, défense</td><td>Produits digitaux, startups, IT</td><td>Banques, assurances, grands groupes IT</td></tr>
+          <tr><td>Votre usage</td><td>Rare (reporting réglementaire)</td><td>Squads Carrefour, Wafa</td><td>Programmes multi-squads</td></tr>
         </table>`}
     ]
   },
